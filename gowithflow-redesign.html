@@ -709,6 +709,31 @@
       transform: translateY(-2px)
     }
 
+    .tchip.linkedin-chip:hover {
+      border-color: #0a66c2;
+      box-shadow: 0 4px 16px rgba(10, 102, 194, .15)
+    }
+
+    .linkedin-chip .li-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 2px;
+      margin-right: 2px;
+      color: #0a66c2;
+      width: 0;
+      opacity: 0;
+      transform: translateX(-10px) scale(0.8);
+      transition: all .3s var(--ease)
+    }
+
+    .linkedin-chip:hover .li-icon {
+      width: 20px;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      margin-left: 8px
+    }
+
     .tchip-av {
       width: 34px;
       height: 34px;
@@ -3700,22 +3725,35 @@
         <p>Iz svakog projekta izneli smo jedno uverenje: <strong>iza svakog dobrog sajta stoji duboko razumevanje
             biznisa koji predstavlja.</strong> Nismo tu da primamo narudžbine — mi smo vaši strateški partneri.</p>
         <div class="team-row">
-          <a href="#contact" class="tchip">
-            <div class="tchip-av"><img
-                src="https://cdn.prod.website-files.com/69b2c981f5e61a80bd8bfe05/69bae9997ea1ef79a0d91a7d_about-us.png"
-                alt="Stefan Bosković" loading="lazy"></div>
+          <a href="https://www.linkedin.com/in/stefan-bo%C5%A1kovi%C4%87-0316a1131/" target="_blank"
+            class="tchip linkedin-chip">
+            <div class="tchip-av"><img src="./assets/stefan_about-us.png" alt="Stefan Bosković" loading="lazy"></div>
             <div>
               <div class="tcn">Stefan Bosković</div>
-              <div class="tcr">Co-Founder · Dizajner</div>
+              <div class="tcr">Co-Founder</div>
+            </div>
+            <div class="li-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
             </div>
           </a>
-          <a href="#contact" class="tchip">
-            <div class="tchip-av"><img
-                src="https://cdn.prod.website-files.com/69b2c981f5e61a80bd8bfe05/69bae9aa2d12924106ef3cd8_Gemini_Generated_Image_k84tx2k84tx2k84t%201.png"
-                alt="Igor Milenković" loading="lazy"></div>
+          <a href="https://www.linkedin.com/in/milenkovicig/" target="_blank" class="tchip linkedin-chip">
+            <div class="tchip-av"><img src="./assets/igor_about-us.png" alt="Igor Milenković" loading="lazy"></div>
             <div>
               <div class="tcn">Igor Milenković</div>
-              <div class="tcr">Co-Founder · Developer</div>
+              <div class="tcr">Co-Founder</div>
+            </div>
+            <div class="li-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
             </div>
           </a>
         </div>
@@ -4644,13 +4682,19 @@
           <div class="talk-head">
             <div class="talk-title">Zakaži 15-min poziv</div>
             <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus"><path d="M12 5v14M5 12h14"/></svg>
-              <svg viewBox="0 0 24 24" class="t-minus"><path d="M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="t-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus">
+                <path d="M5 12h14" />
+              </svg>
             </div>
           </div>
           <div class="talk-body">
-            <p>Izaberi termin koji ti najviše odgovara. Bez obaveza, pričaćemo o tvom projektu, idejama i kako naša ekspertiza može da ti pomogne.</p>
-            <a href="https://calendly.com/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">Odaberi termin</a>
+            <p>Izaberi termin koji ti najviše odgovara. Bez obaveza, pričaćemo o tvom projektu, idejama i kako naša
+              ekspertiza može da ti pomogne.</p>
+            <a href="https://calendly.com/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">Odaberi
+              termin</a>
           </div>
         </div>
 
@@ -4659,13 +4703,19 @@
           <div class="talk-head">
             <div class="talk-title">Pošalji nam email</div>
             <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus"><path d="M12 5v14M5 12h14"/></svg>
-              <svg viewBox="0 0 24 24" class="t-minus"><path d="M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="t-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus">
+                <path d="M5 12h14" />
+              </svg>
             </div>
           </div>
           <div class="talk-body">
-            <p>Ukoliko ne želiš da zakažeš razgovor, slobodno nam se obrati putem mail-a za bilo šta – savet, saradnju, potražnju ili ideju.</p>
-            <a href="mailto:hello@gowithflow.rs" class="talk-btn" onclick="event.stopPropagation()">hello@gowithflow.rs</a>
+            <p>Ukoliko ne želiš da zakažeš razgovor, slobodno nam se obrati putem mail-a za bilo šta – savet, saradnju,
+              potražnju ili ideju.</p>
+            <a href="mailto:hello@gowithflow.rs" class="talk-btn"
+              onclick="event.stopPropagation()">hello@gowithflow.rs</a>
           </div>
         </div>
 
@@ -4674,15 +4724,22 @@
           <div class="talk-head">
             <div class="talk-title">Društvene mreže</div>
             <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus"><path d="M12 5v14M5 12h14"/></svg>
-              <svg viewBox="0 0 24 24" class="t-minus"><path d="M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="t-plus">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus">
+                <path d="M5 12h14" />
+              </svg>
             </div>
           </div>
           <div class="talk-body">
-            <p>Prati naš rad i novosti. Poveži se sa nama na LinkedIn-u ili zaprati agenciju na Instagram-u za dnevnu dozu dizajna.</p>
+            <p>Prati naš rad i novosti. Poveži se sa nama na LinkedIn-u ili zaprati agenciju na Instagram-u za dnevnu
+              dozu dizajna.</p>
             <div style="display:flex; gap: 10px;">
-              <a href="https://linkedin.com/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">LinkedIn</a>
-              <a href="https://www.instagram.com/gowithflow.rs/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">Instagram</a>
+              <a href="https://linkedin.com/" target="_blank" class="talk-btn"
+                onclick="event.stopPropagation()">LinkedIn</a>
+              <a href="https://www.instagram.com/gowithflow.rs/" target="_blank" class="talk-btn"
+                onclick="event.stopPropagation()">Instagram</a>
             </div>
           </div>
         </div>
