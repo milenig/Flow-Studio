@@ -2122,102 +2122,142 @@
       flex-shrink: 0
     }
 
-    .form-card {
-      background: var(--white);
-      border-radius: 24px;
-      padding: 44px;
-      border: 1px solid var(--border)
-    }
-
-    form {
+    .talk-accordion {
       display: flex;
       flex-direction: column;
-      gap: 14px
+      gap: 12px
     }
 
-    .frow {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px
+    .talk-item {
+      border-radius: 20px;
+      padding: 28px 32px;
+      cursor: pointer;
+      transition: all .4s var(--ease);
+      overflow: hidden;
+      position: relative
     }
 
-    .fg {
+    .talk-item:hover {
+      transform: translateY(-2px)
+    }
+
+    .talk-head {
       display: flex;
-      flex-direction: column;
-      gap: 6px
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none
     }
 
-    .fg label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--dim)
-    }
-
-    .fg input,
-    .fg textarea,
-    .fg select {
-      background: var(--off);
-      border: 1.5px solid var(--border);
-      border-radius: 11px;
-      padding: 13px 17px;
-      color: var(--ink);
+    .talk-title {
       font-family: var(--body);
-      font-size: 15px;
-      outline: none;
-      transition: border-color .2s;
-      resize: none;
-      appearance: none
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -0.02em
     }
 
-    .fg input::placeholder,
-    .fg textarea::placeholder {
-      color: var(--dim)
-    }
-
-    .fg input:focus,
-    .fg textarea:focus,
-    .fg select:focus {
-      border-color: var(--ink)
-    }
-
-    .fg textarea {
-      min-height: 118px
-    }
-
-    .fg select {
-      cursor: pointer;
-      color: var(--muted)
-    }
-
-    .fg select option {
-      background: var(--white)
-    }
-
-    .sbtn {
-      background: var(--ink);
-      color: var(--white);
-      border: none;
-      border-radius: 100px;
-      padding: 17px 40px;
-      font-family: var(--serif);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .25s;
+    .talk-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      margin-top: 4px
+      flex-shrink: 0;
+      position: relative
     }
 
-    .sbtn:hover {
-      background: var(--green);
+    .talk-item.dark .talk-icon {
+      background: rgba(255, 255, 255, .15)
+    }
+
+    .talk-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--ink);
+      stroke-width: 2.5;
+      fill: none;
+      position: absolute;
+      transition: all .4s var(--ease)
+    }
+
+    .talk-item.dark .talk-icon svg {
+      stroke: var(--white)
+    }
+
+    .talk-icon .t-minus {
+      opacity: 0;
+      transform: scale(0.5)
+    }
+
+    .talk-item.open .talk-icon .t-plus {
+      opacity: 0;
+      transform: scale(0.5) rotate(90deg)
+    }
+
+    .talk-item.open .talk-icon .t-minus {
+      opacity: 1;
+      transform: scale(1) rotate(0)
+    }
+
+    .talk-body {
+      max-height: 0;
+      opacity: 0;
+      transition: all .5s var(--ease);
+      visibility: hidden
+    }
+
+    .talk-item.open .talk-body {
+      max-height: 250px;
+      opacity: 1;
+      margin-top: 20px;
+      visibility: visible
+    }
+
+    .talk-body p {
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: .8;
+      margin-bottom: 24px;
+      font-weight: 400;
+      max-width: 90%
+    }
+
+    .talk-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all .25s;
+      border: 1.5px solid transparent
+    }
+
+    .talk-btn:hover {
+      background: transparent;
       color: var(--ink);
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(0, 229, 160, .25)
+      border-color: var(--ink)
+    }
+
+    .talk-item.dark .talk-body p {
+      color: var(--white)
+    }
+
+    .talk-item.dark .talk-btn {
+      background: var(--white);
+      color: var(--ink)
+    }
+
+    .talk-item.dark .talk-btn:hover {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white)
     }
 
     /* ══ FOOTER ══ */
@@ -4598,34 +4638,54 @@
             </svg>Dostupni za projekte širom sveta</div>
         </div>
       </div>
-      <div class="form-card reveal">
-        <form onsubmit="fSub(event)">
-          <div class="frow">
-            <div class="fg"><label>Ime i prezime</label><input type="text" placeholder="Stefan Jovanović" required>
+      <div class="talk-accordion reveal">
+        <!-- Zakaži poziv -->
+        <div class="talk-item open" style="background: var(--green); color: var(--ink)" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Zakaži 15-min poziv</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus"><path d="M12 5v14M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="t-minus"><path d="M5 12h14"/></svg>
             </div>
-            <div class="fg"><label>Email</label><input type="email" placeholder="stefan@firma.rs" required></div>
           </div>
-          <div class="fg"><label>Firma / Brend</label><input type="text" placeholder="Naziv firme"></div>
-          <div class="fg"><label>Šta ti treba?</label>
-            <select>
-              <option value="">Izaberi uslugu…</option>
-              <option>Landing Page</option>
-              <option>Business Sajt</option>
-              <option>E-commerce</option>
-              <option>AI Integracija</option>
-              <option>Brend Identitet</option>
-              <option>Ostalo</option>
-            </select>
+          <div class="talk-body">
+            <p>Izaberi termin koji ti najviše odgovara. Bez obaveza, pričaćemo o tvom projektu, idejama i kako naša ekspertiza može da ti pomogne.</p>
+            <a href="https://calendly.com/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">Odaberi termin</a>
           </div>
-          <div class="fg"><label>Poruka</label><textarea
-              placeholder="O čemu se radi? Ko je tvoja publika? Koji je tvoj rok?" required></textarea></div>
-          <button type="submit" class="sbtn" id="sbtn">
-            Pošalji poruku
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-            </svg>
-          </button>
-        </form>
+        </div>
+
+        <!-- Email -->
+        <div class="talk-item" style="background: var(--light); color: var(--ink)" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Pošalji nam email</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus"><path d="M12 5v14M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="t-minus"><path d="M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="talk-body">
+            <p>Ukoliko ne želiš da zakažeš razgovor, slobodno nam se obrati putem mail-a za bilo šta – savet, saradnju, potražnju ili ideju.</p>
+            <a href="mailto:hello@gowithflow.rs" class="talk-btn" onclick="event.stopPropagation()">hello@gowithflow.rs</a>
+          </div>
+        </div>
+
+        <!-- Društvene mreže -->
+        <div class="talk-item dark" style="background: var(--ink); color: var(--white)" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Društvene mreže</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus"><path d="M12 5v14M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="t-minus"><path d="M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="talk-body">
+            <p>Prati naš rad i novosti. Poveži se sa nama na LinkedIn-u ili zaprati agenciju na Instagram-u za dnevnu dozu dizajna.</p>
+            <div style="display:flex; gap: 10px;">
+              <a href="https://linkedin.com/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">LinkedIn</a>
+              <a href="https://www.instagram.com/gowithflow.rs/" target="_blank" class="talk-btn" onclick="event.stopPropagation()">Instagram</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -5060,13 +5120,16 @@
     document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const h = a.getAttribute('href'); if (h === '#') return; e.preventDefault(); document.querySelector(h)?.scrollIntoView({ behavior: 'smooth' }) }));
 
     // ════════════════════════════════════
-    // FORM SUBMIT
+    // ACCORDION TOGGLE
     // ════════════════════════════════════
-    function fSub(e) {
-      e.preventDefault();
-      const b = document.getElementById('sbtn');
-      b.innerHTML = 'Poruka poslata ✓'; b.style.background = 'var(--green)'; b.style.color = 'var(--ink)'; b.disabled = true;
-      setTimeout(() => { b.innerHTML = 'Pošalji poruku'; b.style.background = ''; b.style.color = ''; b.disabled = false; e.target.reset(); }, 5000);
+    function toggleTalk(el) {
+      const isOpen = el.classList.contains('open');
+      document.querySelectorAll('.talk-item').forEach(item => {
+        item.classList.remove('open');
+      });
+      if (!isOpen) {
+        el.classList.add('open');
+      }
     }
   </script>
 </body>
