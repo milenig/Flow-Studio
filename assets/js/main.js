@@ -163,7 +163,7 @@ document.body.style.overflow = "hidden";
   const FS = `precision highp float;
     uniform float t;uniform vec2 res;uniform vec2 mo;
     vec3 pal(float t){
-      return vec3(.05,.05,.07)+vec3(.04,.05,.03)*cos(6.283*(vec3(.06,.11,.07)*t+vec3(0.,.35,.6)));
+      return vec3(.08,.08,.11)+vec3(.07,.08,.05)*cos(6.283*(vec3(.06,.11,.07)*t+vec3(0.,.35,.6)));
     }
     float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
     float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1)),f.x),f.y);}
@@ -178,10 +178,10 @@ document.body.style.overflow = "hidden";
       float f=fbm(uv+1.7*rr)+w;
       f=f+.45*fbm(uv*2.1+t*.04);
       vec3 col=pal(f+t*.04);
-      col=mix(col,col*1.7,smoothstep(.3,.7,f));
+      col=mix(col,col*2.2,smoothstep(.3,.7,f));
       float vg=1.-dot(uv*1.1,uv*1.1);
       col*=clamp(vg*1.4,.0,1.);
-      col+=vec3(0.,.07,.04)*(1.-smoothstep(.5,.9,length(uv)))*smoothstep(.45,.8,f);
+      col+=vec3(0.,.14,.08)*(1.-smoothstep(.5,.9,length(uv)))*smoothstep(.45,.8,f);
       gl_FragColor=vec4(col,1.);
     }`;
   function sh(tp, src) {
