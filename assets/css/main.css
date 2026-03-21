@@ -1011,53 +1011,6 @@ nav:hover .nav-links a:hover {
   font-weight: 500;
 }
 
-.ai-features {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 40px;
-}
-
-.ai-feat {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  transition: all 0.3s;
-}
-
-.ai-feat:hover {
-  background: rgba(0, 229, 160, 0.05);
-  border-color: rgba(0, 229, 160, 0.15);
-}
-
-.af-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 17px;
-}
-
-.af-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 3px;
-}
-
-.af-desc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.35);
-  line-height: 1.55;
-}
-
 /* AI canvas visual */
 .ai-visual {
   position: relative;
