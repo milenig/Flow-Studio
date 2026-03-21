@@ -484,36 +484,6 @@ document.body.style.overflow = "hidden";
   setTimeout(run, 1000);
 })();
 
-// Project placeholder canvas
-(function () {
-  const c = document.getElementById("pc4");
-  if (!c) return;
-  const ctx = c.getContext("2d");
-  let t = 0;
-  function fr() {
-    ctx.fillStyle = "rgba(12,12,14,.18)";
-    ctx.fillRect(0, 0, c.width, c.height);
-    [
-      [200, 145, 0, "rgba(0,229,160,"],
-      [80, 145, -1, "rgba(124,58,237,"],
-      [380, 145, 0.7, "rgba(37,99,235,"],
-    ].forEach(([x, y, d, col], i) => {
-      const ax = x + Math.cos(t + i * 2.1) * 60,
-        ay = y + Math.sin(t * 1.1 + i * 2.1) * 35;
-      const g = ctx.createRadialGradient(ax, ay, 0, ax, ay, 80);
-      g.addColorStop(0, col + ".4)");
-      g.addColorStop(1, "transparent");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(ax, ay, 80, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    t += 0.009;
-    requestAnimationFrame(fr);
-  }
-  fr();
-})();
-
 // ════════════════════════════════════
 // SERVICE CARD MOUSE GLOW
 // ════════════════════════════════════
@@ -524,16 +494,163 @@ function scGlow(el, e) {
 }
 
 // ════════════════════════════════════
-// PROJECT HORIZONTAL SCROLL
+// PROJECTS — carousel (bounded), drag + arrows
 // ════════════════════════════════════
-let pi = 0;
-function ps(dir) {
+(function initProjectsCarousel() {
   const track = document.getElementById("pt");
-  const cards = track.querySelectorAll(".pc");
-  const cw = cards[0].offsetWidth + 22;
-  pi = Math.max(0, Math.min(cards.length - 2, pi + dir));
-  track.style.transform = `translateX(-${pi * cw}px)`;
-}
+  const scroll = document.getElementById("proj-scroll");
+  const navPrev = document.querySelector(".proj-nav .pnb:first-of-type");
+  const navNext = document.querySelector(".proj-nav .pnb:last-of-type");
+  if (!track || !scroll) return;
+
+  const slides = [...track.querySelectorAll(".pc[data-slide]")];
+  const n = slides.length;
+  if (!n) return;
+
+  let idx = 0;
+  let step = 0;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragBase = 0;
+  let trans = 0;
+  let animating = false;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
+  const durationMs = 720;
+
+  function getGap() {
+    const g = getComputedStyle(track).gap;
+    return parseFloat(g) || 28;
+  }
+
+  function measure() {
+    const card = track.querySelector(".pc[data-slide]");
+    if (!card) return;
+    step = card.offsetWidth + getGap();
+    if (!step) step = 1;
+  }
+
+  function minTrans() {
+    return n <= 1 ? 0 : -(n - 1) * step;
+  }
+
+  function clampTrans(px) {
+    const lo = minTrans();
+    return Math.max(lo, Math.min(0, px));
+  }
+
+  function setTranslate(px, instant) {
+    trans = clampTrans(px);
+    const noAnim = instant || reducedMotion;
+    track.style.transition = noAnim ? "none" : `transform ${durationMs}ms ${ease}`;
+    track.style.transform = `translate3d(${trans}px,0,0)`;
+    animating = !noAnim;
+  }
+
+  function updateNav() {
+    if (!navPrev || !navNext) return;
+    const atStart = idx <= 0;
+    const atEnd = idx >= n - 1;
+    navPrev.disabled = atStart;
+    navNext.disabled = atEnd;
+    navPrev.setAttribute("aria-disabled", atStart ? "true" : "false");
+    navNext.setAttribute("aria-disabled", atEnd ? "true" : "false");
+  }
+
+  function onTransitionEnd(e) {
+    if (e.target !== track || e.propertyName !== "transform" || dragging) return;
+    animating = false;
+  }
+
+  track.addEventListener("transitionend", onTransitionEnd);
+
+  window.ps = function (dir) {
+    if (animating || dragging || n < 2) return;
+    const next = idx + dir;
+    if (next < 0 || next > n - 1) return;
+    measure();
+    idx = next;
+    setTranslate(-idx * step, false);
+    updateNav();
+  };
+
+  function snapAfterDrag() {
+    measure();
+    let nearest = Math.round(-trans / step);
+    nearest = Math.max(0, Math.min(n - 1, nearest));
+    idx = nearest;
+    setTranslate(-idx * step, false);
+    updateNav();
+  }
+
+  scroll.addEventListener(
+    "pointerdown",
+    (e) => {
+      if (e.button !== 0) return;
+      if (e.target.closest("a, button")) return;
+      dragging = true;
+      scroll.classList.add("is-dragging");
+      measure();
+      dragStartX = e.clientX;
+      dragBase = trans;
+      track.style.transition = "none";
+      animating = false;
+      scroll.setPointerCapture(e.pointerId);
+    },
+    { passive: true },
+  );
+
+  scroll.addEventListener(
+    "pointermove",
+    (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - dragStartX;
+      setTranslate(dragBase + dx, true);
+    },
+    { passive: true },
+  );
+
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false;
+    scroll.classList.remove("is-dragging");
+    try {
+      scroll.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+    snapAfterDrag();
+  }
+
+  scroll.addEventListener("pointerup", endDrag);
+  scroll.addEventListener("pointercancel", endDrag);
+
+  function layout() {
+    measure();
+    idx = Math.max(0, Math.min(n - 1, idx));
+    setTranslate(-idx * step, true);
+    updateNav();
+  }
+
+  requestAnimationFrame(() => requestAnimationFrame(layout));
+  window.addEventListener("resize", layout);
+
+  track.querySelectorAll(".pc[data-slide] video").forEach((v) => {
+    const card = v.closest(".pc");
+    if (!card) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting && en.intersectionRatio > 0.25) {
+            v.play().catch(() => {});
+          } else {
+            v.pause();
+          }
+        });
+      },
+      { threshold: [0, 0.25, 0.5, 1] },
+    );
+    io.observe(card);
+  });
+})();
 
 const ro = new IntersectionObserver(
   (en) =>

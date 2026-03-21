@@ -506,109 +506,114 @@
           <h2 class="hl2">Projekti kojima<br />se <em>ponosimo</em></h2>
         </div>
         <div class="proj-nav">
-          <button class="pnb" onclick="ps(-1)">
+          <button type="button" class="pnb" onclick="ps(-1)" aria-label="Prethodni projekat">
             <svg viewBox="0 0 24 24">
               <path d="M19 12H5M12 5l-7 7 7 7" />
             </svg>
           </button>
-          <button class="pnb" onclick="ps(1)">
+          <button type="button" class="pnb" onclick="ps(1)" aria-label="Sledeći projekat">
             <svg viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </div>
       </div>
-      <div class="proj-scroll">
+      <div class="proj-scroll" id="proj-scroll">
         <div class="proj-track" id="pt">
-          <div class="pc feat">
-            <div class="pc-thumb">
-              <img
+          <article class="pc" data-slide>
+            <div class="pc-media">
+              <img class="pc-img"
                 src="https://cdn.prod.website-files.com/69b2c981f5e61a80bd8bfe05/69b2fdb9a86e7ef03e1e814d_Screenshot%202026-03-12%20at%2018.53.50.png"
                 alt="Test AI Models" loading="lazy" />
-              <div class="pc-ov">
-                <a href="https://testaimodels.com/" target="_blank" rel="noopener" class="pc-live">Pogledaj live ↗</a>
+              <div class="pc-grad" aria-hidden="true"></div>
+              <div class="pc-body">
+                <div class="pc-tags">
+                  <span class="pct">SaaS</span><span class="pct">AI</span>
+                </div>
+                <h3 class="pc-name">Test AI Models</h3>
+                <p class="pc-desc">
+                  Landing page visokih konverzija za AI platformu. Webflow animacije,
+                  SEO 100/100 i čista hierarhija poruka.
+                </p>
+                <a href="https://testaimodels.com/" target="_blank" rel="noopener" class="pc-cta">Pogledaj live ↗</a>
               </div>
             </div>
-            <div class="pc-info">
-              <div class="pc-tags">
-                <span class="pct g">Istaknuto</span><span class="pct">SaaS</span><span class="pct">AI</span>
-              </div>
-              <div class="pc-name">Test AI Models</div>
-              <div class="pc-desc">
-                Landing page visokih konverzija za AI platformu. Webflow
-                animacije, SEO 100/100 i čista hierarhija poruka.
-              </div>
-              <div class="pc-metrics">
-                <span class="pcm">Brzina: <em>98</em></span><span class="pcm">SEO: <em>100</em></span><span
-                  class="pcm">A11y: <em>96</em></span>
-              </div>
-            </div>
-          </div>
-          <div class="pc">
-            <div class="pc-thumb">
-              <img
-                src="https://cdn.prod.website-files.com/69b2c981f5e61a80bd8bfe05/69b56c46d0e8070d16737c59_Screenshot%202026-03-14%20at%2015.09.44.png"
-                alt="Dice Media" loading="lazy" />
-              <div class="pc-ov">
-                <a href="https://dice-media.webflow.io/" target="_blank" rel="noopener" class="pc-live">Pogledaj live
+          </article>
+          <article class="pc" data-slide>
+            <div class="pc-media">
+              <video class="pc-vid" muted playsinline loop preload="metadata">
+                <source src="./assets/dicemedia-promo.mp4" type="video/mp4" />
+              </video>
+              <div class="pc-grad" aria-hidden="true"></div>
+              <div class="pc-body">
+                <div class="pc-tags">
+                  <span class="pct">Marketing</span><span class="pct">CMS</span>
+                </div>
+                <h3 class="pc-name">Dice Media</h3>
+                <p class="pc-desc">
+                  Korporativni sajt sa animiranim hero-om, blog CMS-om i jakim
+                  vizuelnim identitetom za marketinšku agenciju.
+                </p>
+                <a href="https://dice-media.webflow.io/" target="_blank" rel="noopener" class="pc-cta">Pogledaj live
                   ↗</a>
               </div>
             </div>
-            <div class="pc-info">
-              <div class="pc-tags">
-                <span class="pct">Marketing</span><span class="pct">CMS</span>
-              </div>
-              <div class="pc-name">Dice Media</div>
-              <div class="pc-desc">
-                Korporativni sajt sa animiranim hero-om, blog CMS-om i jakim
-                vizuelnim identitetom za marketinšku agenciju.
-              </div>
-            </div>
-          </div>
-          <div class="pc">
-            <div class="pc-thumb">
-              <img
-                src="https://cdn.prod.website-files.com/69b2c981f5e61a80bd8bfe05/69b2e9c958c1416a25f5b2f7_Screenshot%202026-03-12%20at%2017.28.39.png"
-                alt="RE Official" loading="lazy" />
-              <div class="pc-ov">
-                <a href="https://reofficial.webflow.io/" target="_blank" rel="noopener" class="pc-live">Pogledaj live
+          </article>
+          <article class="pc" data-slide>
+            <div class="pc-media">
+              <video class="pc-vid" muted playsinline loop preload="metadata">
+                <source src="./assets/reofficial-promo.mp4" type="video/mp4" />
+              </video>
+              <div class="pc-grad" aria-hidden="true"></div>
+              <div class="pc-body">
+                <div class="pc-tags">
+                  <span class="pct">Moda</span><span class="pct">E-com</span>
+                </div>
+                <h3 class="pc-name">RE Official</h3>
+                <p class="pc-desc">
+                  Editorijalni e-commerce za upcycling brend — svaka stranica priča priču,
+                  svaki klik vodi ka konverziji.
+                </p>
+                <a href="https://reofficial.webflow.io/" target="_blank" rel="noopener" class="pc-cta">Pogledaj live
                   ↗</a>
               </div>
             </div>
-            <div class="pc-info">
-              <div class="pc-tags">
-                <span class="pct">Moda</span><span class="pct">E-com</span>
-              </div>
-              <div class="pc-name">RE Official</div>
-              <div class="pc-desc">
-                Editorijalni e-commerce za upcycling brend — svaka stranica
-                priča priču, svaki klik vodi ka konverziji.
-              </div>
-            </div>
-          </div>
-          <div class="pc" style="
-                background: var(--ink);
-                border-color: rgba(255, 255, 255, 0.06);
-              ">
-            <div class="pc-thumb">
-              <canvas id="pc4" width="460" height="290" style="width: 100%; height: 100%; display: block"></canvas>
-            </div>
-            <div class="pc-info">
-              <div class="pc-tags">
-                <span class="pct" style="
-                      background: rgba(255, 255, 255, 0.06);
-                      color: rgba(255, 255, 255, 0.4);
-                    ">Tvoj projekat</span>
-              </div>
-              <div class="pc-name" style="color: var(--white)">
-                Sledeći projekat?
-              </div>
-              <div class="pc-desc" style="color: rgba(255, 255, 255, 0.35)">
-                Tvoj brend mogao bi biti sledeći koji prezentujemo ovde.
-                Kontaktiraj nas i razgovaramo.
+          </article>
+          <article class="pc" data-slide>
+            <div class="pc-media">
+              <video class="pc-vid" muted playsinline loop preload="metadata">
+                <source src="./assets/project-promo-3x4.mp4" type="video/mp4" />
+              </video>
+              <div class="pc-grad" aria-hidden="true"></div>
+              <div class="pc-body">
+                <div class="pc-tags">
+                  <span class="pct">Turizam</span><span class="pct">Webflow</span>
+                </div>
+                <h3 class="pc-name">Brvnare Janković</h3>
+                <p class="pc-desc">
+                  Smestaj na Goču — video prikaz atmosfere i ponude direktno na landing stranici.
+                </p>
+                <a href="https://brvnarejankovic.rs" target="_blank" rel="noopener" class="pc-cta">Pogledaj live
+                  ↗</a>
               </div>
             </div>
-          </div>
+          </article>
+          <article class="pc pc--cta" data-slide>
+            <div class="pc-media pc-media--cta">
+              <div class="pc-cta-bg" aria-hidden="true"></div>
+              <div class="pc-grad" aria-hidden="true"></div>
+              <div class="pc-body">
+                <div class="pc-tags">
+                  <span class="pct pct--dim">Tvoj projekat</span>
+                </div>
+                <h3 class="pc-name">Sledeći projekat?</h3>
+                <p class="pc-desc">
+                  Tvoj brend mogao bi biti sledeći koji prezentujemo ovde. Kontaktiraj nas i razgovaramo.
+                </p>
+                <a href="#contact" class="pc-cta">Kontaktiraj nas ↗</a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </div>
