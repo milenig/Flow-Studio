@@ -246,6 +246,7 @@ nav:hover .nav-links a:hover {
 }
 
 @keyframes pulse-dot {
+
   0%,
   100% {
     opacity: 1;
@@ -460,6 +461,7 @@ nav:hover .nav-links a:hover {
 }
 
 @keyframes scLine {
+
   0%,
   100% {
     transform: scaleY(1);
@@ -760,21 +762,12 @@ nav:hover .nav-links a:hover {
   position: relative;
 }
 
-#about-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .av-ov {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(12, 12, 14, 0.9) 0%,
-    transparent 55%
-  );
+  background: linear-gradient(to top,
+      rgba(12, 12, 14, 0.9) 0%,
+      transparent 55%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -809,6 +802,7 @@ nav:hover .nav-links a:hover {
 }
 
 @keyframes flt {
+
   0%,
   100% {
     transform: translateY(0);
@@ -1044,11 +1038,9 @@ nav:hover .nav-links a:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse 60% 60% at var(--mx, 50%) var(--my, 50%),
-    rgba(255, 255, 255, 0.04),
-    transparent
-  );
+  background: radial-gradient(ellipse 60% 60% at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, 0.04),
+      transparent);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s;
@@ -1566,8 +1558,7 @@ nav:hover .nav-links a:hover {
   color: #009c6d;
 }
 
-.comp-rows {
-}
+.comp-rows {}
 
 .crow {
   display: flex;
@@ -2000,16 +1991,12 @@ nav:hover .nav-links a:hover {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      ellipse 55% 80% at 80% 50%,
+    radial-gradient(ellipse 55% 80% at 80% 50%,
       rgba(0, 229, 160, 0.07),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 40% 60% at 10% 80%,
+      transparent),
+    radial-gradient(ellipse 40% 60% at 10% 80%,
       rgba(124, 58, 237, 0.06),
-      transparent
-    );
+      transparent);
 }
 
 .wct-title {
@@ -2533,6 +2520,7 @@ footer {
 }
 
 @keyframes blink-c {
+
   0%,
   49% {
     opacity: 1;
@@ -3160,13 +3148,11 @@ footer {
   bottom: 0;
   left: 50%;
   width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 255, 255, 0.08) 20%,
-    rgba(255, 255, 255, 0.08) 80%,
-    transparent
-  );
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent);
 }
 
 #bubble-canvas {
@@ -3313,6 +3299,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+
   .split-left,
   .split-right {
     padding: 36px 28px;

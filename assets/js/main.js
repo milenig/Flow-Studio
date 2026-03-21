@@ -225,83 +225,6 @@ document.body.style.overflow = "hidden";
 })();
 
 // ════════════════════════════════════
-// ABOUT canvas — flowing mesh gradient
-// ════════════════════════════════════
-(function () {
-  const c = document.getElementById("about-canvas");
-  if (!c) return;
-  const ctx = c.getContext("2d");
-  function resize() {
-    c.width = c.offsetWidth;
-    c.height = c.offsetHeight;
-  }
-  resize();
-  new ResizeObserver(resize).observe(c);
-  let t = 0;
-  const orbs = [
-    { x: 0.3, y: 0.3, r: 0.45, col: "rgba(0,229,160,", vx: 0.0003, vy: 0.0002 },
-    {
-      x: 0.7,
-      y: 0.6,
-      r: 0.4,
-      col: "rgba(124,58,237,",
-      vx: -0.0004,
-      vy: 0.0003,
-    },
-    {
-      x: 0.5,
-      y: 0.85,
-      r: 0.35,
-      col: "rgba(37,99,235,",
-      vx: 0.0003,
-      vy: -0.0003,
-    },
-  ];
-  function frame() {
-    c.width = c.offsetWidth;
-    ctx.fillStyle = "#0c0c0e";
-    ctx.fillRect(0, 0, c.width, c.height);
-    orbs.forEach((o) => {
-      o.x = (o.x + o.vx + 1) % 1;
-      o.y = (o.y + o.vy + 1) % 1;
-      const gx = o.x * c.width,
-        gy = o.y * c.height,
-        gr = o.r * Math.min(c.width, c.height);
-      const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
-      g.addColorStop(0, o.col + "0.35)");
-      g.addColorStop(0.5, o.col + "0.12)");
-      g.addColorStop(1, o.col + "0)");
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, c.width, c.height);
-    });
-    // particle grid
-    const cols = ["rgba(0,229,160,", "rgba(124,58,237,", "rgba(255,255,255,"];
-    if (!frame._pts) {
-      frame._pts = [];
-      for (let i = 0; i < 60; i++)
-        frame._pts.push({
-          x: Math.random(),
-          y: Math.random(),
-          vx: (Math.random() - 0.5) * 0.0004,
-          vy: (Math.random() - 0.5) * 0.0004,
-          c: cols[i % 3],
-        });
-    }
-    frame._pts.forEach((p) => {
-      p.x = (p.x + p.vx + 1) % 1;
-      p.y = (p.y + p.vy + 1) % 1;
-      ctx.beginPath();
-      ctx.arc(p.x * c.width, p.y * c.height, 0.8, 0, Math.PI * 2);
-      ctx.fillStyle = p.c + "0.6)";
-      ctx.fill();
-    });
-    t += 0.01;
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
-
-// ════════════════════════════════════
 // AI canvas — orbit bubble animation
 // (swapped from agency section)
 // ════════════════════════════════════
@@ -319,7 +242,7 @@ document.body.style.overflow = "hidden";
 
   const orbits = [
     {
-      label: "Claude AI",
+      label: "flowstudio",
       r: 0,
       speed: 0,
       col: "#00e5a0",

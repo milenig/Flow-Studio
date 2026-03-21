@@ -179,8 +179,10 @@
       </div>
       <div class="about-visual reveal">
         <div class="av-card">
-          <canvas id="about-canvas"></canvas>
-          <div class="av-ov">
+          <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+            <source src="./assets/about-visual.mp4" type="video/mp4" />
+          </video>
+          <div class="av-ov" style="z-index: 1;">
             <div class="av-ov-t">Svaki projekat je<br />naša vizit karta</div>
             <div class="av-ov-s">Dizajn · Razvoj · AI · Strategija</div>
           </div>
@@ -709,239 +711,223 @@
     </div>
   </section>
 
-  <!-- ZAŠTO NAŠA AGENCIJA -->
-  <section id="comparison" class="sec" style="background: var(--off); padding-bottom: 160px">
+  <!-- ZAŠTO NAŠA AGENCIJA - ELEGANT REDESIGN -->
+  <section id="comparison" class="sec" style="background: var(--white); padding-bottom: 140px;">
     <div class="mwrap">
-      <div class="reveal" style="text-align: center; max-width: 640px; margin: 0 auto 56px">
-        <div class="kicker" style="justify-content: center">
-          Zašto naša agencija
-        </div>
-        <h2 class="hl2" style="text-align: center">
-          Dok drugi stoje u mestu,<br />mi <em>definišemo standard</em>
-        </h2>
-      </div>
 
-      <!-- Split card container -->
-      <div class="split-card reveal">
-        <!-- LEFT — light side: "Ostale agencije" -->
-        <div class="split-left">
-          <div class="split-eyebrow">Ostale agencije</div>
-          <h3 class="split-hl-l">
-            Isti alati.<br />Ista rešenja.<br />Isti prosečni rezultati.
-          </h3>
-          <p class="split-body-l">
-            Većina agencija gradi sajtove na istim alatima od pre deset
-            godina, bez razumevanja biznisa, bez strategije i bez ikakve AI
-            integracije.
-          </p>
+      <!-- MAIN CONTAINER -->
+      <div class="reveal"
+        style="background: var(--off); border-radius: 40px; padding: 80px 64px; border: 1px solid var(--border);">
 
-          <!-- Weakness pills -->
-          <div class="split-pills">
-            <span class="spill bad">WordPress zavisnost</span>
-            <span class="spill bad">Spori rokovi</span>
-            <span class="spill bad">Bez AI integracija</span>
-            <span class="spill bad">Skriveni troškovi</span>
-            <span class="spill bad">Generički dizajn</span>
-            <span class="spill bad">Nema SEO temelja</span>
-          </div>
-
-          <!-- Comparison rows -->
-          <div class="split-rows">
-            <div class="srow">
-              <div class="srow-lbl">Alati</div>
-              <div class="srow-val bad">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>WordPress + pluginovi
-              </div>
-            </div>
-            <div class="srow">
-              <div class="srow-lbl">Rokovi</div>
-              <div class="srow-val bad">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>2–4 meseca
-              </div>
-            </div>
-            <div class="srow">
-              <div class="srow-lbl">AI</div>
-              <div class="srow-val bad">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>Ne koriste
-              </div>
-            </div>
-            <div class="srow">
-              <div class="srow-lbl">Cena</div>
-              <div class="srow-val bad">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>Skriveni troškovi
-              </div>
-            </div>
-            <div class="srow">
-              <div class="srow-lbl">Posle launcha</div>
-              <div class="srow-val bad">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>Nema podrške
-              </div>
-            </div>
-          </div>
+        <!-- HEADER ROW inside container -->
+        <div style="margin-bottom: 72px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+          <h2 class="hl2" style="font-size: clamp(38px, 4.5vw, 56px); margin: 0; line-height: 1.1;">
+            <span style="color: var(--dim)">Tradicionalni razvoj kaska —</span><br />
+            Zato mi isporučujemo kvalitet.
+          </h2>
         </div>
 
-        <!-- CENTER — clean divider line, no canvas -->
-        <div class="split-center">
-          <div class="split-vs">VS</div>
-        </div>
+        <!-- TWO COLUMNS ROW -->
+        <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; align-items: start;">
 
-        <!-- RIGHT — dark side: "Flow Studio" -->
-        <div class="split-right">
-          <div class="split-eyebrow-r">Flow Studio</div>
-          <h3 class="split-hl-r">
-            AI-first.<br />Modern stack.<br />Merljivi rezultati.
-          </h3>
-          <p class="split-body-r">
-            Gradimo na alatima koji definišu savremeni web —
-            <span class="tool-link-wrap">
-              <a class="tool-link" href="https://webflow.com" target="_blank" rel="noopener">Webflow</a>
-              <span class="tool-preview">
-                <span class="tp-img" style="
-                      background: linear-gradient(
-                        135deg,
-                        #0a0a0a 0%,
-                        #0d1f4d 100%
-                      );
-                    ">
-                  <svg viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M56 4l-11 20-6-11-6 11L22 4h8l5 9 6-9 6 9 5-9h4zM4 4h6l3.5 10L17 4h5l-7.5 20L11 14l-3.5 10L0 4h4z"
-                      fill="white" fill-opacity=".9" />
-                  </svg>
-                </span>
-                <span class="tp-body">
-                  <span class="tp-name">Webflow</span>
-                  <span class="tp-desc">Visual web development platform. Design, build and launch
-                    production-ready sites.</span>
-                  <span class="tp-url">webflow.com ↗</span>
-                </span>
-              </span>
-            </span>
-            i
-            <span class="tool-link-wrap">
-              <a class="tool-link" href="https://framer.com" target="_blank" rel="noopener">Framer</a>
-              <span class="tool-preview">
-                <span class="tp-img" style="
-                      background: linear-gradient(
-                        135deg,
-                        #0a0aff 0%,
-                        #0000cc 100%
-                      );
-                    ">
-                  <svg viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h40v20H20L0 0zM0 20h20l20 20H0V20zM0 40h20v16L0 40z" fill="white" fill-opacity=".9" />
-                  </svg>
-                </span>
-                <span class="tp-body">
-                  <span class="tp-name">Framer</span>
-                  <span class="tp-desc">The website builder for creative teams. Ship stunning
-                    sites with advanced animations.</span>
-                  <span class="tp-url">framer.com ↗</span>
-                </span>
-              </span>
-            </span>
-            — uz Claude AI i Make.com automatizaciju — za merljive KPI-jeve od
-            prvog dana.
-          </p>
+          <!-- LEFT COLUMN (Bad / Light) -->
+          <div
+            style="background: var(--white); border-radius: 24px; padding: 48px 40px; border: 1px solid var(--border); display: flex; flex-direction: column;">
+            <div style="font-size: 24px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 24px;">
+              Standardne agencije (v1.0)<br />
+              su spore i skupe.
+            </div>
+            <p style="color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 40px;">
+              Većina agencija i dalje koristi procese koji oduzimaju vreme. Sajtovi se prave mesecima na nestabilnim
+              WordPress temama, dizajn gubi oštrinu u kodu, a svaki dodatak – optimizacija, brzina, SEO – postaje povod
+              za dodatne naplate na fakturi.
+            </p>
 
-          <!-- Strength pills — Webflow + Framer as clickable links -->
-          <div class="split-pills">
-            <a href="https://webflow.com" target="_blank" rel="noopener" class="spill good spill-link">Webflow</a>
-            <a href="https://framer.com" target="_blank" rel="noopener" class="spill good spill-link">Framer</a>
-            <span class="spill good">2 nedelje isporuka</span>
-            <span class="spill good">AI integracije</span>
-            <span class="spill good">Fiksna cena</span>
-            <span class="spill good">SEO od dana 1</span>
-          </div>
-
-          <!-- Comparison rows -->
-          <div class="split-rows-r">
-            <div class="srow-r">
-              <div class="srow-lbl-r">Alati</div>
-              <div class="srow-val-r good-r">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg><span class="tool-link-wrap"><a class="tool-link tool-link-dark" href="https://webflow.com"
-                    target="_blank" rel="noopener">Webflow</a><span class="tool-preview tool-preview-up"><span
-                      class="tp-img" style="
-                          background: linear-gradient(135deg, #0a0a0a, #0d1f4d);
-                        "><svg viewBox="0 0 80 28" fill="none">
-                        <path
-                          d="M56 4l-11 20-6-11-6 11L22 4h8l5 9 6-9 6 9 5-9h4zM4 4h6l3.5 10L17 4h5l-7.5 20L11 14l-3.5 10L0 4h4z"
-                          fill="white" fill-opacity=".9" />
-                      </svg></span><span class="tp-body"><span class="tp-name">Webflow</span><span
-                        class="tp-desc">Visual web development platform for production-ready
-                        sites.</span><span class="tp-url">webflow.com ↗</span></span></span></span>
-                ·
-                <span class="tool-link-wrap"><a class="tool-link tool-link-dark" href="https://framer.com"
-                    target="_blank" rel="noopener">Framer</a><span class="tool-preview tool-preview-up"><span
-                      class="tp-img" style="
-                          background: linear-gradient(135deg, #0a0aff, #0000cc);
-                        "><svg viewBox="0 0 40 56" fill="none">
-                        <path d="M0 0h40v20H20L0 0zM0 20h20l20 20H0V20zM0 40h20v16L0 40z" fill="white"
-                          fill-opacity=".9" />
-                      </svg></span><span class="tp-body"><span class="tp-name">Framer</span><span class="tp-desc">The
-                        website builder for creative teams with advanced
-                        animations.</span><span class="tp-url">framer.com ↗</span></span></span></span>
-                · AI
+            <div
+              style="display: flex; flex-direction: column; gap: 16px; border-top: 1px solid var(--border); padding-top: 32px;">
+              <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+                  style="margin-top:2px; flex-shrink:0">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+                <div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Dugi razvojni
+                    ciklusi</div>
+                  <div style="font-size: 14px; color: var(--muted); line-height: 1.5;">Projekti padaju u beskonačne
+                    iteracije.</div>
+                </div>
               </div>
-            </div>
-            <div class="srow-r">
-              <div class="srow-lbl-r">Rokovi</div>
-              <div class="srow-val-r good-r">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>2–4 nedelje
+              <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+                  style="margin-top:2px; flex-shrink:0">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+                <div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Skriveni
+                    troškovi održavanja</div>
+                  <div style="font-size: 14px; color: var(--muted); line-height: 1.5;">SEO i performanse se naplaćuju
+                    naknadno.</div>
+                </div>
               </div>
-            </div>
-            <div class="srow-r">
-              <div class="srow-lbl-r">AI</div>
-              <div class="srow-val-r good-r">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>Ugrađeno u svaki projekat
-              </div>
-            </div>
-            <div class="srow-r">
-              <div class="srow-lbl-r">Cena</div>
-              <div class="srow-val-r good-r">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>Transparentno, fiksno
-              </div>
-            </div>
-            <div class="srow-r">
-              <div class="srow-lbl-r">Posle launcha</div>
-              <div class="srow-val-r good-r">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>30 dana podrške
+              <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+                  style="margin-top:2px; flex-shrink:0">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+                <div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">Zavisnost od
+                    tuđeg koda</div>
+                  <div style="font-size: 14px; color: var(--muted); line-height: 1.5;">Ne možeš sam da menjaš ni
+                    najobičniji tekst.</div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- CTA -->
-          <a href="#contact" class="split-cta">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-            Počni sa nama
-          </a>
+          <!-- RIGHT COLUMN (Good / Dark) -->
+          <div
+            style="background: var(--ink); border-radius: 32px; padding: 64px 56px; border: 1px solid rgba(255,255,255,0.08); position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 32px 64px rgba(0,0,0,0.15); overflow: visible;">
+
+            <!-- Subtle green glow effect in background -->
+            <div
+              style="position: absolute; top: -100px; right: -100px; width: 450px; height: 450px; background: radial-gradient(circle, rgba(0, 229, 160, 0.08) 0%, transparent 65%); pointer-events: none;">
+            </div>
+            <div
+              style="position: absolute; bottom: -50px; left: -50px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 65%); pointer-events: none;">
+            </div>
+
+            <div style="position: relative; z-index: 1;">
+              <div
+                style="font-size: 32px; font-weight: 600; color: var(--white); line-height: 1.25; margin-bottom: 24px;">
+                Flow Studio: Dizajn za konverzije.
+              </div>
+              <p
+                style="color: rgba(255,255,255,0.65); font-size: 17px; line-height: 1.6; margin-bottom: 40px; max-width: 480px;">
+                Mi smo isključivo Webflow (i Framer) agencija jer verujemo da kôd ne sme da usporava viziju. Nema
+                kompromisa između brzine i dizajna – pretvaramo strategiju u premium web iskustvo koje privlači
+                klijente.
+              </p>
+
+              <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 48px;">
+                <!-- Point 1 -->
+                <div style="display: flex; align-items: flex-start; gap: 16px;">
+                  <div
+                    style="width: 24px; height: 24px; border-radius: 50%; background: rgba(0, 229, 160, 0.15); border: 1px solid rgba(0, 229, 160, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="color: var(--white); font-weight: 600; font-size: 16px; margin-bottom: 6px;">SEO koji
+                      dominira i Ekstremna brzina</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.5;">Prvi na Google
+                      pretragama zahvaljujući najčistijem kodu. Naši sajtovi gađaju 98+ Lighthouse score.</div>
+                  </div>
+                </div>
+
+                <!-- Point 2 -->
+                <div style="display: flex; align-items: flex-start; gap: 16px;">
+                  <div
+                    style="width: 24px; height: 24px; border-radius: 50%; background: rgba(0, 229, 160, 0.15); border: 1px solid rgba(0, 229, 160, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="color: var(--white); font-weight: 600; font-size: 16px; margin-bottom: 6px;">Snažan
+                      Copy-writing</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.5;">Lep sajt ne prodaje
+                      ako poruka ne rezonuje. Mi gradimo prodajne i marketing tekstove koji direktno angažuju kupce.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Point 3 -->
+                <div style="display: flex; align-items: flex-start; gap: 16px;">
+                  <div
+                    style="width: 24px; height: 24px; border-radius: 50%; background: rgba(0, 229, 160, 0.15); border: 1px solid rgba(0, 229, 160, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="color: var(--white); font-weight: 600; font-size: 16px; margin-bottom: 6px;">Vizuelni
+                      CMS pod tvojom kontrolom</div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.5;">Uređuj sajt jednako
+                      lako kao Word dokument. Sam dodaješ usluge i blogove jednim klikom.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="border-top: 1px solid rgba(255,255,255,0.06); margin-bottom: 40px; padding-top: 40px;">
+                <div
+                  style="color: rgba(255,255,255,0.3); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;">
+                  Moderni stack industrije</div>
+                <!-- TOOL LINKS INJECTED HERE -->
+                <div style="display: flex; gap: 12px; align-items: center; color: var(--white); flex-wrap: wrap;">
+                  <span class="tool-link-wrap">
+                    <a class="tool-link tool-link-dark" href="https://webflow.com" target="_blank"
+                      rel="noopener">Webflow</a>
+                    <span class="tool-preview tool-preview-up">
+                      <span class="tp-img" style="background: linear-gradient(135deg, #0a0a0a 0%, #0d1f4d 100%);">
+                        <svg viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M56 4l-11 20-6-11-6 11L22 4h8l5 9 6-9 6 9 5-9h4zM4 4h6l3.5 10L17 4h5l-7.5 20L11 14l-3.5 10L0 4h4z"
+                            fill="white" fill-opacity=".9" />
+                        </svg>
+                      </span>
+                      <span class="tp-body">
+                        <span class="tp-name">Webflow</span>
+                        <span class="tp-desc">Visual web development platform. Design, build and launch production-ready
+                          sites.</span>
+                        <span class="tp-url">webflow.com ↗</span>
+                      </span>
+                    </span>
+                  </span>
+                  <span style="color: rgba(255,255,255,0.2); font-weight:300;">+</span>
+                  <span class="tool-link-wrap">
+                    <a class="tool-link tool-link-dark" href="https://framer.com" target="_blank"
+                      rel="noopener">Framer</a>
+                    <span class="tool-preview tool-preview-up">
+                      <span class="tp-img" style="background: linear-gradient(135deg, #0a0aff 0%, #0000cc 100%);">
+                        <svg viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M0 0h40v20H20L0 0zM0 20h20l20 20H0V20zM0 40h20v16L0 40z" fill="white"
+                            fill-opacity=".9" />
+                        </svg>
+                      </span>
+                      <span class="tp-body">
+                        <span class="tp-name">Framer</span>
+                        <span class="tp-desc">The website builder for creative teams. Ship stunning sites with advanced
+                          animations.</span>
+                        <span class="tp-url">framer.com ↗</span>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            <div
+              style="margin-top: auto; display: flex; justify-content: flex-end; align-items: center; position: relative; z-index: 1;">
+              <a href="#contact" class="btn-light"
+                style="padding: 16px 32px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s; width: 100%; justify-content: center;">
+                Besplatna konsultacija
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
-
   <!-- TESTIMONIALS — Modern colored card wall -->
   <section id="testimonials" class="sec">
     <div class="mwrap">
