@@ -21,7 +21,6 @@
   --violet: #7c3aed;
   --blue: #2563eb;
   --amber: #f59e0b;
-  --serif: "Syne", sans-serif;
   --body: "Inter", sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease2: cubic-bezier(0.4, 0, 0.2, 1);
@@ -89,7 +88,7 @@ body {
 }
 
 .ld-logo {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 52px;
   font-weight: 800;
   color: var(--white);
@@ -121,7 +120,7 @@ body {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.3);
   letter-spacing: 0.14em;
-  font-family: var(--serif);
+  font-family: var(--body);
 }
 
 /* ══ FLOATING PILL NAV ══ */
@@ -160,7 +159,7 @@ nav.ready {
 }
 
 .nav-logo {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 16px;
   font-weight: 800;
   color: var(--ink);
@@ -171,7 +170,7 @@ nav.ready {
 }
 
 .nav-logo em {
-  color: var(--green);
+  color: var(--ink);
   font-style: normal;
 }
 
@@ -218,23 +217,23 @@ nav:hover .nav-links a:hover {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: var(--green);
-  color: var(--ink) !important;
+  background: var(--ink);
+  color: var(--white) !important;
   font-size: 13px;
   font-weight: 700;
   padding: 9px 20px;
   border-radius: 100px;
   text-decoration: none;
   transition: all 0.25s;
-  font-family: var(--serif);
+  font-family: var(--body);
   margin-left: 4px;
   white-space: nowrap;
 }
 
 .nav-cta:hover {
-  background: var(--green2);
+  background: var(--ink2);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 229, 160, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
 .nav-avail-dot {
@@ -275,6 +274,16 @@ nav:hover .nav-links a:hover {
   height: 100%;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  #hero-canvas {
+    display: none;
+  }
+
+  #about-visual-vid {
+    display: none;
+  }
+}
+
 .hero-inner {
   position: absolute;
   inset: 0;
@@ -311,10 +320,10 @@ nav:hover .nav-links a:hover {
 }
 
 .hero-hl {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(58px, 8vw, 124px);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 1.1;
   letter-spacing: -0.04em;
   color: var(--white);
   margin-bottom: 44px;
@@ -327,15 +336,16 @@ nav:hover .nav-links a:hover {
   color: var(--green);
 }
 
-/* Animated text lines */
+/* Animated text lines — room for ascenders/descenders (italic + Serbian diacritics) */
 .hero-hl .tline {
   display: block;
   overflow: hidden;
+  padding-bottom: 0.06em;
 }
 
 .hero-hl .tword {
   display: inline-block;
-  transform: translateY(105%);
+  transform: translateY(108%);
   animation: wipeUp 0.9s var(--ease) forwards;
 }
 
@@ -388,7 +398,7 @@ nav:hover .nav-links a:hover {
   gap: 8px;
   background: var(--white);
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 700;
   padding: 14px 28px;
@@ -449,7 +459,7 @@ nav:hover .nav-links a:hover {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-family: var(--serif);
+  font-family: var(--body);
   z-index: 2;
 }
 
@@ -504,12 +514,12 @@ nav:hover .nav-links a:hover {
 }
 
 .sn {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 54px;
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--ink);
-  line-height: 1;
+  line-height: 1.12;
 }
 
 .sn em {
@@ -548,7 +558,7 @@ nav:hover .nav-links a:hover {
   align-items: center;
   gap: 28px;
   padding: 0 28px;
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 12px;
   font-weight: 700;
   color: var(--dim);
@@ -601,10 +611,10 @@ nav:hover .nav-links a:hover {
 }
 
 .hl2 {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(38px, 4.5vw, 64px);
   font-weight: 800;
-  line-height: 0.98;
+  line-height: 1.12;
   letter-spacing: -0.035em;
   color: var(--ink);
 }
@@ -775,7 +785,7 @@ nav:hover .nav-links a:hover {
 }
 
 .av-ov-t {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 20px;
   font-weight: 800;
   color: var(--white);
@@ -814,7 +824,7 @@ nav:hover .nav-links a:hover {
   align-items: center;
   gap: 8px;
   margin-top: 20px;
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 700;
   color: var(--ink);
@@ -873,7 +883,7 @@ nav:hover .nav-links a:hover {
 }
 
 .sc-num {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 11px;
   font-weight: 700;
   color: var(--dim);
@@ -901,7 +911,7 @@ nav:hover .nav-links a:hover {
 }
 
 .sc-name {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 20px;
   font-weight: 800;
   color: var(--ink);
@@ -984,10 +994,10 @@ nav:hover .nav-links a:hover {
 }
 
 .ai-hl {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(36px, 4.5vw, 60px);
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.12;
   letter-spacing: -0.035em;
   color: var(--white);
   margin-bottom: 24px;
@@ -1185,7 +1195,7 @@ nav:hover .nav-links a:hover {
 }
 
 #projects .pc .pc-name {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 20px;
   font-weight: 800;
   color: var(--white);
@@ -1211,7 +1221,7 @@ nav:hover .nav-links a:hover {
   padding: 8px 16px;
   border-radius: 100px;
   text-decoration: none;
-  font-family: var(--serif);
+  font-family: var(--body);
   transition: background 0.2s var(--ease), color 0.2s var(--ease);
 }
 
@@ -1297,10 +1307,10 @@ nav:hover .nav-links a:hover {
 }
 
 .proc-hl {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(38px, 4.5vw, 64px);
   font-weight: 800;
-  line-height: 0.98;
+  line-height: 1.12;
   letter-spacing: -0.04em;
   color: var(--white);
   margin-bottom: 80px;
@@ -1343,7 +1353,7 @@ nav:hover .nav-links a:hover {
 }
 
 .ps-n {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 11px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.18);
@@ -1352,7 +1362,7 @@ nav:hover .nav-links a:hover {
 }
 
 .ps-title {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 19px;
   font-weight: 800;
   color: var(--white);
@@ -1372,7 +1382,7 @@ nav:hover .nav-links a:hover {
   position: absolute;
   bottom: -16px;
   right: -8px;
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 130px;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.025);
@@ -1417,7 +1427,7 @@ nav:hover .nav-links a:hover {
 }
 
 .comp-pname {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 20px;
   font-weight: 800;
   color: var(--ink);
@@ -1686,7 +1696,7 @@ nav:hover .nav-links a:hover {
 }
 
 .pc-name {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 20px;
   font-weight: 800;
   color: var(--ink);
@@ -1709,7 +1719,7 @@ nav:hover .nav-links a:hover {
 }
 
 .pc-price {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 42px;
   font-weight: 800;
   color: var(--ink);
@@ -1782,7 +1792,7 @@ nav:hover .nav-links a:hover {
   text-align: center;
   padding: 14px;
   border-radius: 100px;
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -1846,7 +1856,7 @@ nav:hover .nav-links a:hover {
 }
 
 .wt {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 17px;
   font-weight: 800;
   color: var(--ink);
@@ -1888,11 +1898,11 @@ nav:hover .nav-links a:hover {
 }
 
 .wct-title {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(26px, 3.5vw, 48px);
   font-weight: 800;
   color: var(--white);
-  line-height: 1.05;
+  line-height: 1.15;
   letter-spacing: -0.03em;
   position: relative;
 }
@@ -1984,10 +1994,10 @@ nav:hover .nav-links a:hover {
 }
 
 .cont-hl {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(34px, 4.2vw, 56px);
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.12;
   letter-spacing: -0.04em;
   color: var(--ink);
   margin-bottom: 20px;
@@ -2185,7 +2195,7 @@ footer {
 }
 
 .fl-logo {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 22px;
   font-weight: 800;
   color: var(--white);
@@ -2281,7 +2291,7 @@ footer {
 }
 
 .foot-big {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(72px, 11vw, 160px);
   font-weight: 800;
   color: rgba(255, 255, 255, 0.035);
@@ -2580,7 +2590,7 @@ footer {
 }
 
 .wb-big-num {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 48px;
   font-weight: 800;
   color: var(--white);
@@ -2599,7 +2609,7 @@ footer {
 }
 
 .wb-title {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 18px;
   font-weight: 800;
   color: var(--white);
@@ -2650,7 +2660,7 @@ footer {
 }
 
 .wb-m-num {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 36px;
   font-weight: 800;
   color: var(--white);
@@ -2680,7 +2690,7 @@ footer {
 }
 
 .wb-strip-badge {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 28px;
   font-weight: 800;
   color: rgba(12, 12, 14, 0.4);
@@ -2832,7 +2842,7 @@ footer {
 }
 
 .tp-name {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 800;
   color: var(--ink);
@@ -2867,7 +2877,7 @@ footer {
 
 /* Updated split-center — clean VS divider */
 .split-vs {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 13px;
   font-weight: 800;
   color: rgba(255, 255, 255, 0.25);
@@ -2915,10 +2925,10 @@ footer {
 }
 
 .split-hl-l {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(22px, 2.5vw, 32px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   color: var(--ink);
 }
@@ -3088,10 +3098,10 @@ footer {
 }
 
 .split-hl-r {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: clamp(22px, 2.5vw, 32px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   color: var(--white);
 }
@@ -3152,7 +3162,7 @@ footer {
   gap: 8px;
   background: var(--green);
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 14px;
   font-weight: 800;
   padding: 13px 24px;
@@ -3253,7 +3263,7 @@ footer {
 }
 
 .tc-name {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 18px;
   font-weight: 800;
   color: var(--ink);
@@ -3316,7 +3326,7 @@ footer {
 }
 
 .aa-title {
-  font-family: var(--serif);
+  font-family: var(--body);
   font-size: 17px;
   font-weight: 800;
   color: var(--white);

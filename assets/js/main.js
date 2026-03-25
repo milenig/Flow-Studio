@@ -94,46 +94,64 @@ document.body.style.overflow = "hidden";
       links.forEach((a) => a.classList.remove("active"));
     }
   }
-  window.addEventListener("scroll", updateScrollActive, { passive: true });
+
+  const navWrap = document.getElementById("nav").parentElement;
+  let scrollRaf = 0;
+  function onScroll() {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = 0;
+      updateScrollActive();
+      navWrap.style.setProperty("--sh", scrollY > 60 ? "1" : "0");
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   // Nav pill position needs recalc on resize
   window.addEventListener("resize", () => {
     const act = document.querySelector(".nav-links a.active");
     if (act) setIndicator(act);
   });
-
-  // Nav background on scroll
-  window.addEventListener(
-    "scroll",
-    () => {
-      document
-        .getElementById("nav")
-        .parentElement.style.setProperty("--sh", scrollY > 60 ? "1" : "0");
-    },
-    { passive: true },
-  );
 })();
 
 // ════════════════════════════════════
 // CURSOR FX — only on interactive elements
 // ════════════════════════════════════
 (function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const fx = document.getElementById("curFx");
+    if (fx) fx.style.display = "none";
+    return;
+  }
   const fx = document.getElementById("curFx");
   let mx = 0,
     my = 0,
     rx = 0,
     ry = 0;
+  let rafId = 0;
   document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
     my = e.clientY;
   });
-  (function tick() {
+  function tick() {
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
     fx.style.left = rx + "px";
     fx.style.top = ry + "px";
-    requestAnimationFrame(tick);
-  })();
+    rafId = requestAnimationFrame(tick);
+  }
+  function start() {
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+      rafId = 0;
+    } else {
+      start();
+    }
+  });
+  start();
   // Only show on links/buttons
   const SELECTORS = "a,button,.pc,.sc,.tcard,.wcard";
   document.querySelectorAll(SELECTORS).forEach((el) => {
@@ -148,6 +166,7 @@ document.body.style.overflow = "hidden";
 // HERO WebGL SHADER
 // ════════════════════════════════════
 (function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const c = document.getElementById("hero-canvas");
   const gl = c.getContext("webgl");
   if (!gl) return;
@@ -162,9 +181,9 @@ document.body.style.overflow = "hidden";
   const VS = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
   const FS = `precision highp float;
     uniform float t;uniform vec2 res;uniform vec2 mo;
-    vec3 pal(float t){
-      return vec3(.08,.08,.11)+vec3(.07,.08,.05)*cos(6.283*(vec3(.06,.11,.07)*t+vec3(0.,.35,.6)));
-    }
+    /* Darker emerald (same hue family as brand green) */
+    vec3 g=vec3(0.,.42,.30);
+    vec3 ink=vec3(.06,.07,.08);
     float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
     float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1)),f.x),f.y);}
     float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<7;i++){v+=a*noise(p);p=p*2.1+vec2(.3,.7);a*=.5;}return v;}
@@ -177,11 +196,12 @@ document.body.style.overflow = "hidden";
       vec2 rr=vec2(fbm(uv+1.7*q+vec2(1.7,9.2)+t*.09),fbm(uv+1.7*q+vec2(8.3,2.8)+t*.07));
       float f=fbm(uv+1.7*rr)+w;
       f=f+.45*fbm(uv*2.1+t*.04);
-      vec3 col=pal(f+t*.04);
-      col=mix(col,col*2.2,smoothstep(.3,.7,f));
+      float glow=smoothstep(.22,.88,f)*.38+f*.12;
+      vec3 col=ink+g*glow;
+      col=mix(col,col*1.22,smoothstep(.3,.75,f));
       float vg=1.-dot(uv*1.1,uv*1.1);
       col*=clamp(vg*1.4,.0,1.);
-      col+=vec3(0.,.14,.08)*(1.-smoothstep(.5,.9,length(uv)))*smoothstep(.45,.8,f);
+      col+=g*.09*(1.-smoothstep(.5,.9,length(uv)))*smoothstep(.45,.8,f);
       gl_FragColor=vec4(col,1.);
     }`;
   function sh(tp, src) {
@@ -215,13 +235,44 @@ document.body.style.overflow = "hidden";
     my = e.clientY;
   });
   const t0 = performance.now();
-  (function frame(now) {
+  const heroEl = document.getElementById("hero");
+  let heroInView = true;
+  let raf = 0;
+  function shouldRun() {
+    return !document.hidden && heroInView;
+  }
+  function frame(now) {
+    if (!shouldRun()) {
+      raf = 0;
+      return;
+    }
     gl.uniform1f(uT, (now - t0) * 0.001);
     gl.uniform2f(uR, c.width, c.height);
     gl.uniform2f(uM, mx, my);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(frame);
-  })(t0);
+    raf = requestAnimationFrame(frame);
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      heroInView = !!entries[0]?.isIntersecting;
+      if (shouldRun() && !raf) raf = requestAnimationFrame(frame);
+      else if (!shouldRun()) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    },
+    { threshold: 0, rootMargin: "0px 0px 48px 0px" },
+  );
+  io.observe(heroEl);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    } else if (shouldRun() && !raf) {
+      raf = requestAnimationFrame(frame);
+    }
+  });
+  raf = requestAnimationFrame(frame);
 })();
 
 // ════════════════════════════════════
@@ -233,16 +284,24 @@ document.body.style.overflow = "hidden";
   if (!c) return;
   const ctx = c.getContext("2d");
 
+  const staticMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
   function resize() {
     c.width = c.parentElement.offsetWidth;
     c.height = c.parentElement.offsetHeight;
   }
   resize();
-  new ResizeObserver(resize).observe(c.parentElement);
+  const ro = new ResizeObserver(() => {
+    resize();
+    if (staticMotion) draw();
+  });
+  ro.observe(c.parentElement);
 
   const orbits = [
     {
-      label: "flowstudio",
+      label: "gowithflow",
       r: 0,
       speed: 0,
       col: "#00e5a0",
@@ -331,7 +390,7 @@ document.body.style.overflow = "hidden";
     return `rgba(${r},${g},${b},${a.toFixed(3)})`;
   }
 
-  function frame() {
+  function draw() {
     const W = c.width,
       H = c.height;
     ctx.clearRect(0, 0, W, H);
@@ -358,7 +417,7 @@ document.body.style.overflow = "hidden";
     ctx.fillRect(0, 0, W, H);
 
     orbits.forEach((o) => {
-      o.angle += o.speed;
+      if (!staticMotion) o.angle += o.speed;
       const nx = o.r === 0 ? cx : cx + Math.cos(o.angle) * o.r;
       const ny = o.r === 0 ? cy : cy + Math.sin(o.angle) * o.r;
       const s = o.size;
@@ -419,10 +478,69 @@ document.body.style.overflow = "hidden";
       ctx.fillText(o.label, nx, ny);
       ctx.restore();
     });
-
-    requestAnimationFrame(frame);
   }
-  frame();
+
+  if (staticMotion) {
+    draw();
+    return;
+  }
+
+  const aiSec = document.getElementById("ai");
+  let aiInView = false;
+  let aiRaf = 0;
+  function aiShouldRun() {
+    return !document.hidden && aiInView;
+  }
+  function aiLoop() {
+    if (!aiShouldRun()) {
+      aiRaf = 0;
+      return;
+    }
+    draw();
+    aiRaf = requestAnimationFrame(aiLoop);
+  }
+  const aio = new IntersectionObserver(
+    (entries) => {
+      aiInView = !!entries[0]?.isIntersecting;
+      if (aiShouldRun() && !aiRaf) aiRaf = requestAnimationFrame(aiLoop);
+      else if (!aiShouldRun()) {
+        cancelAnimationFrame(aiRaf);
+        aiRaf = 0;
+      }
+    },
+    { threshold: 0.01, rootMargin: "100px 0px" },
+  );
+  if (aiSec) aio.observe(aiSec);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cancelAnimationFrame(aiRaf);
+      aiRaf = 0;
+    } else if (aiShouldRun() && !aiRaf) {
+      aiRaf = requestAnimationFrame(aiLoop);
+    }
+  });
+  aiRaf = requestAnimationFrame(aiLoop);
+})();
+
+// ════════════════════════════════════
+// ABOUT — load background video when near viewport (saves bandwidth)
+// ════════════════════════════════════
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const v = document.getElementById("about-visual-vid");
+  if (!v) return;
+  const wrap = v.closest(".about-visual");
+  if (!wrap) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      if (!entries[0]?.isIntersecting) return;
+      io.disconnect();
+      v.load();
+      v.play().catch(() => {});
+    },
+    { rootMargin: "160px 0px", threshold: 0.01 },
+  );
+  io.observe(wrap);
 })();
 
 // ════════════════════════════════════
@@ -514,7 +632,9 @@ function scGlow(el, e) {
   let dragBase = 0;
   let trans = 0;
   let animating = false;
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
   const durationMs = 720;
 
@@ -542,7 +662,9 @@ function scGlow(el, e) {
   function setTranslate(px, instant) {
     trans = clampTrans(px);
     const noAnim = instant || reducedMotion;
-    track.style.transition = noAnim ? "none" : `transform ${durationMs}ms ${ease}`;
+    track.style.transition = noAnim
+      ? "none"
+      : `transform ${durationMs}ms ${ease}`;
     track.style.transform = `translate3d(${trans}px,0,0)`;
     animating = !noAnim;
   }
@@ -558,7 +680,8 @@ function scGlow(el, e) {
   }
 
   function onTransitionEnd(e) {
-    if (e.target !== track || e.propertyName !== "transform" || dragging) return;
+    if (e.target !== track || e.propertyName !== "transform" || dragging)
+      return;
     animating = false;
   }
 
