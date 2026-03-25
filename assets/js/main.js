@@ -4,24 +4,52 @@
 (function () {
   const fill = document.getElementById("ldfill"),
     num = document.getElementById("ldnum");
-  let p = 0,
-    iv = setInterval(() => {
-      p += Math.random() * 15 + 3;
-      if (p >= 100) {
-        p = 100;
-        clearInterval(iv);
-        setTimeout(() => {
-          document.getElementById("loader").classList.add("out");
-          document.body.style.overflow = "";
-          setTimeout(
-            () => document.getElementById("nav").classList.add("ready"),
-            200,
-          );
-        }, 400);
+  const loaderEl = document.getElementById("loader");
+  let progress = 0;
+  let target = 0;
+  let raf = 0;
+  let done = false;
+  const startedAt = performance.now();
+  const minVisibleMs = 700;
+
+  function finishLoader() {
+    if (done) return;
+    done = true;
+    loaderEl.classList.add("out");
+    document.body.style.overflow = "";
+    setTimeout(() => document.getElementById("nav").classList.add("ready"), 200);
+  }
+
+  function tick(now) {
+    // Before full page load, approach 92% smoothly.
+    if (target < 92) {
+      const elapsed = now - startedAt;
+      const t = Math.min(elapsed / 1200, 1);
+      target = 92 * (1 - Math.pow(1 - t, 3));
+    }
+
+    // Smoothly approach the current target.
+    progress += (target - progress) * 0.12;
+    if (target >= 100 && progress > 99.6) progress = 100;
+
+    fill.style.width = progress.toFixed(2) + "%";
+    num.textContent = Math.floor(progress) + "%";
+
+    if (progress >= 100) {
+      const waitedEnough = now - startedAt >= minVisibleMs;
+      if (waitedEnough) {
+        finishLoader();
+        return;
       }
-      fill.style.width = p + "%";
-      num.textContent = Math.floor(p) + "%";
-    }, 90);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  window.addEventListener("load", () => {
+    target = 100;
+  });
+
+  raf = requestAnimationFrame(tick);
 })();
 document.body.style.overflow = "hidden";
 
@@ -30,8 +58,24 @@ document.body.style.overflow = "hidden";
 // ════════════════════════════════════
 (function () {
   const npi = document.getElementById("npi");
+  const navEl = document.getElementById("nav");
+  const navToggle = document.getElementById("nav-toggle");
+  const navLinksEl = document.getElementById("nav-links");
   const links = document.querySelectorAll(".nav-links a[data-section]");
   let activeLink = null;
+  let lastCur = null;
+  const secs = [
+    "about",
+    "services",
+    "projects",
+    "ai",
+    "comparison",
+    "testimonials",
+    "pricing",
+    "why",
+    "contact",
+  ];
+  let sectionTops = [];
 
   function setIndicator(el) {
     const parent = el.closest("ul");
@@ -57,31 +101,57 @@ document.body.style.overflow = "hidden";
   }
 
   // Hover
-  const navEl = document.getElementById("nav");
   navEl.addEventListener("mouseleave", clearIndicator);
   links.forEach((a) => {
     a.addEventListener("mouseenter", () => setIndicator(a));
   });
 
+  function closeMenu() {
+    navEl.classList.remove("menu-open");
+    if (navToggle) {
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open menu");
+    }
+  }
+
+  if (navToggle && navLinksEl) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = navEl.classList.toggle("menu-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+    navLinksEl.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        if (window.matchMedia("(max-width: 768px)").matches) closeMenu();
+      }),
+    );
+    window.addEventListener("resize", () => {
+      if (!window.matchMedia("(max-width: 768px)").matches) closeMenu();
+    });
+  }
+
+  function refreshSectionTops() {
+    sectionTops = secs
+      .map((id) => {
+        const el = document.getElementById(id);
+        if (!el) return null;
+        return { id, top: el.getBoundingClientRect().top + window.scrollY };
+      })
+      .filter(Boolean);
+  }
+
   // Scroll-based active section
   function updateScrollActive() {
-    const secs = [
-      "about",
-      "services",
-      "projects",
-      "ai",
-      "comparison",
-      "testimonials",
-      "pricing",
-      "why",
-      "contact",
-    ];
+    const y = window.scrollY + 120;
     let cur = null;
-    for (const id of secs) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      if (el.getBoundingClientRect().top <= 120) cur = id;
+    for (let i = 0; i < sectionTops.length; i++) {
+      if (sectionTops[i].top <= y) cur = sectionTops[i].id;
+      else break;
     }
+
+    if (cur === lastCur) return;
+    lastCur = cur;
+
     links.forEach((a) => {
       const active = a.dataset.section === cur;
       if (active && !a.matches(":hover")) {
@@ -109,16 +179,24 @@ document.body.style.overflow = "hidden";
 
   // Nav pill position needs recalc on resize
   window.addEventListener("resize", () => {
+    refreshSectionTops();
     const act = document.querySelector(".nav-links a.active");
     if (act) setIndicator(act);
   });
+  window.addEventListener("load", refreshSectionTops);
+  refreshSectionTops();
+  updateScrollActive();
 })();
 
 // ════════════════════════════════════
 // CURSOR FX — only on interactive elements
 // ════════════════════════════════════
 (function () {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    window.matchMedia("(max-width: 768px)").matches ||
+    window.matchMedia("(hover: none), (pointer: coarse)").matches
+  ) {
     const fx = document.getElementById("curFx");
     if (fx) fx.style.display = "none";
     return;
@@ -136,8 +214,7 @@ document.body.style.overflow = "hidden";
   function tick() {
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
-    fx.style.left = rx + "px";
-    fx.style.top = ry + "px";
+    fx.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
     rafId = requestAnimationFrame(tick);
   }
   function start() {
@@ -166,7 +243,10 @@ document.body.style.overflow = "hidden";
 // HERO WebGL SHADER
 // ════════════════════════════════════
 (function () {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  )
+    return;
   const c = document.getElementById("hero-canvas");
   const gl = c.getContext("webgl");
   if (!gl) return;
@@ -236,7 +316,7 @@ document.body.style.overflow = "hidden";
   });
   const t0 = performance.now();
   const heroEl = document.getElementById("hero");
-  let heroInView = true;
+  let heroInView = false;
   let raf = 0;
   function shouldRun() {
     return !document.hidden && heroInView;
@@ -272,254 +352,6 @@ document.body.style.overflow = "hidden";
       raf = requestAnimationFrame(frame);
     }
   });
-  raf = requestAnimationFrame(frame);
-})();
-
-// ════════════════════════════════════
-// AI canvas — orbit bubble animation
-// (swapped from agency section)
-// ════════════════════════════════════
-(function () {
-  const c = document.getElementById("ai-canvas");
-  if (!c) return;
-  const ctx = c.getContext("2d");
-
-  const staticMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
-  function resize() {
-    c.width = c.parentElement.offsetWidth;
-    c.height = c.parentElement.offsetHeight;
-  }
-  resize();
-  const ro = new ResizeObserver(() => {
-    resize();
-    if (staticMotion) draw();
-  });
-  ro.observe(c.parentElement);
-
-  const orbits = [
-    {
-      label: "gowithflow",
-      r: 0,
-      speed: 0,
-      col: "#00e5a0",
-      size: 54,
-      pulse: 0,
-      angle: 0,
-    },
-    {
-      label: "Webflow",
-      r: 80,
-      speed: 0.011,
-      col: "#146EF5",
-      size: 36,
-      angle: 0.5,
-    },
-    {
-      label: "Framer",
-      r: 80,
-      speed: 0.011,
-      col: "#0055FF",
-      size: 34,
-      angle: 3.2,
-    },
-    {
-      label: "Make",
-      r: 125,
-      speed: 0.008,
-      col: "#6E30D9",
-      size: 28,
-      angle: 0.9,
-    },
-    {
-      label: "GPT-4o",
-      r: 125,
-      speed: 0.008,
-      col: "#10a37f",
-      size: 28,
-      angle: 3.0,
-    },
-    {
-      label: "SEO",
-      r: 125,
-      speed: 0.008,
-      col: "#2563eb",
-      size: 26,
-      angle: 5.2,
-    },
-    {
-      label: "Cursor",
-      r: 162,
-      speed: 0.006,
-      col: "#7c3aed",
-      size: 22,
-      angle: 1.5,
-    },
-    {
-      label: "n8n",
-      r: 162,
-      speed: 0.006,
-      col: "#ea4b71",
-      size: 20,
-      angle: 3.8,
-    },
-    {
-      label: "Lottie",
-      r: 162,
-      speed: 0.006,
-      col: "#00c48c",
-      size: 20,
-      angle: 5.8,
-    },
-    {
-      label: "Figma",
-      r: 162,
-      speed: 0.006,
-      col: "#f24e1e",
-      size: 20,
-      angle: 0.2,
-    },
-  ];
-
-  function hexAlpha(hex, a) {
-    const r = parseInt(hex.slice(1, 3), 16),
-      g = parseInt(hex.slice(3, 5), 16),
-      b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r},${g},${b},${a.toFixed(3)})`;
-  }
-
-  function draw() {
-    const W = c.width,
-      H = c.height;
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = "#060810";
-    ctx.fillRect(0, 0, W, H);
-
-    const cx = W / 2,
-      cy = H / 2;
-
-    // Rings
-    [80, 125, 162].forEach((r) => {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(255,255,255,.05)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    });
-
-    // Ambient center glow
-    const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 100);
-    glow.addColorStop(0, "rgba(0,229,160,.07)");
-    glow.addColorStop(1, "transparent");
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, W, H);
-
-    orbits.forEach((o) => {
-      if (!staticMotion) o.angle += o.speed;
-      const nx = o.r === 0 ? cx : cx + Math.cos(o.angle) * o.r;
-      const ny = o.r === 0 ? cy : cy + Math.sin(o.angle) * o.r;
-      const s = o.size;
-      const rgb =
-        parseInt(o.col.slice(1, 3), 16) +
-        "," +
-        parseInt(o.col.slice(3, 5), 16) +
-        "," +
-        parseInt(o.col.slice(5, 7), 16);
-
-      // Glow halo
-      const gr = ctx.createRadialGradient(nx, ny, 0, nx, ny, s * 1.6);
-      gr.addColorStop(0, `rgba(${rgb},.2)`);
-      gr.addColorStop(1, "transparent");
-      ctx.beginPath();
-      ctx.arc(nx, ny, s * 1.6, 0, Math.PI * 2);
-      ctx.fillStyle = gr;
-      ctx.fill();
-
-      // Circle
-      ctx.beginPath();
-      ctx.arc(nx, ny, s / 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${rgb},.1)`;
-      ctx.fill();
-      ctx.strokeStyle = `rgba(${rgb},.65)`;
-      ctx.lineWidth = 1.3;
-      ctx.stroke();
-
-      // Center pulsing dashes
-      if (o.r === 0) {
-        ctx.save();
-        ctx.setLineDash([3, 5]);
-        ctx.beginPath();
-        ctx.arc(nx, ny, s / 2 + 9, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(0,229,160,.35)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.restore();
-      }
-
-      // Connector lines to orbit-1
-      if (o.r === 80) {
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(nx, ny);
-        ctx.strokeStyle = `rgba(${rgb},.12)`;
-        ctx.lineWidth = 0.7;
-        ctx.stroke();
-      }
-
-      // Label
-      ctx.save();
-      const fs = Math.max(9, s / 3.8);
-      ctx.font = `600 ${fs.toFixed(0)}px "Inter",sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillStyle = "rgba(255,255,255,.82)";
-      ctx.fillText(o.label, nx, ny);
-      ctx.restore();
-    });
-  }
-
-  if (staticMotion) {
-    draw();
-    return;
-  }
-
-  const aiSec = document.getElementById("ai");
-  let aiInView = false;
-  let aiRaf = 0;
-  function aiShouldRun() {
-    return !document.hidden && aiInView;
-  }
-  function aiLoop() {
-    if (!aiShouldRun()) {
-      aiRaf = 0;
-      return;
-    }
-    draw();
-    aiRaf = requestAnimationFrame(aiLoop);
-  }
-  const aio = new IntersectionObserver(
-    (entries) => {
-      aiInView = !!entries[0]?.isIntersecting;
-      if (aiShouldRun() && !aiRaf) aiRaf = requestAnimationFrame(aiLoop);
-      else if (!aiShouldRun()) {
-        cancelAnimationFrame(aiRaf);
-        aiRaf = 0;
-      }
-    },
-    { threshold: 0.01, rootMargin: "100px 0px" },
-  );
-  if (aiSec) aio.observe(aiSec);
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      cancelAnimationFrame(aiRaf);
-      aiRaf = 0;
-    } else if (aiShouldRun() && !aiRaf) {
-      aiRaf = requestAnimationFrame(aiLoop);
-    }
-  });
-  aiRaf = requestAnimationFrame(aiLoop);
 })();
 
 // ════════════════════════════════════
@@ -605,10 +437,22 @@ document.body.style.overflow = "hidden";
 // ════════════════════════════════════
 // SERVICE CARD MOUSE GLOW
 // ════════════════════════════════════
+const scGlowState = new WeakMap();
 function scGlow(el, e) {
-  const r = el.getBoundingClientRect();
-  el.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-  el.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+  let st = scGlowState.get(el);
+  if (!st) {
+    st = { raf: 0, x: 0, y: 0 };
+    scGlowState.set(el, st);
+  }
+  st.x = e.clientX;
+  st.y = e.clientY;
+  if (st.raf) return;
+  st.raf = requestAnimationFrame(() => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", ((st.x - r.left) / r.width) * 100 + "%");
+    el.style.setProperty("--my", ((st.y - r.top) / r.height) * 100 + "%");
+    st.raf = 0;
+  });
 }
 
 // ════════════════════════════════════

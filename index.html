@@ -37,12 +37,16 @@
   <div class="nav-wrap">
     <nav id="nav">
       <a href="#" class="nav-logo">gowith<em>flow</em></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links" id="nav-links">
         <div class="nav-pill-indicator" id="npi"></div>
         <li><a href="#about" data-section="about">O nama</a></li>
         <li><a href="#services" data-section="services">Usluge</a></li>
         <li><a href="#projects" data-section="projects">Projekti</a></li>
         <li><a href="#ai" data-section="ai">AI</a></li>
+        <li><a href="#contact" data-section="contact">Kontakt</a></li>
       </ul>
       <a href="#contact" class="nav-cta">
         <span class="nav-avail-dot"></span>Počni projekat
@@ -55,7 +59,7 @@
     <canvas id="hero-canvas"></canvas>
     <div class="hero-inner">
       <div class="hero-badge">
-        <em>Web Design</em>&nbsp;·&nbsp;AI
+        <em>Websites</em>&nbsp;·&nbsp;AI
       </div>
       <h1 class="hero-hl">
         <span class="tline"><span class="tword">Digitalna</span></span>
@@ -418,10 +422,8 @@
           </svg></a>
       </div>
       <div class="ai-visual reveal">
-        <!-- Main canvas: ORBIT bubble animation (swapped from agency section) -->
         <div class="ai-vis-main">
-          <canvas id="ai-canvas"></canvas>
-          <!-- Terminal window floating over canvas -->
+          <!-- Terminal window -->
           <div class="ai-terminal">
             <div class="at-bar">
               <span class="atb r"></span><span class="atb y"></span><span class="atb g"></span>
@@ -671,7 +673,7 @@
     <div class="mwrap">
 
       <!-- MAIN CONTAINER -->
-      <div class="reveal"
+      <div class="reveal comp-shell"
         style="background: var(--off); border-radius: 40px; padding: 80px 64px; border: 1px solid var(--border);">
 
         <!-- HEADER ROW inside container -->
@@ -683,10 +685,10 @@
         </div>
 
         <!-- TWO COLUMNS ROW -->
-        <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; align-items: start;">
+        <div class="comparison-cols" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; align-items: start;">
 
           <!-- LEFT COLUMN (Bad / Light) -->
-          <div
+          <div class="comparison-left-card"
             style="background: var(--white); border-radius: 24px; padding: 48px 40px; border: 1px solid var(--border); display: flex; flex-direction: column;">
             <div style="font-size: 24px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 24px;">
               Standardne agencije (v1.0)<br />
@@ -740,7 +742,7 @@
           </div>
 
           <!-- RIGHT COLUMN (Good / Dark) -->
-          <div
+          <div class="comparison-right-card"
             style="background: var(--ink); border-radius: 32px; padding: 64px 56px; border: 1px solid rgba(255,255,255,0.08); position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 32px 64px rgba(0,0,0,0.15); overflow: visible;">
 
             <!-- Subtle green glow effect in background -->
@@ -891,7 +893,7 @@
           Klijenti o nama
         </div>
         <h2 class="hl2" style="text-align: center">
-          Reči koje nas<br />pokreću da radimo<br /><em>još bolje</em>
+          <span class="line-lock">Reči koje nas pokreću</span><br />da radimo <em>još bolje</em>
         </h2>
       </div>
       <div class="test-masonry reveal">
@@ -1168,7 +1170,7 @@
       <div class="reveal" style="max-width: 600px; margin-bottom: 56px">
         <div class="kicker">Zašto gowithflow</div>
         <h2 class="hl2">
-          Šest razloga zašto<br />klijenti biraju nas <em>iznova</em>
+          <span class="line-lock">Šest razloga zašto</span><br /><span class="line-lock">klijenti biraju nas <em>iznova</em></span>
         </h2>
       </div>
 
@@ -1335,7 +1337,7 @@
       <div class="reveal-l">
         <div class="kicker ci-kicker">Hajde da pričamo</div>
         <h2 class="cont-hl">
-          Spreman da<br />izgradimo nešto<br /><em>odlično?</em>
+          <span class="line-lock">Spreman da izgradimo</span><br /><span class="line-lock">nešto <em>odlično?</em></span>
         </h2>
         <p class="cont-body">
           Ispričaj nam o svom projektu i javićemo se u roku od 24 sata. Bez
