@@ -54,7 +54,7 @@
 document.body.style.overflow = "hidden";
 
 // ════════════════════════════════════
-// FLOATING PILL NAV — animated active indicator (Monofactor-style)
+// FLOATING PILL NAV - animated active indicator (Monofactor-style)
 // ════════════════════════════════════
 (function () {
   const npi = document.getElementById("npi");
@@ -189,7 +189,7 @@ document.body.style.overflow = "hidden";
 })();
 
 // ════════════════════════════════════
-// CURSOR FX — only on interactive elements
+// CURSOR FX - only on interactive elements
 // ════════════════════════════════════
 (function () {
   if (
@@ -355,7 +355,7 @@ document.body.style.overflow = "hidden";
 })();
 
 // ════════════════════════════════════
-// ABOUT — load background video when near viewport (saves bandwidth)
+// ABOUT - load background video when near viewport (saves bandwidth)
 // ════════════════════════════════════
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -456,7 +456,7 @@ function scGlow(el, e) {
 }
 
 // ════════════════════════════════════
-// PROJECTS — carousel (bounded), drag + arrows
+// PROJECTS - carousel (bounded), drag + arrows
 // ════════════════════════════════════
 (function initProjectsCarousel() {
   const track = document.getElementById("pt");
@@ -464,6 +464,51 @@ function scGlow(el, e) {
   const navPrev = document.querySelector(".proj-nav .pnb:first-of-type");
   const navNext = document.querySelector(".proj-nav .pnb:last-of-type");
   if (!track || !scroll) return;
+  if (track.classList.contains("proj-track--featured")) {
+    if (navPrev) navPrev.style.display = "none";
+    if (navNext) navNext.style.display = "none";
+    const cards = [...track.querySelectorAll(".pc[data-slide]")];
+    const navItems = [...document.querySelectorAll(".pfw-item[data-target]")];
+    const cardById = new Map(cards.map((c) => [c.id, c]));
+    const idToIndex = new Map(cards.map((c, i) => [c.id, i]));
+    const wrap = document.getElementById("proj-featured-wrap");
+
+    function setActiveById(id) {
+      navItems.forEach((item) => {
+        item.classList.toggle("active", item.dataset.target === id);
+      });
+      if (wrap && id) {
+        const i = idToIndex.get(id) ?? 0;
+        wrap.style.setProperty("--pfw-i", String(i));
+        wrap.style.setProperty("--pfw-count", String(cards.length));
+      }
+    }
+
+    navItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const target = cardById.get(item.dataset.target);
+        if (!target) return;
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        let best = null;
+        for (const en of entries) {
+          if (!en.isIntersecting) continue;
+          if (!best || en.intersectionRatio > best.intersectionRatio) best = en;
+        }
+        if (best?.target?.id) setActiveById(best.target.id);
+      },
+      { threshold: [0.35, 0.5, 0.7, 0.9], rootMargin: "-12% 0px -38% 0px" },
+    );
+    cards.forEach((c) => io.observe(c));
+
+    const firstId = cards[0]?.id;
+    if (firstId) setActiveById(firstId);
+    return;
+  }
 
   const slides = [...track.querySelectorAll(".pc[data-slide]")];
   const n = slides.length;
