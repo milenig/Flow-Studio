@@ -844,9 +844,11 @@ document.querySelectorAll('a[href^="#"]').forEach((a) =>
 // ════════════════════════════════════
 function toggleTalk(el) {
   const isOpen = el.classList.contains("open");
-  document.querySelectorAll(".talk-item").forEach((item) => {
-    item.classList.remove("open");
-  });
+  const accordion = el.closest(".talk-accordion");
+  const items = accordion
+    ? accordion.querySelectorAll(".talk-item")
+    : document.querySelectorAll(".talk-item");
+  items.forEach((item) => item.classList.remove("open"));
   if (!isOpen) {
     el.classList.add("open");
   }

@@ -1036,6 +1036,35 @@
     </div>
   </section>
 
+  <!-- Brand CTA (after testimonials) -->
+  <section class="sec sec-brand-cta" aria-label="Poziv na akciju">
+    <div class="mwrap">
+      <div class="why-cta reveal">
+        <div>
+          <h3 class="wct-title">
+            Tvoj brend zaslužuje<br />sajt koji <em>radi za tebe</em>
+          </h3>
+          <p class="wct-sub">
+            Izgradimo nešto izvanredno zajedno. Besplatan discovery poziv,
+            bez obaveza.
+          </p>
+        </div>
+        <div class="rings">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+        </div>
+        <div class="wct-action">
+          <a href="#contact" class="btn-light" style="font-size: 15px; padding: 18px 36px">Pošalji upit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M7 17L17 7M17 7H7M17 7v10" />
+            </svg></a>
+          <div class="wct-note">Bez obaveze · Odgovaramo za 24h</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PRICING -->
   <section id="pricing" class="sec" style="background: var(--off)">
     <div class="mwrap">
@@ -1206,166 +1235,222 @@
   <!-- WHY -->
   <section id="why" class="sec">
     <div class="mwrap">
-      <div class="reveal" style="max-width: 600px; margin-bottom: 56px">
-        <div class="kicker">Zašto gowithflow</div>
-        <h2 class="hl2">
-          <span class="line-lock">Šest razloga zašto</span><br /><span class="line-lock">klijenti biraju nas
-            <em>iznova</em></span>
-        </h2>
-      </div>
-
-      <!-- Bento grid: 2 col x 3 rows - no emojis, SVG icons, stat numbers -->
-      <div class="why-bento reveal">
-        <!-- Card 1: large stat - transparentnost -->
-        <div class="wb-card wb-dark wb-tall">
-          <div class="wb-icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <path d="M9 9h6M9 12h6M9 15h4" />
-            </svg>
-          </div>
-          <div class="wb-big-num">0<span>skrivenih troškova</span></div>
-          <div class="wb-title">Transparentne cene</div>
-          <div class="wb-desc">
-            Znaš tačno šta plaćaš od prvog razgovora. Fiksna cena, jasni
-            rokovi, bez iznenađenja na fakturi.
-          </div>
+      <div class="why-qa-grid">
+        <div class="why-qa-head reveal">
+          <div class="kicker">Q&A</div>
+          <h2 class="hl2 why-qa-hl">
+            <span class="why-qa-line">Najčešća pitanja</span>
+            <span class="why-qa-line">Kratko i jasno</span>
+            <span class="why-qa-line why-qa-line-em"><em>odgovoreno</em></span>
+          </h2>
         </div>
 
-        <!-- Card 2: delivery speed -->
-        <div class="wb-card wb-light">
-          <div class="wb-icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          </div>
-          <div class="wb-title">Isporuka za 2 nedelje</div>
-          <div class="wb-desc">
-            Dok drugi agresivno planiraju mesece unapred, mi isporučujemo brzo
-            bez kompromisa u kvalitetu.
-          </div>
-          <div class="wb-metric">
-            <span class="wb-m-num">2</span><span class="wb-m-lbl">nedelje prosečno</span>
-          </div>
-        </div>
+        <div class="why-qa-acc">
+          <div class="talk-accordion reveal">
+            <div class="talk-item open" onclick="toggleTalk(this)">
+              <div class="talk-head">
+                <div class="talk-title">Da li su cene transparentne?</div>
+                <div class="talk-icon">
+                  <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                    <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                    <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="talk-body">
+                <p>
+                  Znaš šta plaćaš od prvog razgovora: fiksna cena, jasni rokovi i bez
+                  iznenađenja na fakturi.
+                </p>
+              </div>
+            </div>
 
-        <!-- Card 3: CMS - full width strip -->
-        <div class="wb-card wb-accent-strip">
-          <div class="wb-strip-left">
-            <div class="wb-icon-wrap" style="background: rgba(12, 12, 14, 0.15)">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            <div class="talk-item" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Koliko traje projekat?</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
             </div>
-            <div>
-              <div class="wb-title" style="color: var(--ink)">
-                Sadržaj pod tvojom kontrolom
-              </div>
-              <div class="wb-desc" style="color: rgba(12, 12, 14, 0.6)">
-                Ažuriraj blog, tim i portfolio sam, nikad više ne moraš da
-                zoveš programera zbog promene teksta.
-              </div>
+          </div>
+          <div class="talk-body">
+            <p>
+              U praksi, isporuku većih delova obično završi­mo za oko 2 nedelje, uz
+              jasne milestone-e i brzu iteraciju.
+            </p>
+          </div>
+          </div>
+
+          <div class="talk-item" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Da li mogu sam da ažuriram sadržaj?</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
             </div>
           </div>
-          <div class="wb-strip-badge">CMS<br /><span>ugrađen</span></div>
-        </div>
+          <div class="talk-body">
+            <p>
+              Da. Ugradimo CMS tako da možeš da menjaš blog, tim i portfolio bez
+              pozivanja programera zbog promena teksta.
+            </p>
+          </div>
+          </div>
 
-        <!-- Card 4: SEO stat -->
-        <div class="wb-card wb-light">
-          <div class="wb-icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
+          <div class="talk-item" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Radite li SEO od starta?</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+            </div>
           </div>
-          <div class="wb-title">SEO od prvog dana</div>
-          <div class="wb-desc">
-            Svaki projekat dolazi sa tehničkim SEO temeljem, semantički HTML,
-            schema markup, Core Web Vitals.
+          <div class="talk-body">
+            <p>
+              Da — semantički HTML, schema markup i Core Web Vitals su deo tehničke
+              osnove projekta od prvog dana.
+            </p>
           </div>
-          <div class="wb-metric">
-            <span class="wb-m-num">98</span><span class="wb-m-lbl">Lighthouse score prosek</span>
           </div>
-        </div>
 
-        <!-- Card 5: AI + modern tools -->
-        <div class="wb-card wb-dark">
-          <div class="wb-icon-wrap">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
-              <path d="M12 8v4l3 3" />
-              <path d="M8 12H4M20 12h-4M12 4V2M12 22v-2" />
-            </svg>
+          <div class="talk-item" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Može li AI da bude deo sajta?</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+            </div>
           </div>
-          <div class="wb-title">AI-first pristup</div>
-          <div class="wb-desc">
-            Koristimo Webflow, Framer, Claude AI i Make.com svaki dan, alate
-            kojima se grade sajtovi koji se rade <em>danas</em>, ne od pre 10
-            godina.
+          <div class="talk-body">
+            <p>
+              Naravno. Koristimo Claude AI i Make.com gde ima smisla: automatizacije,
+              agenti i integracije koje štede vreme i podižu konverzije.
+            </p>
           </div>
-          <!-- Mini tool pills -->
-          <div class="wb-tool-row">
-            <span class="wb-tool">Webflow</span>
-            <span class="wb-tool">Framer</span>
-            <span class="wb-tool">Claude</span>
-            <span class="wb-tool">Make</span>
           </div>
-        </div>
 
-        <!-- Card 6: NPS big stat -->
-        <div class="wb-card wb-green-glow">
-          <div class="wb-icon-wrap" style="
-                background: rgba(0, 229, 160, 0.15);
-                border-color: rgba(0, 229, 160, 0.25);
-              ">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+          <div class="talk-item" onclick="toggleTalk(this)">
+          <div class="talk-head">
+            <div class="talk-title">Da li imate podršku posle launcha?</div>
+            <div class="talk-icon">
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+              </svg>
+            </div>
           </div>
-          <div class="wb-title">Partner, ne vendor</div>
-          <div class="wb-desc">
-            Ne završavamo projekte, gradimo partnerstva. Tu smo 30 dana posle
-            launcha, i dugo posle toga.
+          <div class="talk-body">
+            <p>
+              Da. Gradimo partnerstva — tu smo najmanje 30 dana posle launcha, a
+              i dugo nakon toga.
+            </p>
           </div>
-          <div class="wb-metric" style="margin-top: auto">
-            <span class="wb-m-num" style="color: var(--green)">98%</span><span class="wb-m-lbl">klijenata preporučuje
-              nas</span>
           </div>
-        </div>
-      </div>
-
-      <!-- CTA card spans full width -->
-      <div class="why-cta reveal">
-        <div>
-          <h3 class="wct-title">
-            Tvoj brend zaslužuje<br />sajt koji <em>radi za tebe</em>
-          </h3>
-          <p class="wct-sub">
-            Izgradimo nešto izvanredno zajedno. Besplatan discovery poziv,
-            bez obaveza.
-          </p>
-        </div>
-        <div class="rings">
-          <div class="ring r1"></div>
-          <div class="ring r2"></div>
-          <div class="ring r3"></div>
-        </div>
-        <div class="wct-action">
-          <a href="#contact" class="btn-light" style="font-size: 15px; padding: 18px 36px">Pošalji upit
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg></a>
-          <div class="wct-note">Bez obaveze · Odgovaramo za 24h</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1411,11 +1496,25 @@
           <div class="talk-head">
             <div class="talk-title">Zakaži 15-min poziv</div>
             <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus">
-                <path d="M12 5v14M5 12h14" />
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
-              <svg viewBox="0 0 24 24" class="t-minus">
-                <path d="M5 12h14" />
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
             </div>
           </div>
@@ -1436,11 +1535,25 @@
           <div class="talk-head">
             <div class="talk-title">Pošalji nam email</div>
             <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus">
-                <path d="M12 5v14M5 12h14" />
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
-              <svg viewBox="0 0 24 24" class="t-minus">
-                <path d="M5 12h14" />
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
             </div>
           </div>
@@ -1459,11 +1572,25 @@
           <div class="talk-head">
             <div class="talk-title">Društvene mreže</div>
             <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus">
-                <path d="M12 5v14M5 12h14" />
+              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+                <path
+                      d="M6 9l6 6 6-6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
-              <svg viewBox="0 0 24 24" class="t-minus">
-                <path d="M5 12h14" />
+              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+                <path
+                      d="M18 15l-6-6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
               </svg>
             </div>
           </div>
