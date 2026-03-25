@@ -2188,10 +2188,6 @@ nav.ready {
   gap: clamp(2px, 0.6vw, 8px);
   margin: 0;
   max-width: 100%;
-  font-size: clamp(26px, 3.2vw, 44px);
-  line-height: 1.12;
-  letter-spacing: -0.04em;
-  color: var(--ink);
 }
 
 #why .why-qa-hl .why-qa-line {
