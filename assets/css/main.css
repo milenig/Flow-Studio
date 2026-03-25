@@ -907,13 +907,33 @@ nav.ready {
   cursor: pointer;
 }
 
-.svc-bento .sc:nth-child(1) { --icon-accent: #00e5a0; }
-.svc-bento .sc:nth-child(2) { --icon-accent: #7c3aed; }
-.svc-bento .sc:nth-child(3) { --icon-accent: #2563eb; }
-.svc-bento .sc:nth-child(4) { --icon-accent: #f59e0b; }
-.svc-bento .sc:nth-child(5) { --icon-accent: #00c48c; }
-.svc-bento .sc:nth-child(6) { --icon-accent: #ef4444; }
-.svc-bento .sc:nth-child(7) { --icon-accent: #8b5cf6; }
+.svc-bento .sc:nth-child(1) {
+  --icon-accent: #00e5a0;
+}
+
+.svc-bento .sc:nth-child(2) {
+  --icon-accent: #7c3aed;
+}
+
+.svc-bento .sc:nth-child(3) {
+  --icon-accent: #2563eb;
+}
+
+.svc-bento .sc:nth-child(4) {
+  --icon-accent: #f59e0b;
+}
+
+.svc-bento .sc:nth-child(5) {
+  --icon-accent: #00c48c;
+}
+
+.svc-bento .sc:nth-child(6) {
+  --icon-accent: #ef4444;
+}
+
+.svc-bento .sc:nth-child(7) {
+  --icon-accent: #8b5cf6;
+}
 
 .sc:hover {
   background: var(--ink);
@@ -1438,8 +1458,8 @@ nav.ready {
   border-radius: 14px;
   overflow: hidden;
   background: transparent;
-  max-height: 400px;
-  height: min(400px, 62vw);
+  max-height: 600px;
+  height: min(600px, 62vw);
   min-height: 180px;
 }
 
