@@ -482,7 +482,6 @@ function scGlow(el, e) {
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
 
     grid.querySelectorAll(".pc--portfolio").forEach((card) => {
       const viewport = card.querySelector(".pc-port-viewport[data-carousel]");
@@ -493,14 +492,17 @@ function scGlow(el, e) {
         return;
       }
 
-      const slides = viewport.querySelectorAll(".pc-port-slide");
+      const slides = [...viewport.querySelectorAll(".pc-port-slide")];
       const trackEl = viewport.querySelector(".pc-port-track");
       const prev = card.querySelector(".pc-port-prev");
       const next = card.querySelector(".pc-port-next");
-      if (!trackEl || slides.length < 2 || !prev || !next) return;
+      if (!trackEl || slides.length < 2) return;
 
       let idx = 0;
       let isCardVisible = false;
+      let scrollSyncRaf = 0;
+      let dragStartX = null;
+      let dragScrollStart = 0;
 
       function syncSlideVideos() {
         slides.forEach((slide, i) => {
@@ -511,23 +513,45 @@ function scGlow(el, e) {
         });
       }
 
-      function layout() {
-        const w = viewport.offsetWidth;
-        if (!w) return;
-        slides.forEach((s) => {
-          s.style.flex = `0 0 ${w}px`;
+      function activeIndexFromScroll() {
+        const vr = viewport.getBoundingClientRect();
+        const mid = vr.left + vr.width / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        slides.forEach((s, i) => {
+          const r = s.getBoundingClientRect();
+          const c = (r.left + r.right) / 2;
+          const d = Math.abs(c - mid);
+          if (d < bestDist) {
+            bestDist = d;
+            best = i;
+          }
         });
-        trackEl.style.width = `${w * slides.length}px`;
-        applyTransform(true);
+        return best;
       }
 
-      function applyTransform(instant) {
-        const w = viewport.offsetWidth;
-        if (!w) return;
-        trackEl.style.transition =
-          instant || reducedMotion ? "none" : `transform 0.5s ${ease}`;
-        trackEl.style.transform = `translate3d(${-idx * w}px,0,0)`;
-        syncSlideVideos();
+      function scrollToSlide(i, smooth) {
+        const slide = slides[i];
+        if (!slide) return;
+        const vr = viewport.getBoundingClientRect();
+        const sr = slide.getBoundingClientRect();
+        const delta =
+          sr.left + sr.width / 2 - (vr.left + vr.width / 2);
+        const target = viewport.scrollLeft + delta;
+        const max = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+        const left = Math.max(0, Math.min(max, target));
+        viewport.scrollTo({
+          left,
+          behavior: smooth && !reducedMotion ? "smooth" : "auto",
+        });
+      }
+
+      function onScroll() {
+        cancelAnimationFrame(scrollSyncRaf);
+        scrollSyncRaf = requestAnimationFrame(() => {
+          idx = activeIndexFromScroll();
+          syncSlideVideos();
+        });
       }
 
       const ioCard = new IntersectionObserver(
@@ -541,22 +565,84 @@ function scGlow(el, e) {
       );
       ioCard.observe(card);
 
-      prev.addEventListener("click", () => {
+      viewport.addEventListener("scroll", onScroll, { passive: true });
+      viewport.addEventListener(
+        "scrollend",
+        () => {
+          idx = activeIndexFromScroll();
+          syncSlideVideos();
+        },
+        { passive: true },
+      );
+
+      function goPrev() {
         idx = (idx - 1 + slides.length) % slides.length;
-        applyTransform(false);
-      });
-      next.addEventListener("click", () => {
+        scrollToSlide(idx, true);
+      }
+
+      function goNext() {
         idx = (idx + 1) % slides.length;
-        applyTransform(false);
-      });
+        scrollToSlide(idx, true);
+      }
 
-      let raf = 0;
-      window.addEventListener("resize", () => {
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(layout);
-      });
+      if (prev) prev.addEventListener("click", goPrev);
+      if (next) next.addEventListener("click", goNext);
 
-      requestAnimationFrame(() => requestAnimationFrame(layout));
+      viewport.addEventListener(
+        "pointerdown",
+        (e) => {
+          if (e.pointerType !== "mouse" || e.button !== 0) return;
+          if (e.target.closest("a, button")) return;
+          dragStartX = e.clientX;
+          dragScrollStart = viewport.scrollLeft;
+          viewport.classList.add("is-dragging");
+          try {
+            viewport.setPointerCapture(e.pointerId);
+          } catch (_) {}
+        },
+        { passive: true },
+      );
+
+      function endPointerDrag(e) {
+        if (dragStartX === null) return;
+        dragStartX = null;
+        viewport.classList.remove("is-dragging");
+        try {
+          viewport.releasePointerCapture(e.pointerId);
+        } catch (_) {}
+        idx = activeIndexFromScroll();
+        syncSlideVideos();
+      }
+
+      viewport.addEventListener(
+        "pointermove",
+        (e) => {
+          if (dragStartX === null || e.pointerType !== "mouse") return;
+          const dx = e.clientX - dragStartX;
+          viewport.scrollLeft = dragScrollStart - dx;
+        },
+        { passive: true },
+      );
+
+      viewport.addEventListener("pointerup", endPointerDrag);
+      viewport.addEventListener("pointercancel", endPointerDrag);
+
+      let resizeRaf = 0;
+      function onResize() {
+        cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(() => {
+          scrollToSlide(idx, false);
+        });
+      }
+      window.addEventListener("resize", onResize);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          idx = activeIndexFromScroll();
+          scrollToSlide(idx, false);
+          syncSlideVideos();
+        });
+      });
     });
   }
 
