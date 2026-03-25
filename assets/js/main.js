@@ -460,55 +460,118 @@ function scGlow(el, e) {
 // ════════════════════════════════════
 (function initProjectsCarousel() {
   const track = document.getElementById("pt");
-  const scroll = document.getElementById("proj-scroll");
-  const navPrev = document.querySelector(".proj-nav .pnb:first-of-type");
-  const navNext = document.querySelector(".proj-nav .pnb:last-of-type");
-  if (!track || !scroll) return;
-  if (track.classList.contains("proj-track--featured")) {
-    if (navPrev) navPrev.style.display = "none";
-    if (navNext) navNext.style.display = "none";
-    const cards = [...track.querySelectorAll(".pc[data-slide]")];
-    const navItems = [...document.querySelectorAll(".pfw-item[data-target]")];
-    const cardById = new Map(cards.map((c) => [c.id, c]));
-    const idToIndex = new Map(cards.map((c, i) => [c.id, i]));
-    const wrap = document.getElementById("proj-featured-wrap");
+  if (!track) return;
 
-    function setActiveById(id) {
-      navItems.forEach((item) => {
-        item.classList.toggle("active", item.dataset.target === id);
-      });
-      if (wrap && id) {
-        const i = idToIndex.get(id) ?? 0;
-        wrap.style.setProperty("--pfw-i", String(i));
-        wrap.style.setProperty("--pfw-count", String(cards.length));
-      }
-    }
-
-    navItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const target = cardById.get(item.dataset.target);
-        if (!target) return;
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-      });
-    });
-
+  function observeVideoInCard(card, video) {
     const io = new IntersectionObserver(
       (entries) => {
-        let best = null;
-        for (const en of entries) {
-          if (!en.isIntersecting) continue;
-          if (!best || en.intersectionRatio > best.intersectionRatio) best = en;
-        }
-        if (best?.target?.id) setActiveById(best.target.id);
+        entries.forEach((en) => {
+          if (en.isIntersecting && en.intersectionRatio > 0.22) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
       },
-      { threshold: [0.35, 0.5, 0.7, 0.9], rootMargin: "-12% 0px -38% 0px" },
+      { threshold: [0, 0.22, 0.5, 1] },
     );
-    cards.forEach((c) => io.observe(c));
+    io.observe(card);
+  }
 
-    const firstId = cards[0]?.id;
-    if (firstId) setActiveById(firstId);
+  function initPortfolioGrid(grid) {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+    grid.querySelectorAll(".pc--portfolio").forEach((card) => {
+      const viewport = card.querySelector(".pc-port-viewport[data-carousel]");
+      if (!viewport) {
+        card.querySelectorAll("video").forEach((v) =>
+          observeVideoInCard(card, v),
+        );
+        return;
+      }
+
+      const slides = viewport.querySelectorAll(".pc-port-slide");
+      const trackEl = viewport.querySelector(".pc-port-track");
+      const prev = card.querySelector(".pc-port-prev");
+      const next = card.querySelector(".pc-port-next");
+      if (!trackEl || slides.length < 2 || !prev || !next) return;
+
+      let idx = 0;
+      let isCardVisible = false;
+
+      function syncSlideVideos() {
+        slides.forEach((slide, i) => {
+          const v = slide.querySelector("video");
+          if (!v) return;
+          if (i === idx && isCardVisible) v.play().catch(() => {});
+          else v.pause();
+        });
+      }
+
+      function layout() {
+        const w = viewport.offsetWidth;
+        if (!w) return;
+        slides.forEach((s) => {
+          s.style.flex = `0 0 ${w}px`;
+        });
+        trackEl.style.width = `${w * slides.length}px`;
+        applyTransform(true);
+      }
+
+      function applyTransform(instant) {
+        const w = viewport.offsetWidth;
+        if (!w) return;
+        trackEl.style.transition =
+          instant || reducedMotion ? "none" : `transform 0.5s ${ease}`;
+        trackEl.style.transform = `translate3d(${-idx * w}px,0,0)`;
+        syncSlideVideos();
+      }
+
+      const ioCard = new IntersectionObserver(
+        (entries) => {
+          const e = entries[0];
+          if (!e) return;
+          isCardVisible = e.isIntersecting && e.intersectionRatio > 0.12;
+          syncSlideVideos();
+        },
+        { threshold: [0, 0.12, 0.25, 0.5] },
+      );
+      ioCard.observe(card);
+
+      prev.addEventListener("click", () => {
+        idx = (idx - 1 + slides.length) % slides.length;
+        applyTransform(false);
+      });
+      next.addEventListener("click", () => {
+        idx = (idx + 1) % slides.length;
+        applyTransform(false);
+      });
+
+      let raf = 0;
+      window.addEventListener("resize", () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(layout);
+      });
+
+      requestAnimationFrame(() => requestAnimationFrame(layout));
+    });
+  }
+
+  const navPrev = document.querySelector(".proj-nav .pnb:first-of-type");
+  const navNext = document.querySelector(".proj-nav .pnb:last-of-type");
+
+  if (track.classList.contains("proj-featured-grid")) {
+    if (navPrev) navPrev.style.display = "none";
+    if (navNext) navNext.style.display = "none";
+    initPortfolioGrid(track);
     return;
   }
+
+  const scroll = document.getElementById("proj-scroll");
+  if (!scroll) return;
 
   const slides = [...track.querySelectorAll(".pc[data-slide]")];
   const n = slides.length;
