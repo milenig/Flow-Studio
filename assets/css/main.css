@@ -122,9 +122,8 @@ body {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.08em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--body);
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
 }
 
 /* ══ FLOATING PILL NAV ══ */
@@ -243,6 +242,12 @@ nav.ready {
 }
 
 .nav-links a.active {
+  color: var(--white);
+}
+
+/* On standalone pages (without moving nav pill), keep active item clearly visible. */
+.contact-page .nav-links a.active {
+  background: var(--ink);
   color: var(--white);
 }
 
@@ -1011,9 +1016,9 @@ nav.ready {
 }
 
 .sc-desc {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
-  line-height: 1.75;
+  line-height: 1.7;
   font-weight: 300;
   max-width: 300px;
 }
@@ -1274,9 +1279,9 @@ nav.ready {
 }
 
 #projects .pc .pc-desc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.55;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.65;
 }
 
 #projects .pc .pc-cta {
@@ -1471,6 +1476,21 @@ nav.ready {
   height: min(300px, 62vw);
 }
 
+@media (max-width: 980px) {
+  .proj-featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proj-featured-grid .pc--wide {
+    grid-column: auto;
+  }
+
+  .proj-featured-grid .pc--portfolio .pc-port-viewport {
+    max-height: 300px;
+    height: min(300px, 72vw);
+  }
+}
+
 /* Inline carousel: native scroll-snap + peek of adjacent slides */
 .pc-port-viewport[data-carousel] {
   container-type: inline-size;
@@ -1554,8 +1574,8 @@ nav.ready {
 }
 
 .pc-port-desc {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.65;
   color: #5c5c5c;
   flex: 1;
   min-width: 0;
@@ -1611,6 +1631,10 @@ nav.ready {
 
   .pc-port-cta {
     align-self: flex-start;
+  }
+
+  .contact-calendly iframe {
+    height: 640px;
   }
 }
 
@@ -1693,9 +1717,9 @@ nav.ready {
 }
 
 .ps-desc {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.38);
-  line-height: 1.75;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.7;
   font-weight: 300;
 }
 
@@ -1854,6 +1878,7 @@ nav.ready {
   border: 1.5px solid var(--border);
   background: var(--white);
   transition: all 0.35s;
+  min-width: 0;
 }
 
 .tcard:hover {
@@ -1952,6 +1977,8 @@ nav.ready {
   font-weight: 600;
   color: var(--ink2);
   max-width: 280px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .tcard-kpi-main .tkpi-val {
@@ -1975,7 +2002,7 @@ nav.ready {
 
 .tcard-kpi .tbody {
   margin-bottom: 30px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.8;
 }
 
@@ -1984,7 +2011,7 @@ nav.ready {
 }
 
 .tbody {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--muted);
   line-height: 1.8;
   font-style: italic;
@@ -2007,6 +2034,14 @@ nav.ready {
 }
 
 .tcard-dark .tbody::before {
+  color: var(--green);
+}
+
+.tcard-kpi-secondary .tbody::before {
+  color: var(--green);
+}
+
+.tcard-bottom-left .tbody::before {
   color: var(--green);
 }
 
@@ -2047,12 +2082,16 @@ nav.ready {
   font-size: 14px;
   font-weight: 700;
   color: var(--ink);
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .ta-role {
   font-size: 12px;
   color: var(--muted);
   margin-top: 4px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* ══ PRICING ══ */
@@ -2130,14 +2169,14 @@ nav.ready {
 }
 
 .pc-desc {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.7;
   margin-bottom: 28px;
 }
 
 .price-card.feat .pc-desc {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .pc-price {
@@ -2370,7 +2409,7 @@ nav.ready {
 }
 
 .wd {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
   line-height: 1.7;
   font-weight: 300;
@@ -2425,9 +2464,10 @@ nav.ready {
 
 .wct-sub {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.72);
   margin-top: 12px;
   font-weight: 300;
+  line-height: 1.65;
   position: relative;
 }
 
@@ -2488,7 +2528,7 @@ nav.ready {
 
 .wct-note {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.72);
   margin-top: 10px;
 }
 
@@ -2539,16 +2579,25 @@ nav.ready {
   align-items: center;
   gap: 11px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--ink);
 }
 
 .cdet svg {
   width: 15px;
   height: 15px;
-  stroke: var(--ink);
+  stroke: var(--violet);
   fill: none;
   stroke-width: 2;
   flex-shrink: 0;
+}
+
+.cdet a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.cdet a:hover {
+  text-decoration: underline;
 }
 
 .talk-accordion {
@@ -2694,6 +2743,49 @@ nav.ready {
   background: transparent;
   color: var(--white);
   border-color: var(--white);
+}
+
+/* Contact page split: actions left, Calendly right */
+.contact-left-actions {
+  margin-top: 18px;
+}
+
+.contact-left-col {
+  min-width: 0;
+}
+
+.contact-calendly {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.contact-calendly-head {
+  padding: 20px 22px 0;
+}
+
+.contact-calendly-head h3 {
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.contact-calendly-head p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.contact-calendly iframe {
+  width: 100%;
+  height: 760px;
+  border: 0;
+  display: block;
 }
 
 /* ══ FOOTER ══ */
@@ -3760,7 +3852,7 @@ nav.ready {
 }
 
 .tool-card.featured-tool .tc-desc {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .tool-card.featured-tool .tcp {
@@ -3800,7 +3892,7 @@ nav.ready {
 }
 
 .tc-desc {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--muted);
   line-height: 1.7;
   font-weight: 300;
@@ -3927,6 +4019,10 @@ nav.ready {
 
   .testi-grid {
     grid-template-columns: 1fr;
+  }
+
+  .testi-shell {
+    padding: 28px 16px;
   }
 
   .testi-shell {
@@ -4146,6 +4242,15 @@ nav.ready {
     user-select: auto;
   }
 
+  .pc-port-foot > * {
+    min-width: 0;
+  }
+
+  .pc-port-desc {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   .proj-nav {
     display: none;
   }
@@ -4242,12 +4347,19 @@ nav.ready {
     padding: 24px 20px;
   }
 
+  .tkpi-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
   .tkpi-label {
     font-size: 20px;
+    max-width: 100%;
   }
 
   .tcard-kpi .tbody {
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 22px;
   }
 
