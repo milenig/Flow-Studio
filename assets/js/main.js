@@ -45,9 +45,17 @@
     raf = requestAnimationFrame(tick);
   }
 
-  window.addEventListener("load", () => {
+  if (document.readyState === "complete") {
     target = 100;
-  });
+  } else {
+    window.addEventListener(
+      "load",
+      () => {
+        target = 100;
+      },
+      { once: true }
+    );
+  }
 
   raf = requestAnimationFrame(tick);
 })();
