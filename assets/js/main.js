@@ -69,23 +69,22 @@ document.body.style.overflow = "hidden";
   const navEl = document.getElementById("nav");
   const navToggle = document.getElementById("nav-toggle");
   const navLinksEl = document.getElementById("nav-links");
-  const links = document.querySelectorAll(".nav-links a[data-section]");
-  let activeLink = null;
-  let lastCur = null;
-  const secs = [
-    "about",
-    "services",
-    "projects",
-    "ai",
-    "comparison",
-    "testimonials",
-    "pricing",
-    "why",
-    "contact",
-  ];
-  let sectionTops = [];
+  const links = [...document.querySelectorAll(".nav-links a[data-section]")];
+  if (!navEl || !navLinksEl || !npi || !links.length) return;
 
-  function setIndicator(el) {
+  const sectionIds = links
+    .map((a) => a.dataset.section?.trim())
+    .filter(Boolean);
+  const navSectionIdSet = new Set(sectionIds);
+  let allSectionTops = [];
+  let currentSectionId = null;
+  let scrollRaf = 0;
+
+  function moveIndicator(el) {
+    if (!el) {
+      npi.style.opacity = "0";
+      return;
+    }
     const parent = el.closest("ul");
     const pRect = parent.getBoundingClientRect();
     const eRect = el.getBoundingClientRect();
@@ -94,25 +93,14 @@ document.body.style.overflow = "hidden";
     npi.style.left = eRect.left - pRect.left + "px";
     npi.style.top = eRect.top - pRect.top + "px";
     npi.style.opacity = "1";
-    links.forEach((a) => a.classList.remove("active"));
-    el.classList.add("active");
-    activeLink = el;
-  }
-  function clearIndicator() {
-    npi.style.opacity = "0";
-    links.forEach((a) => a.classList.remove("active"));
-    if (activeLink) {
-      // restore scroll-based active
-      updateScrollActive();
-    }
-    activeLink = null;
   }
 
-  // Hover
-  navEl.addEventListener("mouseleave", clearIndicator);
-  links.forEach((a) => {
-    a.addEventListener("mouseenter", () => setIndicator(a));
-  });
+  function applyVisualState() {
+    const sectionLink =
+      links.find((a) => a.dataset.section === currentSectionId) || null;
+    links.forEach((a) => a.classList.toggle("active", a === sectionLink));
+    moveIndicator(sectionLink);
+  }
 
   function closeMenu() {
     navEl.classList.remove("menu-open");
@@ -139,42 +127,57 @@ document.body.style.overflow = "hidden";
   }
 
   function refreshSectionTops() {
-    sectionTops = secs
-      .map((id) => {
-        const el = document.getElementById(id);
-        if (!el) return null;
+    allSectionTops = [...document.querySelectorAll("section[id]")]
+      .map((el) => {
+        const id = el.id?.trim();
+        if (!id) return null;
         return { id, top: el.getBoundingClientRect().top + window.scrollY };
       })
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((a, b) => a.top - b.top);
   }
 
-  // Scroll-based active section
-  function updateScrollActive() {
+  function resolveNavbarSection(sectionId) {
+    // UX rule: never auto-activate "Početna" (hero).
+    if (!sectionId || sectionId === "hero") return null;
+    // If the current section is not represented in navbar, show no active state.
+    if (!navSectionIdSet.has(sectionId)) return null;
+    return sectionId;
+  }
+
+  function computeCurrentSection() {
     const y = window.scrollY + 120;
     let cur = null;
-    for (let i = 0; i < sectionTops.length; i++) {
-      if (sectionTops[i].top <= y) cur = sectionTops[i].id;
+    for (let i = 0; i < allSectionTops.length; i++) {
+      if (allSectionTops[i].top <= y) cur = allSectionTops[i].id;
       else break;
     }
-
-    if (cur === lastCur) return;
-    lastCur = cur;
-
-    links.forEach((a) => {
-      const active = a.dataset.section === cur;
-      if (active && !a.matches(":hover")) {
-        setIndicator(a);
-        return;
-      }
-    });
-    if (!cur) {
-      npi.style.opacity = "0";
-      links.forEach((a) => a.classList.remove("active"));
-    }
+    return resolveNavbarSection(cur);
   }
 
+  // Scroll-based active section.
+  // Intentionally avoids active state when user is in non-nav sections.
+  function updateScrollActive() {
+    const nextSectionId = computeCurrentSection();
+    if (nextSectionId === currentSectionId) return;
+    currentSectionId = nextSectionId;
+    applyVisualState();
+  }
+
+  function refreshAndUpdateActiveState() {
+    refreshSectionTops();
+    updateScrollActive();
+  }
+
+  window.addEventListener("load", refreshAndUpdateActiveState);
+  window.addEventListener("resize", () => {
+    refreshAndUpdateActiveState();
+    applyVisualState();
+  });
+
+  refreshAndUpdateActiveState();
+
   const navWrap = document.getElementById("nav").parentElement;
-  let scrollRaf = 0;
   function onScroll() {
     if (scrollRaf) return;
     scrollRaf = requestAnimationFrame(() => {
@@ -184,16 +187,6 @@ document.body.style.overflow = "hidden";
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-
-  // Nav pill position needs recalc on resize
-  window.addEventListener("resize", () => {
-    refreshSectionTops();
-    const act = document.querySelector(".nav-links a.active");
-    if (act) setIndicator(act);
-  });
-  window.addEventListener("load", refreshSectionTops);
-  refreshSectionTops();
-  updateScrollActive();
 })();
 
 // ════════════════════════════════════

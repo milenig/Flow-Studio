@@ -185,10 +185,6 @@ nav.ready {
   line-height: 1;
 }
 
-.contact-page .nav-logo span {
-  color: var(--violet);
-}
-
 .nav-toggle {
   display: none;
   width: 40px;
@@ -260,12 +256,6 @@ nav.ready {
   color: var(--white);
 }
 
-/* On standalone pages (without moving nav pill), keep active item clearly visible. */
-.contact-page .nav-links a.active {
-  background: var(--ink);
-  color: var(--white);
-}
-
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -295,10 +285,6 @@ nav.ready {
   background: var(--green);
   border-radius: 50%;
   animation: pulse-dot 2s infinite;
-}
-
-.contact-page .nav-avail-dot {
-  background: var(--violet);
 }
 
 @keyframes pulse-dot {
@@ -695,7 +681,7 @@ nav.ready {
 #services .hl2 em,
 #pricing .hl2 em,
 #comparison .hl2 em,
-#contact .cont-hl em {
+#contact .hl2 em {
   color: var(--violet);
 }
 
@@ -2626,8 +2612,8 @@ nav.ready {
   z-index: 1;
 }
 
-.contact-page .cont-hl,
-.contact-page .cont-body,
+.contact-page .hl2,
+.contact-page .pc-desc,
 .contact-page .cdet,
 .contact-page .cdet a {
   color: #0e0e13;
@@ -2636,6 +2622,19 @@ nav.ready {
 
 .contact-page .ci-kicker {
   color: rgba(12, 12, 14, 0.76);
+}
+
+.contact-page #hero .hl2 {
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.contact-page #hero .hl2 em {
+  color: var(--violet);
+}
+
+.contact-page #hero .pc-desc {
+  margin-bottom: 36px;
 }
 
 .cont-grid {
