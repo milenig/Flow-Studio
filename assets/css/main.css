@@ -4226,7 +4226,7 @@ nav.ready {
   }
 
   .nav-wrap {
-    top: 12px;
+    top: max(10px, env(safe-area-inset-top));
     padding: 0 10px;
   }
 
@@ -4245,6 +4245,8 @@ nav.ready {
       inset 0 1px 0 rgba(255, 255, 255, 0.62);
     backdrop-filter: blur(22px) saturate(190%);
     -webkit-backdrop-filter: blur(22px) saturate(190%);
+    transform: none;
+    opacity: 1;
   }
 
   .nav-logo {
@@ -4309,20 +4311,6 @@ nav.ready {
   .nav-links li:not(.nav-mobile-call) a {
     background: rgba(255, 255, 255, 0.5);
     border-color: rgba(12, 12, 14, 0.08);
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .nav-links li:not(.nav-mobile-call) a::before {
-    content: "";
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    width: 3px;
-    height: 15px;
-    transform: translateY(-50%);
-    border-radius: 4px;
-    background: rgba(124, 58, 237, 0.25);
   }
 
   .nav-links .nav-mobile-call a {
@@ -4352,6 +4340,13 @@ nav.ready {
   nav:hover .nav-links a:hover {
     color: var(--white);
     background: var(--ink);
+  }
+
+  .nav-links li:not(.nav-mobile-call) a.active,
+  .nav-links li:not(.nav-mobile-call) a:hover {
+    color: var(--white);
+    background: var(--ink);
+    border-color: var(--ink);
   }
 
   nav.menu-open .nav-toggle span:nth-child(1) {
@@ -4462,7 +4457,7 @@ nav.ready {
   }
 
   .hero-inner {
-    padding: 0 24px 80px !important;
+    padding: 112px 24px 80px !important;
     justify-content: center;
     align-items: flex-start;
   }
