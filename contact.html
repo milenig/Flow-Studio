@@ -1,25 +1,315 @@
 <!doctype html>
 <html lang="sr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=kontakt.html" />
-  <link rel="canonical" href="kontakt.html" />
-  <style>
-    body {
-      font-family: Inter, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #f7f6f2;
-      color: #0c0c0e;
-    }
-    a { color: #0c0c0e; }
-  </style>
+  <title>Kontakt | gowithflow</title>
+  <meta name="description" content="Kontaktiraj gowithflow tim. Zakaži poziv, pošalji email ili nas zaprati na društvenim mrežama." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body>
-  <p>Preusmeravanje na kontakt stranicu... <a href="kontakt.html">Klikni ovde</a>.</p>
+
+<body class="contact-page">
+  <div class="nav-wrap">
+    <nav id="nav" class="ready">
+      <a href="index.html" class="nav-logo">gowith<em>flow</em></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Otvori meni" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#about">O nama</a></li>
+        <li><a href="index.html#services">Usluge</a></li>
+        <li><a href="index.html#projects">Projekti</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">
+        <span class="nav-avail-dot"></span>Zakaži 15-min poziv
+      </a>
+    </nav>
+  </div>
+
+  <main>
+    <section id="hero" class="sec contact-hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="mwrap cont-grid">
+        <div class="contact-left-col">
+          <div>
+            <div class="kicker ci-kicker">Hajde da pričamo</div>
+            <h1 class="cont-hl">
+              <span class="line-lock">Spreman da izgradimo</span><br /><span class="line-lock">nešto
+                <em>odlično?</em></span>
+            </h1>
+            <p class="cont-body">
+              Ispričaj nam o svom projektu i javićemo se u roku od 24 sata. Bez
+              pritiska, samo pravi razgovor o tome kako možemo da pomognemo.
+            </p>
+            <div class="cont-dets">
+              <div class="cdet">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>Širom sveta
+              </div>
+              <div class="cdet">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3 7l9 6 9-6" />
+                </svg><a href="mailto:hello@gowithflow.rs">hello@gowithflow.rs</a>
+              </div>
+              <div class="cdet">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg><a href="https://www.instagram.com/gowithflow.rs/" target="_blank" rel="noopener">gowithflow.rs</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-calendly">
+          <div class="contact-calendly-head">
+            <h3>Zakaži 15-min poziv</h3>
+            <p>Odaberi termin koji ti najviše odgovara.</p>
+          </div>
+          <iframe
+            src="https://calendly.com/stephanbosch94/web-discussion-gowithflow?hide_landing_page_details=1&hide_gdpr_banner=1"
+            title="Calendly - gowithflow"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="foot-top">
+      <div>
+        <a href="index.html" class="fl-logo">gowith<em>flow</em></a>
+        <p class="fl-desc">
+          Premium web dizajn i AI agencija iz Beograda. Sajtovi koji privlače,
+          konvertuju i ostaju u sećanju.
+        </p>
+      </div>
+      <div>
+        <div class="fcol-t">Navigacija</div>
+        <ul class="flinks">
+          <li><a href="index.html#about">O nama</a></li>
+          <li><a href="index.html#services">Usluge</a></li>
+          <li><a href="index.html#projects">Projekti</a></li>
+          <li><a href="index.html#pricing">Cenovnik</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fcol-t">Usluge</div>
+        <ul class="flinks">
+          <li><a href="index.html#services">Web Razvoj</a></li>
+          <li><a href="index.html#services">UX/UI Dizajn</a></li>
+          <li><a href="index.html#services">SEO</a></li>
+          <li><a href="index.html#ai">AI Integracije</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fcol-t">Kontakt</div>
+        <ul class="flinks">
+          <li><a href="https://www.instagram.com/gowithflow.rs/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="contact.html">Pošalji upit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-big">gowithflow.</div>
+    <div class="foot-bot">
+      <div class="fcopy">© 2026 gowithflow. Sva prava zadržana.</div>
+      <div class="fsocs">
+        <a href="https://www.instagram.com/gowithflow.rs/" class="fsoc" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg></a>
+        <a href="https://linkedin.com/" class="fsoc" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const nav = document.getElementById("nav");
+      const navToggle = document.getElementById("nav-toggle");
+      const navLinks = document.getElementById("nav-links");
+      if (!nav || !navToggle || !navLinks) return;
+
+      function closeMenu() {
+        nav.classList.remove("menu-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Otvori meni");
+      }
+
+      navToggle.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("menu-open");
+        navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        navToggle.setAttribute("aria-label", isOpen ? "Zatvori meni" : "Otvori meni");
+      });
+
+      navLinks.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 768px)").matches) closeMenu();
+        });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      const card = document.querySelector(".contact-calendly");
+      const frame = card ? card.querySelector("iframe") : null;
+      if (!card || !frame) return;
+
+      function activateGlass() {
+        card.classList.add("glass-ready");
+      }
+
+      // Apply effect after full page load.
+      if (document.readyState === "complete") {
+        activateGlass();
+      } else {
+        window.addEventListener("load", activateGlass, { once: true });
+      }
+
+      // Ensure activation once iframe content is ready too.
+      frame.addEventListener("load", activateGlass, { once: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      const c = document.getElementById("hero-canvas");
+      const heroEl = document.getElementById("hero");
+      if (!c || !heroEl) return;
+
+      const gl = c.getContext("webgl");
+      if (!gl) return;
+
+      function resize() {
+        c.width = innerWidth;
+        c.height = innerHeight;
+        gl.viewport(0, 0, c.width, c.height);
+      }
+
+      resize();
+      window.addEventListener("resize", resize);
+
+      const VS = "attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}";
+      const FS = `precision highp float;
+        uniform float t;uniform vec2 res;uniform vec2 mo;
+        vec3 g=vec3(.86,.66,1.);
+        vec3 ink=vec3(1.,1.,1.);
+        float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
+        float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1)),f.x),f.y);}
+        float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<7;i++){v+=a*noise(p);p=p*2.1+vec2(.3,.7);a*=.5;}return v;}
+        void main(){
+          vec2 uv=(gl_FragCoord.xy-.5*res)/min(res.x,res.y);
+          vec2 m=(mo/res-.5)*2.;m.y*=-1.;
+          float d=length(uv-m*.25);
+          float w=sin(d*14.-t*2.2)*exp(-d*3.2)*.12;
+          vec2 q=vec2(fbm(uv+t*.08),fbm(uv+vec2(1.9,9.4)+t*.06));
+          vec2 rr=vec2(fbm(uv+1.7*q+vec2(1.7,9.2)+t*.09),fbm(uv+1.7*q+vec2(8.3,2.8)+t*.07));
+          float f=fbm(uv+1.7*rr)+w;
+          f=f+.45*fbm(uv*2.1+t*.04);
+          float glow=smoothstep(.13,.90,f)*.76+f*.33;
+          vec3 col=mix(ink,g,clamp(glow*1.75,0.,1.));
+          col=mix(col,mix(ink,g,1.0),smoothstep(.16,.78,f)*.84);
+          float vg=1.-dot(uv*1.1,uv*1.1);
+          col=mix(ink,col,clamp(vg*1.4,.0,1.));
+          col=mix(col,mix(ink,g,0.94),(1.-smoothstep(.38,.9,length(uv)))*smoothstep(.36,.88,f)*.60);
+          gl_FragColor=vec4(clamp(col,0.,1.),1.);
+        }`;
+
+      function shader(type, source) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, source);
+        gl.compileShader(s);
+        return s;
+      }
+
+      const program = gl.createProgram();
+      gl.attachShader(program, shader(gl.VERTEX_SHADER, VS));
+      gl.attachShader(program, shader(gl.FRAGMENT_SHADER, FS));
+      gl.linkProgram(program);
+      gl.useProgram(program);
+
+      const buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+        gl.STATIC_DRAW
+      );
+
+      const loc = gl.getAttribLocation(program, "p");
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      const uT = gl.getUniformLocation(program, "t");
+      const uR = gl.getUniformLocation(program, "res");
+      const uM = gl.getUniformLocation(program, "mo");
+
+      let mx = 0;
+      let my = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+
+      const t0 = performance.now();
+      let inView = false;
+      let raf = 0;
+
+      function shouldRun() {
+        return !document.hidden && inView;
+      }
+
+      function frame(now) {
+        if (!shouldRun()) {
+          raf = 0;
+          return;
+        }
+        gl.uniform1f(uT, (now - t0) * 0.001);
+        gl.uniform2f(uR, c.width, c.height);
+        gl.uniform2f(uM, mx, my);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        raf = requestAnimationFrame(frame);
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          inView = !!entries[0]?.isIntersecting;
+          if (shouldRun() && !raf) raf = requestAnimationFrame(frame);
+          else if (!shouldRun()) {
+            cancelAnimationFrame(raf);
+            raf = 0;
+          }
+        },
+        { threshold: 0, rootMargin: "0px 0px 48px 0px" }
+      );
+      io.observe(heroEl);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        } else if (shouldRun() && !raf) {
+          raf = requestAnimationFrame(frame);
+        }
+      });
+    })();
+  </script>
 </body>
+
 </html>

@@ -118,7 +118,7 @@ document.body.style.overflow = "hidden";
     navEl.classList.remove("menu-open");
     if (navToggle) {
       navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Open menu");
+      navToggle.setAttribute("aria-label", "Otvori meni");
     }
   }
 
@@ -126,7 +126,7 @@ document.body.style.overflow = "hidden";
     navToggle.addEventListener("click", () => {
       const isOpen = navEl.classList.toggle("menu-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      navToggle.setAttribute("aria-label", isOpen ? "Zatvori meni" : "Otvori meni");
     });
     navLinksEl.querySelectorAll("a").forEach((a) =>
       a.addEventListener("click", () => {
@@ -390,22 +390,22 @@ document.body.style.overflow = "hidden";
   const sequences = [
     {
       cmd: 'analyzeProject("dice-media")',
-      out: "✓ Brend analiziran · UX audit · 3 preporuke generisane",
+      out: "✓ Brend analiziran · UX revizija · 3 preporuke generisane",
     },
     {
       cmd: 'generateHero({style:"editorial",ai:true})',
-      out: "✓ AI vizual kreiran · Integrisan u Webflow · Live",
+      out: "✓ AI vizual kreiran · Integrisan u sajt · Uživo",
     },
     {
       cmd: 'optimizeSEO({target:"beograd",schema:true})',
-      out: "✓ 12 ključnih reči · Schema markup · Score: 98",
+      out: "✓ 12 ključnih reči · Šema oznake · Rezultat: 98",
     },
     {
       cmd: 'deployAgent({crm:"pipedrive",mode:"24/7"})',
-      out: "✓ Lead agent aktivan · 3 ponude poslate danas",
+      out: "✓ Agent za lidove aktivan · 3 ponude poslate danas",
     },
     {
-      cmd: 'connectTools(["make","webflow","slack"])',
+      cmd: 'connectTools(["make","cms","slack"])',
       out: "✓ Automatizacija aktivna · 0 manuelnih koraka",
     },
     {
