@@ -368,7 +368,15 @@ document.body.style.overflow = "hidden";
       if (!entries[0]?.isIntersecting) return;
       io.disconnect();
       v.load();
-      v.play().catch(() => {});
+      // Some mobile browsers reject play() if the media isn't ready yet.
+      const tryPlay = () => v.play().catch(() => {});
+      if (v.readyState >= 2) {
+        tryPlay();
+      } else {
+        v.addEventListener("loadeddata", tryPlay, { once: true });
+        // Fallback: if loadeddata doesn't fire quickly, still try after a moment.
+        setTimeout(tryPlay, 900);
+      }
     },
     { rootMargin: "160px 0px", threshold: 0.01 },
   );
