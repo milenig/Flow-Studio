@@ -359,7 +359,6 @@ document.body.style.overflow = "hidden";
 // ABOUT - load background video when near viewport (saves bandwidth)
 // ════════════════════════════════════
 (function () {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const v = document.getElementById("about-visual-vid");
   if (!v) return;
   const wrap = v.closest(".about-visual");
