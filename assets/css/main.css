@@ -2603,7 +2603,7 @@ nav.ready {
 
 .contact-page #hero.contact-hero {
   position: relative;
-  min-height: auto;
+  min-height: 100vh;
   height: auto;
   overflow: hidden;
   background: #fff;
