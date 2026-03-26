@@ -173,9 +173,16 @@ nav.ready {
   white-space: nowrap;
 }
 
-.nav-logo em {
-  color: var(--ink);
+.nav-logo span {
+  color: var(--green);
   font-style: normal;
+  margin-left: 0.08em;
+  font-size: 1.18em;
+  line-height: 1;
+}
+
+.contact-page .nav-logo span {
+  color: var(--violet);
 }
 
 .nav-toggle {
@@ -280,6 +287,10 @@ nav.ready {
   background: var(--green);
   border-radius: 50%;
   animation: pulse-dot 2s infinite;
+}
+
+.contact-page .nav-avail-dot {
+  background: var(--violet);
 }
 
 @keyframes pulse-dot {
@@ -1021,6 +1032,10 @@ nav.ready {
   line-height: 1.7;
   font-weight: 300;
   max-width: 300px;
+}
+
+.sc.wide .sc-desc {
+  max-width: none;
 }
 
 .sc-arr {
@@ -2895,12 +2910,15 @@ nav.ready {
   text-decoration: none;
   letter-spacing: -0.04em;
   display: block;
-  margin-bottom: 60px;
+  margin-bottom: 14px;
 }
 
-.fl-logo em {
+.fl-logo span {
   color: var(--green);
   font-style: normal;
+  margin-left: 0.08em;
+  font-size: 1.18em;
+  line-height: 1;
 }
 
 .fl-desc {
@@ -2911,12 +2929,38 @@ nav.ready {
   font-weight: 300;
 }
 
+.fl-mail {
+  margin-bottom: 14px;
+}
+
+.fl-mail a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.fl-mail svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+}
+
+.fl-mail a:hover {
+  color: var(--white);
+}
+
 .fcol-t {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.72);
   margin-bottom: 18px;
 }
 
@@ -2928,14 +2972,15 @@ nav.ready {
 }
 
 .flinks a {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--white);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.2s;
+  transition: opacity 0.2s;
 }
 
 .flinks a:hover {
-  color: var(--white);
+  text-decoration: underline;
+  opacity: 0.9;
 }
 
 .foot-bot {
@@ -2948,7 +2993,7 @@ nav.ready {
 
 .fcopy {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .fsocs {
@@ -2959,13 +3004,13 @@ nav.ready {
 .fsoc {
   width: 38px;
   height: 38px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--green);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--green);
   transition: all 0.25s;
 }
 
@@ -4180,17 +4225,43 @@ nav.ready {
     white-space: normal;
   }
 
+  .nav-wrap {
+    top: 12px;
+    padding: 0 10px;
+  }
+
   nav {
-    padding: 8px 8px 8px 16px;
+    padding: 7px 7px 7px 13px;
     position: relative;
-    width: calc(100% - 48px);
+    width: 100%;
     max-width: 100%;
     justify-content: space-between;
+    border-radius: 18px;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    box-shadow:
+      0 16px 44px rgba(0, 0, 0, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(22px) saturate(190%);
+    -webkit-backdrop-filter: blur(22px) saturate(190%);
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 800;
   }
 
   .nav-toggle {
     display: inline-flex;
     margin-left: auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.76);
+    backdrop-filter: blur(12px) saturate(170%);
+    -webkit-backdrop-filter: blur(12px) saturate(170%);
   }
 
   .nav-cta {
@@ -4199,22 +4270,22 @@ nav.ready {
 
   .nav-links {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 9px);
     left: 0;
     right: 0;
     display: none;
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.66);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 14px;
+    gap: 8px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid rgba(12, 12, 14, 0.08);
+    border-radius: 18px;
     box-shadow:
-      0 18px 44px rgba(0, 0, 0, 0.16),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+      0 18px 46px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(22px) saturate(190%);
+    -webkit-backdrop-filter: blur(22px) saturate(190%);
   }
 
   nav.menu-open .nav-links {
@@ -4227,9 +4298,54 @@ nav.ready {
 
   .nav-links a {
     color: var(--ink);
-    background: var(--off);
-    border-radius: 10px;
-    padding: 11px 12px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(12, 12, 14, 0.06);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .nav-links li:not(.nav-mobile-call) a {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(12, 12, 14, 0.08);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .nav-links li:not(.nav-mobile-call) a::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    width: 3px;
+    height: 15px;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    background: rgba(124, 58, 237, 0.25);
+  }
+
+  .nav-links .nav-mobile-call a {
+    background: linear-gradient(135deg, var(--ink), #2a2142);
+    color: var(--white);
+    border-color: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+    box-shadow: 0 10px 24px rgba(20, 16, 34, 0.28);
+  }
+
+  .nav-links .nav-mobile-call .nav-avail-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .nav-links .nav-mobile-call a:hover,
+  .nav-links .nav-mobile-call a.active {
+    background: linear-gradient(135deg, #100f16, #37285d);
+    color: var(--white);
   }
 
   .nav-links a.active,

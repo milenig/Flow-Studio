@@ -15,7 +15,7 @@
 <body class="contact-page">
   <div class="nav-wrap">
     <nav id="nav" class="ready">
-      <a href="index.html" class="nav-logo">gowith<em>flow</em></a>
+      <a href="index.html" class="nav-logo">gowithflow<span>.</span></a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Otvori meni" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -23,6 +23,9 @@
         <li><a href="index.html#about">O nama</a></li>
         <li><a href="index.html#services">Usluge</a></li>
         <li><a href="index.html#projects">Projekti</a></li>
+        <li class="nav-mobile-call">
+          <a href="contact.html"><span class="nav-avail-dot"></span>Zakaži 15-min poziv</a>
+        </li>
       </ul>
       <a href="contact.html" class="nav-cta">
         <span class="nav-avail-dot"></span>Zakaži 15-min poziv
@@ -87,10 +90,23 @@
   <footer class="site-footer">
     <div class="foot-top">
       <div>
-        <a href="index.html" class="fl-logo">gowith<em>flow</em></a>
-        <p class="fl-desc">
-          Premium web dizajn i AI agencija iz Beograda. Sajtovi koji privlače,
-          konvertuju i ostaju u sećanju.
+        <a href="index.html" class="fl-logo">gowithflow<span>.</span></a>
+        <p class="fl-mail">
+          <a href="mailto:hello@gowithflow.rs">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M3 7l9 6 9-6" />
+            </svg>
+            hello@gowithflow.rs
+          </a>
+        </p>
+        <p class="fl-mail">
+          <a href="tel:+381621604136">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8 9.89a16 16 0 0 0 6.11 6.11l1.44-1.28a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.92z" />
+            </svg>
+            +381621604136
+          </a>
         </p>
       </div>
       <div>
@@ -170,8 +186,40 @@
       const frame = card ? card.querySelector("iframe") : null;
       if (!card || !frame) return;
 
+      const targetSelectors = [
+        ".b5DUopirRGtCo7WwEuHi",
+        ".Ak2LzgESY3es01fS1C8E",
+        ".GFGgdp3qKF5bNtT2W4G8",
+        ".ay7wYeeCFojVf1x8uLy4",
+      ].join(",");
+
+      function applyGlassInline(el) {
+        if (!el || el.dataset.glassApplied === "true") return;
+        el.dataset.glassApplied = "true";
+        el.style.background = "rgba(255, 255, 255, 0.62)";
+        el.style.backdropFilter = "blur(16px) saturate(165%)";
+        el.style.webkitBackdropFilter = "blur(16px) saturate(165%)";
+        el.style.border = "1px solid rgba(255, 255, 255, 0.72)";
+        el.style.boxShadow =
+          "0 18px 48px rgba(32, 17, 65, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.78)";
+      }
+
+      function enhanceTargets(root) {
+        if (!root) return;
+        root.querySelectorAll(targetSelectors).forEach(applyGlassInline);
+      }
+
       function activateGlass() {
         card.classList.add("glass-ready");
+        enhanceTargets(document);
+
+        // Try to style the same selectors inside iframe when accessible.
+        try {
+          const doc = frame.contentDocument || frame.contentWindow?.document;
+          if (doc) enhanceTargets(doc);
+        } catch (_) {
+          // Cross-origin iframe: internal nodes are not accessible by browser policy.
+        }
       }
 
       // Apply effect after full page load.
@@ -183,6 +231,11 @@
 
       // Ensure activation once iframe content is ready too.
       frame.addEventListener("load", activateGlass, { once: true });
+
+      // Some embed UIs mount after load; keep watching briefly.
+      const observer = new MutationObserver(() => activateGlass());
+      observer.observe(document.body, { childList: true, subtree: true });
+      setTimeout(() => observer.disconnect(), 12000);
     })();
   </script>
   <script>
