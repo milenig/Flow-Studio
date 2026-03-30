@@ -106,7 +106,7 @@ document.body.style.overflow = "hidden";
     navEl.classList.remove("menu-open");
     if (navToggle) {
       navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Otvori meni");
+      navToggle.setAttribute("aria-label", "Open menu");
     }
   }
 
@@ -114,7 +114,7 @@ document.body.style.overflow = "hidden";
     navToggle.addEventListener("click", () => {
       const isOpen = navEl.classList.toggle("menu-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      navToggle.setAttribute("aria-label", isOpen ? "Zatvori meni" : "Otvori meni");
+      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
     });
     navLinksEl.querySelectorAll("a").forEach((a) =>
       a.addEventListener("click", () => {
@@ -138,7 +138,7 @@ document.body.style.overflow = "hidden";
   }
 
   function resolveNavbarSection(sectionId) {
-    // UX rule: never auto-activate "Početna" (hero).
+    // UX rule: never auto-activate "Home" (hero).
     if (!sectionId || sectionId === "hero") return null;
     // If the current section is not represented in navbar, show no active state.
     if (!navSectionIdSet.has(sectionId)) return null;
@@ -390,27 +390,27 @@ document.body.style.overflow = "hidden";
   const sequences = [
     {
       cmd: 'analyzeProject("dice-media")',
-      out: "✓ Brend analiziran · UX revizija · 3 preporuke generisane",
+      out: "✓ Brand audit · UX proposal · three actionable recommendations",
     },
     {
       cmd: 'generateHero({style:"editorial",ai:true})',
-      out: "✓ AI vizual kreiran · Integrisan u sajt · Uživo",
+      out: "✓ Visual direction · Aligned with the full website · Ready for review",
     },
     {
       cmd: 'optimizeSEO({target:"beograd",schema:true})',
-      out: "✓ 12 ključnih reči · Šema oznake · Rezultat: 98",
+      out: "✓ Content structure · Schema where it adds value · Technical check complete",
     },
     {
       cmd: 'deployAgent({crm:"pipedrive",mode:"24/7"})',
-      out: "✓ Agent za lidove aktivan · 3 ponude poslate danas",
+      out: "✓ Lead flow activated · Less manual CRM input",
     },
     {
       cmd: 'connectTools(["make","cms","slack"])',
-      out: "✓ Automatizacija aktivna · 0 manuelnih koraka",
+      out: "✓ Workflows connected · Shared data across tools",
     },
     {
       cmd: "buildLanding({convert:true,cms:true})",
-      out: "✓ 7 sekcija · CMS spreman · Isporuka: 8 dana",
+      out: "✓ Agreed sections delivered · CMS configured · Deadline met",
     },
   ];
   let si = 0;

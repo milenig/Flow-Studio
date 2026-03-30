@@ -681,6 +681,11 @@ nav.ready {
   color: var(--violet);
 }
 
+/* Green accent for services title (e.g. "usluge") */
+#services .hl2 em.g {
+  color: var(--green);
+}
+
 .line-lock {
   white-space: nowrap;
 }
@@ -4173,9 +4178,12 @@ nav.ready {
     padding-bottom: 44px;
   }
 
-  .stats-inner,
-  .foot-top {
+  .stats-inner {
     padding: 0 32px;
+  }
+
+  .foot-top {
+    padding: 0 32px 56px;
   }
 
   #hero .hero-inner {
@@ -4665,10 +4673,9 @@ nav.ready {
   }
 
   .foot-top {
-    padding: 0 !important;
+    padding: 0 0 40px 0 !important;
     gap: 28px;
     margin-bottom: 32px;
-    padding-bottom: 28px;
   }
 
   .fl-desc {
