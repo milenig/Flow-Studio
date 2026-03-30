@@ -677,7 +677,8 @@ nav.ready {
 #services .hl2 em,
 #pricing .hl2 em,
 #comparison .hl2 em,
-#contact .hl2 em {
+#contact .hl2 em,
+#testimonials .hl2 em {
   color: var(--violet);
 }
 
