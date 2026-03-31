@@ -1,1219 +1,1212 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gowithflow | Web Agency for Websites, Apps & Automation</title>
-  <meta name="description"
-    content="gowithflow is a digital agency focused on high-performing websites, scalable applications, and smart automation. We combine strategy, UX/UI, development, SEO, and AI workflows to help brands grow online." />
-  <meta name="keywords"
-    content="web design agency, website development, webflow development, app development, UX UI design, SEO optimization, AI automation, AI agents" />
-  <meta property="og:title" content="gowithflow — Websites, Applications & Automation" />
-  <meta property="og:description"
-    content="Conversion-focused websites, custom applications, and practical automation. We design and build digital products that look sharp, load fast, and support business growth." />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Async Google Fonts: non-render-blocking -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
-  <!-- Fallback font-display while Inter loads -->
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    .fonts-loaded body { font-family: 'Inter', sans-serif; }
-  </style>
-  <link rel="stylesheet" href="assets/css/main.css" />
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>gowithflow | Web Agency for Websites, Apps & Automation</title>
+		<meta name="description"
+			  content="gowithflow is a digital agency focused on high-performing websites, scalable applications, and smart automation. We combine strategy, UX/UI, development, SEO, and AI workflows to help brands grow online." />
+		<meta name="keywords"
+			  content="web design agency, website development, webflow development, app development, UX UI design, SEO optimization, AI automation, AI agents" />
+		<meta property="og:title" content="gowithflow — Websites, Applications & Automation" />
+		<meta property="og:description"
+			  content="Conversion-focused websites, custom applications, and practical automation. We design and build digital products that look sharp, load fast, and support business growth." />
+		<meta property="og:type" content="website" />
+		<!-- Self-hosted Inter variable font (no render-blocking Google Fonts) -->
+		<link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="assets/fonts/InterVariable-Italic.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
 
-<body>
-  <!-- CURSOR FX (link-only) -->
-  <div class="cursor-fx" id="curFx"></div>
+	<body>
+		<!-- CURSOR FX (link-only) -->
+		<div class="cursor-fx" id="curFx"></div>
 
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="ld-logo">gowithflow<span>.</span></div>
-    <div class="ld-bar">
-      <div class="ld-fill" id="ldfill"></div>
-    </div>
-    <div class="ld-num" id="ldnum">0%</div>
-  </div>
+		<!-- LOADER -->
+		<div id="loader">
+			<div class="ld-logo">gowithflow<span>.</span></div>
+			<div class="ld-bar">
+				<div class="ld-fill" id="ldfill"></div>
+			</div>
+			<div class="ld-num" id="ldnum">0%</div>
+		</div>
 
-  <!-- FLOATING PILL NAV -->
-  <div class="nav-wrap">
-    <nav id="nav">
-      <a href="#" class="nav-logo">gowithflow<span>.</span></a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links">
-        <div class="nav-pill-indicator" id="npi"></div>
-        <li><a href="#hero" data-section="hero">Home</a></li>
-        <li><a href="#about" data-section="about">About</a></li>
-        <li><a href="#services" data-section="services">Services</a></li>
-        <li><a href="#projects" data-section="projects">Projects</a></li>
-        <li><a href="#pricing" data-section="pricing">Our offer</a></li>
-        <li class="nav-mobile-call">
-          <a href="contact.html"><span class="nav-avail-dot"></span>Schedule 15 min call</a>
-        </li>
-      </ul>
-      <a href="contact.html" class="nav-cta">
-        <span class="nav-avail-dot"></span>Schedule 15 min call
-      </a>
-    </nav>
-  </div>
+		<!-- FLOATING PILL NAV -->
+		<div class="nav-wrap">
+			<nav id="nav">
+				<a href="#" class="nav-logo">gowithflow<span>.</span></a>
+				<button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"
+						aria-controls="nav-links">
+					<span></span><span></span><span></span>
+				</button>
+				<ul class="nav-links" id="nav-links">
+					<div class="nav-pill-indicator" id="npi"></div>
+					<li><a href="#hero" data-section="hero">Home</a></li>
+					<li><a href="#about" data-section="about">About</a></li>
+					<li><a href="#services" data-section="services">Services</a></li>
+					<li><a href="#projects" data-section="projects">Projects</a></li>
+					<li><a href="#pricing" data-section="pricing">Our offer</a></li>
+					<li class="nav-mobile-call">
+						<a href="contact.html"><span class="nav-avail-dot"></span>Schedule 15 min call</a>
+					</li>
+				</ul>
+				<a href="contact.html" class="nav-cta">
+					<span class="nav-avail-dot"></span>Schedule 15 min call
+				</a>
+			</nav>
+		</div>
 
-  <!-- HERO -->
-  <section id="hero">
-    <canvas id="hero-canvas"></canvas>
-    <div class="hero-inner">
-      <div class="hero-badge">
-        <em>Websites</em>&nbsp;·&nbsp;Applications&nbsp;·&nbsp;Automation
-      </div>
-      <h1 class="hero-hl">
-        <span class="tline"><span class="tword">We don't do basics,</span></span>
-        <span class="tline"><span class="tword">we do <em>bangers.</em></span></span>
-      </h1>
-      <div class="hero-meta">
-        <p class="hero-sub">
-          From the first click to the final scroll, we design experiences that hold attention, increase conversions, and drive measurable growth.
-        </p>
-        <div class="hero-acts">
-          <a href="#projects" class="btn-light">View projects
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg></a>
-          <a href="contact.html" class="btn-outline">Schedule a call</a>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-cue">
-      <div class="scroll-cue-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
+		<!-- HERO -->
+		<section id="hero">
+			<canvas id="hero-canvas"></canvas>
+			<div class="hero-inner">
+				<div class="hero-badge">
+					<em>Websites</em>&nbsp;·&nbsp;Applications&nbsp;·&nbsp;Automation
+				</div>
+				<h1 class="hero-hl">
+					<span class="tline"><span class="tword">We don't do basics,</span></span>
+					<span class="tline"><span class="tword">we do <em>bangers.</em></span></span>
+				</h1>
+				<div class="hero-meta">
+					<p class="hero-sub">
+						From the first click to the final scroll, we design experiences that hold attention, increase
+						conversions, and drive measurable growth.
+					</p>
+					<div class="hero-acts">
+						<a href="#projects" class="btn-light">View projects
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								 stroke-width="2.5">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg></a>
+						<a href="contact.html" class="btn-outline">Schedule a call</a>
+					</div>
+				</div>
+			</div>
+			<div class="scroll-cue">
+				<div class="scroll-cue-line"></div>
+				<span>Scroll</span>
+			</div>
+		</section>
 
-  <!-- STATS -->
-  <div class="stats-band">
-    <div class="stats-inner">
-      <div class="sblock reveal">
-        <div class="sn">30<em>+</em></div>
-        <div class="sl">Happy<br />clients</div>
-      </div>
-      <div class="sblock reveal" style="transition-delay: 0.08s">
-        <div class="sn">2<em>weeks</em></div>
-        <div class="sl">Average delivery<br />time</div>
-      </div>
-      <div class="sblock reveal" style="transition-delay: 0.16s">
-        <div class="sn">10<em>+</em></div>
-        <div class="sl">Years of experience</div>
-      </div>
-      <div class="sblock reveal" style="transition-delay: 0.24s">
-        <div class="sn">100<em>%</em></div>
-        <div class="sl">Guaranteed<br />satisfaction</div>
-      </div>
-    </div>
-  </div>
+		<!-- STATS -->
+		<div class="stats-band">
+			<div class="stats-inner">
+				<div class="sblock reveal">
+					<div class="sn">30<em>+</em></div>
+					<div class="sl">Happy<br />clients</div>
+				</div>
+				<div class="sblock reveal" style="transition-delay: 0.08s">
+					<div class="sn">2<em>weeks</em></div>
+					<div class="sl">Average delivery<br />time</div>
+				</div>
+				<div class="sblock reveal" style="transition-delay: 0.16s">
+					<div class="sn">10<em>+</em></div>
+					<div class="sl">Years of experience</div>
+				</div>
+				<div class="sblock reveal" style="transition-delay: 0.24s">
+					<div class="sn">100<em>%</em></div>
+					<div class="sl">Guaranteed<br />satisfaction</div>
+				</div>
+			</div>
+		</div>
 
-  <!-- MARQUEE -->
-  <div class="marq-wrap">
-    <div class="marq-track">
-      <div class="marq-group">
-        <span class="mi"><span class="mdot"></span>Website Development</span>
-        <span class="mi"><span class="mdot"></span>Webflow Websites</span>
-        <span class="mi"><span class="mdot"></span>UX/UI Design</span>
-        <span class="mi"><span class="mdot"></span>AI Automation</span>
-        <span class="mi"><span class="mdot"></span>SEO Optimization</span>
-        <span class="mi"><span class="mdot"></span>Branding</span>
-        <span class="mi"><span class="mdot"></span>Motion</span>
-        <span class="mi"><span class="mdot"></span>Web Sales</span>
-      </div>
-      <div class="marq-group" aria-hidden="true">
-        <span class="mi"><span class="mdot"></span>Website Development</span>
-        <span class="mi"><span class="mdot"></span>Webflow Websites</span>
-        <span class="mi"><span class="mdot"></span>UX/UI Design</span>
-        <span class="mi"><span class="mdot"></span>AI Automation</span>
-        <span class="mi"><span class="mdot"></span>SEO Optimization</span>
-        <span class="mi"><span class="mdot"></span>Branding</span>
-        <span class="mi"><span class="mdot"></span>Motion</span>
-        <span class="mi"><span class="mdot"></span>Web Sales</span>
-      </div>
-    </div>
-  </div>
+		<!-- MARQUEE -->
+		<div class="marq-wrap">
+			<div class="marq-track">
+				<div class="marq-group">
+					<span class="mi"><span class="mdot"></span>Website Development</span>
+					<span class="mi"><span class="mdot"></span>Webflow Websites</span>
+					<span class="mi"><span class="mdot"></span>UX/UI Design</span>
+					<span class="mi"><span class="mdot"></span>AI Automation</span>
+					<span class="mi"><span class="mdot"></span>SEO Optimization</span>
+					<span class="mi"><span class="mdot"></span>Branding</span>
+					<span class="mi"><span class="mdot"></span>Motion</span>
+					<span class="mi"><span class="mdot"></span>Web Sales</span>
+				</div>
+				<div class="marq-group" aria-hidden="true">
+					<span class="mi"><span class="mdot"></span>Website Development</span>
+					<span class="mi"><span class="mdot"></span>Webflow Websites</span>
+					<span class="mi"><span class="mdot"></span>UX/UI Design</span>
+					<span class="mi"><span class="mdot"></span>AI Automation</span>
+					<span class="mi"><span class="mdot"></span>SEO Optimization</span>
+					<span class="mi"><span class="mdot"></span>Branding</span>
+					<span class="mi"><span class="mdot"></span>Motion</span>
+					<span class="mi"><span class="mdot"></span>Web Sales</span>
+				</div>
+			</div>
+		</div>
 
-  <!-- ABOUT -->
-  <section id="about" class="sec">
-    <div class="mwrap about-grid">
-      <div class="about-body reveal-l">
-        <div class="kicker">Who we are</div>
-        <h2 class="hl2">A decade of <em>experience.</em></h2>
-        <p>
-          We have been designing and building digital products for over 10 years. Our work spans different markets, industries, and growth stages, from early startups to established companies. One principle stayed constant: every strong website starts with a strong understanding of the business behind it.
-        </p>
-        <div class="team-row">
-          <a href="https://www.linkedin.com/in/stefan-bo%C5%A1kovi%C4%87-0316a1131/" target="_blank"
-            class="tchip linkedin-chip">
-            <div class="tchip-av">
-              <img src="./assets/stefan_about-us.png" alt="Stefan Bosković" loading="lazy" />
-            </div>
-            <div>
-              <div class="tcn">Stefan Bosković</div>
-              <div class="tcr">Co-founder</div>
-            </div>
-            <div class="li-icon">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/milenkovicig/" target="_blank" class="tchip linkedin-chip">
-            <div class="tchip-av">
-              <img src="./assets/igor_about-us.png" alt="Igor Milenković" loading="lazy" />
-            </div>
-            <div>
-              <div class="tcn">Igor Milenković</div>
-              <div class="tcr">Co-founder</div>
-            </div>
-            <div class="li-icon">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="about-visual reveal">
-        <div class="av-card">
-          <video id="about-visual-vid" loop muted playsinline preload="none"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
-            <source src="./assets/Our works - RS.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
-  </section>
+		<!-- ABOUT -->
+		<section id="about" class="sec">
+			<div class="mwrap about-grid">
+				<div class="about-body reveal-l">
+					<div class="kicker">Who we are</div>
+					<h2 class="hl2">A decade of <em>experience.</em></h2>
+					<p>
+						We have been designing and building digital products for over 10 years. Our work spans different
+						markets, industries, and growth stages, from early startups to established companies. One
+						principle stayed constant: every strong website starts with a strong understanding of the
+						business behind it.
+					</p>
+					<div class="team-row">
+						<a href="https://www.linkedin.com/in/stefan-bo%C5%A1kovi%C4%87-0316a1131/" target="_blank"
+						   class="tchip linkedin-chip">
+							<div class="tchip-av">
+								<img src="./assets/stefan_about-us.webp" alt="Stefan Bosković" loading="lazy" />
+							</div>
+							<div>
+								<div class="tcn">Stefan Bosković</div>
+								<div class="tcr">Co-founder</div>
+							</div>
+							<div class="li-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+									 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+									<rect x="2" y="9" width="4" height="12"></rect>
+									<circle cx="4" cy="4" r="2"></circle>
+								</svg>
+							</div>
+						</a>
+						<a href="https://www.linkedin.com/in/milenkovicig/" target="_blank" class="tchip linkedin-chip">
+							<div class="tchip-av">
+								<img src="./assets/igor_about-us.webp" alt="Igor Milenković" loading="lazy" />
+							</div>
+							<div>
+								<div class="tcn">Igor Milenković</div>
+								<div class="tcr">Co-founder</div>
+							</div>
+							<div class="li-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+									 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+									<rect x="2" y="9" width="4" height="12"></rect>
+									<circle cx="4" cy="4" r="2"></circle>
+								</svg>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="about-visual reveal">
+					<div class="av-card">
+						<video id="about-visual-vid" loop muted playsinline preload="none"
+							   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+							<source src="./assets/Our works - RS.mp4" type="video/mp4" />
+						</video>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- SERVICES -->
-  <section id="services" class="sec">
-    <div class="mwrap">
-      <div class="svc-head reveal">
-        <div>
-          <div class="kicker">What we do</div>
-          <h2 class="hl2">Our <em class="g">services</em></h2>
-        </div>
-        <div>
-          <p class="sh-note">
-            We cover the full web production cycle with a focus on quality, performance, and long-term scalability. Every decision is aligned with your business goals, not short-term trends.
-          </p>
-          <a href="contact.html" class="sh-cta">Book a quick call
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg></a>
-        </div>
-      </div>
-      <div class="svc-bento reveal">
-        <!-- ROW 1: wide (2col) + 1 -->
-        <div class="sc wide" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">01</div>
-            <div class="sc-icon-box" style="
+		<!-- SERVICES -->
+		<section id="services" class="sec">
+			<div class="mwrap">
+				<div class="svc-head reveal">
+					<div>
+						<div class="kicker">What we do</div>
+						<h2 class="hl2">Our <em class="g">services</em></h2>
+					</div>
+					<div>
+						<p class="sh-note">
+							We cover the full web production cycle with a focus on quality, performance, and long-term
+							scalability. Every decision is aligned with your business goals, not short-term trends.
+						</p>
+						<a href="contact.html" class="sh-cta">Book a quick call
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								 stroke-width="2.5">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg></a>
+					</div>
+				</div>
+				<div class="svc-bento reveal">
+					<!-- ROW 1: wide (2col) + 1 -->
+					<div class="sc wide" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">01</div>
+							<div class="sc-icon-box" style="
                   background: rgba(0, 229, 160, 0.09);
                   border: 1px solid rgba(0, 229, 160, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00e5a0" stroke-width="1.8">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M9 3v18M3 9h6" />
-              </svg>
-            </div>
-            <div class="sc-name">Website Development</div>
-            <div class="sc-desc">
-              Fast, scalable websites built to grow with your business, with design and performance treated as one system.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-        <div class="sc" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">02</div>
-            <div class="sc-icon-box" style="
+								<svg viewBox="0 0 24 24" fill="none" stroke="#00e5a0" stroke-width="1.8">
+									<rect x="3" y="3" width="18" height="18" rx="2" />
+									<path d="M9 3v18M3 9h6" />
+								</svg>
+							</div>
+							<div class="sc-name">Website Development</div>
+							<div class="sc-desc">
+								Fast, scalable websites built to grow with your business, with design and performance
+								treated as one system.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+					<div class="sc" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">02</div>
+							<div class="sc-icon-box" style="
                   background: rgba(124, 58, 237, 0.09);
                   border: 1px solid rgba(124, 58, 237, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8">
-                <circle cx="12" cy="12" r="3" />
-                <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3" />
-              </svg>
-            </div>
-            <div class="sc-name">UX/UI Design</div>
-            <div class="sc-desc">
-              Structure first, visuals second: wireframes, clickable prototypes, then polished interface design. The result is clarity, consistency, and faster decision-making.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-        <!-- ROW 2: 3 equal cards -->
-        <div class="sc" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">03</div>
-            <div class="sc-icon-box" style="
+								<svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8">
+									<circle cx="12" cy="12" r="3" />
+									<path
+										  d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3" />
+								</svg>
+							</div>
+							<div class="sc-name">UX/UI Design</div>
+							<div class="sc-desc">
+								Structure first, visuals second: wireframes, clickable prototypes, then polished
+								interface design. The result is clarity, consistency, and faster decision-making.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+					<!-- ROW 2: 3 equal cards -->
+					<div class="sc" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">03</div>
+							<div class="sc-icon-box" style="
                   background: rgba(37, 99, 235, 0.09);
                   border: 1px solid rgba(37, 99, 235, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8">
-                <circle cx="11" cy="11" r="8" />
-                <path d="M21 21l-4.35-4.35" />
-              </svg>
-            </div>
-            <div class="sc-name">SEO Optimization</div>
-            <div class="sc-desc">
-              SEO is built into the product from day one, not bolted on later: speed, semantic HTML, and clear content hierarchy for consistent visibility.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-        <div class="sc" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">04</div>
-            <div class="sc-icon-box" style="
+								<svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8">
+									<circle cx="11" cy="11" r="8" />
+									<path d="M21 21l-4.35-4.35" />
+								</svg>
+							</div>
+							<div class="sc-name">SEO Optimization</div>
+							<div class="sc-desc">
+								SEO is built into the product from day one, not bolted on later: speed, semantic HTML,
+								and clear content hierarchy for consistent visibility.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+					<div class="sc" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">04</div>
+							<div class="sc-icon-box" style="
                   background: rgba(245, 158, 11, 0.09);
                   border: 1px solid rgba(245, 158, 11, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8">
-                <path d="M4 4h16v4H4zM4 12h8v8H4zM16 12h4v8h-4z" />
-              </svg>
-            </div>
-            <div class="sc-name">CMS Integration</div>
-            <div class="sc-desc">
-              Update copy, blog posts, and key sections on your own without relying on developers for every minor change.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-        <div class="sc" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">05</div>
-            <div class="sc-icon-box" style="
+								<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8">
+									<path d="M4 4h16v4H4zM4 12h8v8H4zM16 12h4v8h-4z" />
+								</svg>
+							</div>
+							<div class="sc-name">CMS Integration</div>
+							<div class="sc-desc">
+								Update copy, blog posts, and key sections on your own without relying on developers for
+								every minor change.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+					<div class="sc" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">05</div>
+							<div class="sc-icon-box" style="
                   background: rgba(0, 229, 160, 0.09);
                   border: 1px solid rgba(0, 229, 160, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#00e5a0" stroke-width="1.8">
-                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-              </svg>
-            </div>
-            <div class="sc-name">Branding</div>
-            <div class="sc-desc">
-              From logo to usage guidelines, we create a visual identity that stays consistent across your website, decks, and client communication.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-        <!-- ROW 3: 1 + wide (2col) -->
-        <div class="sc" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">06</div>
-            <div class="sc-icon-box" style="
+								<svg viewBox="0 0 24 24" fill="none" stroke="#00e5a0" stroke-width="1.8">
+									<path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+								</svg>
+							</div>
+							<div class="sc-name">Branding</div>
+							<div class="sc-desc">
+								From logo to usage guidelines, we create a visual identity that stays consistent across
+								your website, decks, and client communication.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+					<!-- ROW 3: 1 + wide (2col) -->
+					<div class="sc" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">06</div>
+							<div class="sc-icon-box" style="
                   background: rgba(239, 68, 68, 0.09);
                   border: 1px solid rgba(239, 68, 68, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.8">
-                <path d="M5 3l14 9-14 9V3z" />
-              </svg>
-            </div>
-            <div class="sc-name">Motion Design</div>
-            <div class="sc-desc">
-              Motion and scroll interactions that add premium feel without sacrificing speed, clarity, or usability.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-        <div class="sc wide" onmousemove="scGlow(this, event)">
-          <div class="sc-inner">
-            <div class="sc-num">07</div>
-            <div class="sc-icon-box" style="
+								<svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.8">
+									<path d="M5 3l14 9-14 9V3z" />
+								</svg>
+							</div>
+							<div class="sc-name">Motion Design</div>
+							<div class="sc-desc">
+								Motion and scroll interactions that add premium feel without sacrificing speed, clarity,
+								or usability.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+					<div class="sc wide" onmousemove="scGlow(this, event)">
+						<div class="sc-inner">
+							<div class="sc-num">07</div>
+							<div class="sc-icon-box" style="
                   background: rgba(124, 58, 237, 0.09);
                   border: 1px solid rgba(124, 58, 237, 0.14);
                 ">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8">
-                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-5 0v-15A2.5 2.5 0 0 1 9.5 2z" />
-                <path d="M14.5 8A2.5 2.5 0 0 1 17 10.5v9a2.5 2.5 0 0 1-5 0v-9A2.5 2.5 0 0 1 14.5 8z" />
-                <path d="M4.5 14A2.5 2.5 0 0 1 7 16.5v3a2.5 2.5 0 0 1-5 0v-3A2.5 2.5 0 0 1 4.5 14z" />
-              </svg>
-            </div>
-            <div class="sc-name">AI Agents & Automation</div>
-            <div class="sc-desc">
-              AI agents, chat workflows, and automation (Make, n8n) connect your website with your CRM and inbox, reducing manual work and speeding up sales operations.
-            </div>
-          </div>
-          <div class="sc-arr">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+								<svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8">
+									<path
+										  d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-5 0v-15A2.5 2.5 0 0 1 9.5 2z" />
+									<path
+										  d="M14.5 8A2.5 2.5 0 0 1 17 10.5v9a2.5 2.5 0 0 1-5 0v-9A2.5 2.5 0 0 1 14.5 8z" />
+									<path
+										  d="M4.5 14A2.5 2.5 0 0 1 7 16.5v3a2.5 2.5 0 0 1-5 0v-3A2.5 2.5 0 0 1 4.5 14z" />
+								</svg>
+							</div>
+							<div class="sc-name">AI Agents & Automation</div>
+							<div class="sc-desc">
+								AI agents, chat workflows, and automation (Make, n8n) connect your website with your CRM
+								and inbox, reducing manual work and speeding up sales operations.
+							</div>
+						</div>
+						<div class="sc-arr">
+							<svg viewBox="0 0 24 24" fill="none">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- OUR APPROACH SECTION -->
-  <section id="ai" class="sec" style="background: var(--ink)">
-    <div class="mwrap ai-grid">
-      <div class="ai-text reveal-l">
-        <h2 class="ai-hl">
-          Premium web design on the surface, AI and automation behind the scenes.
-        </h2>
-        <div class="proc-kicker kicker" style="margin-top: 22px">AI agents and digital systems</div>
-        <p class="ai-body">
-          Your website should be fast, clear, and aligned with how your team already works.
-          <strong>Where it makes business sense, we can also implement AI agents and automation to reduce repetitive tasks, from lead forms to CRM and tool integrations.</strong>
-        </p>
+		<!-- OUR APPROACH SECTION -->
+		<section id="ai" class="sec" style="background: var(--ink)">
+			<div class="mwrap ai-grid">
+				<div class="ai-text reveal-l">
+					<h2 class="ai-hl">
+						Premium web design on the surface, AI and automation behind the scenes.
+					</h2>
+					<div class="proc-kicker kicker" style="margin-top: 22px">AI agents and digital systems</div>
+					<p class="ai-body">
+						Your website should be fast, clear, and aligned with how your team already works.
+						<strong>Where it makes business sense, we can also implement AI agents and automation to reduce
+							repetitive tasks, from lead forms to CRM and tool integrations.</strong>
+					</p>
 
-        <a href="contact.html" class="btn-light">Talk about AI solutions
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M7 17L17 7M17 7H7M17 7v10" />
-          </svg></a>
-      </div>
-      <div class="ai-visual reveal">
-        <div class="ai-vis-main">
-          <!-- Terminal window -->
-          <div class="ai-terminal">
-            <div class="at-bar">
-              <span class="atb r"></span><span class="atb y"></span><span class="atb g"></span>
-              <span class="at-bar-title">flow-ai-agent.js</span>
-            </div>
-            <div class="at-body">
-              <div class="at-line">
-                <span class="at-prompt">›</span><span class="at-cmd" id="at-cmd1"></span>
-              </div>
-              <div class="at-line at-res">
-                <span class="at-out" id="at-out1"></span>
-              </div>
-              <div class="at-line" style="margin-top: 6px">
-                <span class="at-prompt">›</span><span class="at-cmd" id="at-cmd2"></span>
-              </div>
-              <div class="at-line at-res">
-                <span class="at-out" id="at-out2"></span>
-              </div>
-              <div class="at-cursor-line">
-                <span class="at-prompt">›</span><span class="at-blink">_</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Tool stack list below canvas -->
-        <div class="ai-tools-list">
-          <div class="atl-label">Tools we connect in real client projects</div>
-          <div class="atl-grid">
-            <div class="atl-item active">
-              <div class="atl-dot" style="background: #00e5a0"></div>
-              Claude AI
-            </div>
-            <div class="atl-item active">
-              <div class="atl-dot" style="background: #146ef5"></div>
-              Platforms
-            </div>
-            <div class="atl-item active">
-              <div class="atl-dot" style="background: #0055ff"></div>
-              No-code
-            </div>
-            <div class="atl-item active">
-              <div class="atl-dot" style="background: #6e30d9"></div>
-              Make.com
-            </div>
-            <div class="atl-item">
-              <div class="atl-dot" style="background: #f59e0b"></div>
-              GPT-4o
-            </div>
-            <div class="atl-item">
-              <div class="atl-dot" style="background: #ef4444"></div>
-              Midjourney
-            </div>
-            <div class="atl-item">
-              <div class="atl-dot" style="background: #7c3aed"></div>
-              Cursor
-            </div>
-            <div class="atl-item">
-              <div class="atl-dot" style="background: #2563eb"></div>
-              n8n
-            </div>
-            <div class="atl-item">
-              <div class="atl-dot" style="background: #00c48c"></div>
-              Lottie
-            </div>
-            <div class="atl-item">
-              <div class="atl-dot" style="background: #9d9caa"></div>
-              Runway ML
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mwrap" style="margin-top: 48px">
-      <div class="proc-kicker kicker reveal">How collaboration works</div>
-      <div class="proc-steps reveal">
-        <div class="ps" data-n="1">
-          <div class="ps-accent"></div>
-          <div class="ps-n">STEP 01</div>
-          <div class="ps-title">Intro call</div>
-          <div class="ps-desc">
-            Around 30 minutes to align on goals, audience, timeline, and constraints. No generic pitch, just a focused fit check.
-          </div>
-        </div>
-        <div class="ps" data-n="2">
-          <div class="ps-accent"></div>
-          <div class="ps-n">STEP 02</div>
-          <div class="ps-title">Design and prototype</div>
-          <div class="ps-desc">
-            Visual direction, wireframes, and a clickable prototype. Sign-off before development means fewer surprises later.
-          </div>
-        </div>
-        <div class="ps" data-n="3">
-          <div class="ps-accent"></div>
-          <div class="ps-n">STEP 03</div>
-          <div class="ps-title">Development and motion</div>
-          <div class="ps-desc">
-            Development in Webflow (or custom stack when needed) with clear revision rounds. Motion and micro-details are polished before launch.
-          </div>
-        </div>
-        <div class="ps" data-n="4">
-          <div class="ps-accent"></div>
-          <div class="ps-n">STEP 04</div>
-          <div class="ps-title">Launch and handover</div>
-          <div class="ps-desc">
-            The site goes live, then we walk your team through CMS usage. You also get 30 days of post-launch support with no hidden fees.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+					<a href="contact.html" class="btn-light">Talk about AI solutions
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							 stroke-width="2.5">
+							<path d="M7 17L17 7M17 7H7M17 7v10" />
+						</svg></a>
+				</div>
+				<div class="ai-visual reveal">
+					<div class="ai-vis-main">
+						<!-- Terminal window -->
+						<div class="ai-terminal">
+							<div class="at-bar">
+								<span class="atb r"></span><span class="atb y"></span><span class="atb g"></span>
+								<span class="at-bar-title">flow-ai-agent.js</span>
+							</div>
+							<div class="at-body">
+								<div class="at-line">
+									<span class="at-prompt">›</span><span class="at-cmd" id="at-cmd1"></span>
+								</div>
+								<div class="at-line at-res">
+									<span class="at-out" id="at-out1"></span>
+								</div>
+								<div class="at-line" style="margin-top: 6px">
+									<span class="at-prompt">›</span><span class="at-cmd" id="at-cmd2"></span>
+								</div>
+								<div class="at-line at-res">
+									<span class="at-out" id="at-out2"></span>
+								</div>
+								<div class="at-cursor-line">
+									<span class="at-prompt">›</span><span class="at-blink">_</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Tool stack list below canvas -->
+					<div class="ai-tools-list">
+						<div class="atl-label">Tools we connect in real client projects</div>
+						<div class="atl-grid">
+							<div class="atl-item active">
+								<div class="atl-dot" style="background: #00e5a0"></div>
+								Claude AI
+							</div>
+							<div class="atl-item active">
+								<div class="atl-dot" style="background: #146ef5"></div>
+								Platforms
+							</div>
+							<div class="atl-item active">
+								<div class="atl-dot" style="background: #0055ff"></div>
+								No-code
+							</div>
+							<div class="atl-item active">
+								<div class="atl-dot" style="background: #6e30d9"></div>
+								Make.com
+							</div>
+							<div class="atl-item">
+								<div class="atl-dot" style="background: #f59e0b"></div>
+								GPT-4o
+							</div>
+							<div class="atl-item">
+								<div class="atl-dot" style="background: #ef4444"></div>
+								Midjourney
+							</div>
+							<div class="atl-item">
+								<div class="atl-dot" style="background: #7c3aed"></div>
+								Cursor
+							</div>
+							<div class="atl-item">
+								<div class="atl-dot" style="background: #2563eb"></div>
+								n8n
+							</div>
+							<div class="atl-item">
+								<div class="atl-dot" style="background: #00c48c"></div>
+								Lottie
+							</div>
+							<div class="atl-item">
+								<div class="atl-dot" style="background: #9d9caa"></div>
+								Runway ML
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mwrap" style="margin-top: 48px">
+				<div class="proc-kicker kicker reveal">How collaboration works</div>
+				<div class="proc-steps reveal">
+					<div class="ps" data-n="1">
+						<div class="ps-accent"></div>
+						<div class="ps-n">STEP 01</div>
+						<div class="ps-title">Intro call</div>
+						<div class="ps-desc">
+							Around 30 minutes to align on goals, audience, timeline, and constraints. No generic pitch,
+							just a focused fit check.
+						</div>
+					</div>
+					<div class="ps" data-n="2">
+						<div class="ps-accent"></div>
+						<div class="ps-n">STEP 02</div>
+						<div class="ps-title">Design and prototype</div>
+						<div class="ps-desc">
+							Visual direction, wireframes, and a clickable prototype. Sign-off before development means
+							fewer surprises later.
+						</div>
+					</div>
+					<div class="ps" data-n="3">
+						<div class="ps-accent"></div>
+						<div class="ps-n">STEP 03</div>
+						<div class="ps-title">Development and motion</div>
+						<div class="ps-desc">
+							Development in Webflow (or custom stack when needed) with clear revision rounds. Motion and
+							micro-details are polished before launch.
+						</div>
+					</div>
+					<div class="ps" data-n="4">
+						<div class="ps-accent"></div>
+						<div class="ps-n">STEP 04</div>
+						<div class="ps-title">Launch and handover</div>
+						<div class="ps-desc">
+							The site goes live, then we walk your team through CMS usage. You also get 30 days of
+							post-launch support with no hidden fees.
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="sec">
-    <div class="mwrap">
-      <div class="proj-head reveal">
-        <div>
-          <div class="kicker">Selected work</div>
-          <h2 class="hl2">Our <em class="g">work</em></h2>
-        </div>
-      </div>
-      <div class="proj-featured-wrap reveal" id="proj-featured-wrap">
-        <div class="proj-featured-grid" id="pt">
-          <article class="pc pc--portfolio pc--wide" data-slide id="proj-1">
-            <header class="pc-port-head">
-              <div class="pc-port-head__main">
-                <p class="pc-port-label">SaaS · AI</p>
-                <h3 class="pc-port-title">Test AI Models</h3>
-              </div>
-            </header>
-            <div class="pc-port-viewport">
-              <div class="pc-port-track">
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/testai.webp" alt="Test AI Models - preview"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-              </div>
-            </div>
-            <footer class="pc-port-foot">
-              <p class="pc-port-desc">
-                Landing page for an AI product with clear message hierarchy, purposeful animation, and SEO built into the structure.
-              </p>
-              <a href="https://testaimodels.com/" target="_blank" rel="noopener" class="pc-port-cta">Open website ↗</a>
-            </footer>
-          </article>
-          <article class="pc pc--portfolio" data-slide id="proj-2">
-            <header class="pc-port-head">
-              <div class="pc-port-head__main">
-                <p class="pc-port-label">Marketing · CMS</p>
-                <h3 class="pc-port-title">Dice Media</h3>
-              </div>
-              <div class="pc-port-arrows">
-                <button type="button" class="pc-port-arrow pc-port-prev" aria-label="Previous preview">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <button type="button" class="pc-port-arrow pc-port-next" aria-label="Next preview">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </header>
-            <div class="pc-port-viewport" data-carousel>
-              <div class="pc-port-track">
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/dice - 1.webp" alt="Dice Media - preview 1"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/dice - 2.webp" alt="Dice Media - preview 2"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/dice - 3.webp" alt="Dice Media - preview 3"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-              </div>
-            </div>
-            <footer class="pc-port-foot">
-              <p class="pc-port-desc">
-                Corporate Webflow website with a dynamic hero, CMS blog, and consistent visual identity for a growth-focused marketing agency.
-              </p>
-              <a href="https://dice-media.webflow.io/" target="_blank" rel="noopener" class="pc-port-cta">Open website
-                ↗</a>
-            </footer>
-          </article>
-          <article class="pc pc--portfolio" data-slide id="proj-3">
-            <header class="pc-port-head">
-              <div class="pc-port-head__main">
-                <p class="pc-port-label">Fashion · E-commerce</p>
-                <h3 class="pc-port-title">RE Official</h3>
-              </div>
-            </header>
-            <div class="pc-port-viewport">
-              <div class="pc-port-track">
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/reofficial.webp" alt="RE Official - preview"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-              </div>
-            </div>
-            <footer class="pc-port-foot">
-              <p class="pc-port-desc">
-                Editorial-style e-commerce for an upcycling brand with clear storytelling and a cleaner path to purchase.
-              </p>
-              <a href="https://reofficial.webflow.io/" target="_blank" rel="noopener" class="pc-port-cta">Open website
-                ↗</a>
-            </footer>
-          </article>
-          <article class="pc pc--portfolio pc--wide" data-slide id="proj-4">
-            <header class="pc-port-head">
-              <div class="pc-port-head__main">
-                <p class="pc-port-label">Tourism · Web</p>
-                <h3 class="pc-port-title">Brvnare Janković</h3>
-              </div>
-              <div class="pc-port-arrows">
-                <button type="button" class="pc-port-arrow pc-port-prev" aria-label="Previous preview">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg>
-                </button>
-                <button type="button" class="pc-port-arrow pc-port-next" aria-label="Next preview">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </header>
-            <div class="pc-port-viewport" data-carousel>
-              <div class="pc-port-track">
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/brvnare-1.webp" alt="Brvnare Jankovic - preview 1"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/brvnare-2.webp" alt="Brvnare Jankovic - preview 2"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-                <div class="pc-port-slide">
-                  <img class="pc-img" src="./assets/featured%20projects/brvnare-3.webp" alt="Brvnare Jankovic - preview 3"
-                    loading="lazy" decoding="async" draggable="false" />
-                </div>
-              </div>
-            </div>
-            <footer class="pc-port-foot">
-              <p class="pc-port-desc">
-                Hospitality website for a mountain retreat, combining video storytelling with clear offer presentation.
-              </p>
-              <a href="https://brvnarejankovic.rs" target="_blank" rel="noopener" class="pc-port-cta">Open website
-                ↗</a>
-            </footer>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
+		<!-- PROJECTS -->
+		<section id="projects" class="sec">
+			<div class="mwrap">
+				<div class="proj-head reveal">
+					<div>
+						<div class="kicker">Selected work</div>
+						<h2 class="hl2">Our <em class="g">work</em></h2>
+					</div>
+				</div>
+				<div class="proj-featured-wrap reveal" id="proj-featured-wrap">
+					<div class="proj-featured-grid" id="pt">
+						<article class="pc pc--portfolio pc--wide" data-slide id="proj-1">
+							<header class="pc-port-head">
+								<div class="pc-port-head__main">
+									<p class="pc-port-label">SaaS · AI</p>
+									<h3 class="pc-port-title">Test AI Models</h3>
+								</div>
+							</header>
+							<div class="pc-port-viewport">
+								<div class="pc-port-track">
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/testai.webp"
+											 alt="Test AI Models - preview" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+								</div>
+							</div>
+							<footer class="pc-port-foot">
+								<p class="pc-port-desc">
+									Landing page for an AI product with clear message hierarchy, purposeful animation,
+									and SEO built into the structure.
+								</p>
+								<a href="https://testaimodels.com/" target="_blank" rel="noopener"
+								   class="pc-port-cta">Open website ↗</a>
+							</footer>
+						</article>
+						<article class="pc pc--portfolio" data-slide id="proj-2">
+							<header class="pc-port-head">
+								<div class="pc-port-head__main">
+									<p class="pc-port-label">Marketing · CMS</p>
+									<h3 class="pc-port-title">Dice Media</h3>
+								</div>
+								<div class="pc-port-arrows">
+									<button type="button" class="pc-port-arrow pc-port-prev"
+											aria-label="Previous preview">
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</button>
+									<button type="button" class="pc-port-arrow pc-port-next" aria-label="Next preview">
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</button>
+								</div>
+							</header>
+							<div class="pc-port-viewport" data-carousel>
+								<div class="pc-port-track">
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/dice - 1.webp"
+											 alt="Dice Media - preview 1" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/dice - 2.webp"
+											 alt="Dice Media - preview 2" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/dice - 3.webp"
+											 alt="Dice Media - preview 3" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+								</div>
+							</div>
+							<footer class="pc-port-foot">
+								<p class="pc-port-desc">
+									Corporate Webflow website with a dynamic hero, CMS blog, and consistent visual
+									identity for a growth-focused marketing agency.
+								</p>
+								<a href="https://dice-media.webflow.io/" target="_blank" rel="noopener"
+								   class="pc-port-cta">Open website
+									↗</a>
+							</footer>
+						</article>
+						<article class="pc pc--portfolio" data-slide id="proj-3">
+							<header class="pc-port-head">
+								<div class="pc-port-head__main">
+									<p class="pc-port-label">Fashion · E-commerce</p>
+									<h3 class="pc-port-title">RE Official</h3>
+								</div>
+							</header>
+							<div class="pc-port-viewport">
+								<div class="pc-port-track">
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/reofficial.webp"
+											 alt="RE Official - preview" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+								</div>
+							</div>
+							<footer class="pc-port-foot">
+								<p class="pc-port-desc">
+									Editorial-style e-commerce for an upcycling brand with clear storytelling and a
+									cleaner path to purchase.
+								</p>
+								<a href="https://reofficial.webflow.io/" target="_blank" rel="noopener"
+								   class="pc-port-cta">Open website
+									↗</a>
+							</footer>
+						</article>
+						<article class="pc pc--portfolio pc--wide" data-slide id="proj-4">
+							<header class="pc-port-head">
+								<div class="pc-port-head__main">
+									<p class="pc-port-label">Tourism · Web</p>
+									<h3 class="pc-port-title">Brvnare Janković</h3>
+								</div>
+								<div class="pc-port-arrows">
+									<button type="button" class="pc-port-arrow pc-port-prev"
+											aria-label="Previous preview">
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</button>
+									<button type="button" class="pc-port-arrow pc-port-next" aria-label="Next preview">
+										<svg viewBox="0 0 24 24" aria-hidden="true">
+											<path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</button>
+								</div>
+							</header>
+							<div class="pc-port-viewport" data-carousel>
+								<div class="pc-port-track">
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/brvnare-1.webp"
+											 alt="Brvnare Jankovic - preview 1" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/brvnare-2.webp"
+											 alt="Brvnare Jankovic - preview 2" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+									<div class="pc-port-slide">
+										<img class="pc-img" src="./assets/featured%20projects/brvnare-3.webp"
+											 alt="Brvnare Jankovic - preview 3" loading="lazy" decoding="async"
+											 draggable="false" />
+									</div>
+								</div>
+							</div>
+							<footer class="pc-port-foot">
+								<p class="pc-port-desc">
+									Hospitality website for a mountain retreat, combining video storytelling with clear
+									offer presentation.
+								</p>
+								<a href="https://brvnarejankovic.rs" target="_blank" rel="noopener"
+								   class="pc-port-cta">Open website
+									↗</a>
+							</footer>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- Brand CTA -->
-  <section class="sec sec-brand-cta" aria-label="Call to action">
-    <div class="mwrap">
-      <div class="why-cta reveal">
-        <div>
-          <h3 class="wct-title">
-            Got a <em>project</em> in mind?
-          </h3>
-          <p class="wct-sub">
-            A short call to align on goals and priorities, and see if we are the right fit. No pressure, just clear next steps.
-          </p>
-        </div>
-        <div class="rings">
-          <div class="ring r1"></div>
-          <div class="ring r2"></div>
-          <div class="ring r3"></div>
-        </div>
-        <div class="wct-action">
-          <a href="contact.html" class="btn-light wct-btn">Schedule a call
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg></a>
-          <div class="wct-note">No obligation · reply within 24h</div>
-        </div>
-      </div>
-    </div>
-  </section>
+		<!-- Brand CTA -->
+		<section class="sec sec-brand-cta" aria-label="Call to action">
+			<div class="mwrap">
+				<div class="why-cta reveal">
+					<div>
+						<h3 class="wct-title">
+							Got a <em>project</em> in mind?
+						</h3>
+						<p class="wct-sub">
+							A short call to align on goals and priorities, and see if we are the right fit. No pressure,
+							just clear next steps.
+						</p>
+					</div>
+					<div class="rings">
+						<div class="ring r1"></div>
+						<div class="ring r2"></div>
+						<div class="ring r3"></div>
+					</div>
+					<div class="wct-action">
+						<a href="contact.html" class="btn-light wct-btn">Schedule a call
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								 stroke-width="2.5">
+								<path d="M7 17L17 7M17 7H7M17 7v10" />
+							</svg></a>
+						<div class="wct-note">No obligation · reply within 24h</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="sec">
-    <div class="mwrap">
-      <div class="reveal testi-shell">
-          <div class="kicker">Client feedback</div>
-        <h2 class="hl2">
-          Kind <em>words</em>
-        </h2>
-        <div class="testi-grid">
-          <article class="tcard tcard-kpi tcard-kpi-main">
-            <p class="tbody">
-              Communication was direct and timelines were realistic. For the first time, our website explained the product exactly the way we see it.
-            </p>
-            <div class="tauthor">
-              <div class="ta-av" style="background: linear-gradient(135deg, #7c3aed, #2563eb)">
-                <img class="ta-av-img" src="https://i.pravatar.cc/80?img=12" alt="Test AI Models avatar" loading="lazy" decoding="async" />
-              </div>
-              <div>
-                <div class="ta-name">Luka Stanković</div>
-                <div class="ta-role">Test AI Models</div>
-              </div>
-            </div>
-          </article>
+		<!-- TESTIMONIALS -->
+		<section id="testimonials" class="sec">
+			<div class="mwrap">
+				<div class="reveal testi-shell">
+					<div class="kicker">Client feedback</div>
+					<h2 class="hl2">
+						Kind <em>words</em>
+					</h2>
+					<div class="testi-grid">
+						<article class="tcard tcard-kpi tcard-kpi-main">
+							<p class="tbody">
+								Communication was direct and timelines were realistic. For the first time, our website
+								explained the product exactly the way we see it.
+							</p>
+							<div class="tauthor">
+								<div class="ta-av" style="background: linear-gradient(135deg, #7c3aed, #2563eb)">
+									<img class="ta-av-img" src="https://i.pravatar.cc/80?img=12"
+										 alt="Test AI Models avatar" loading="lazy" decoding="async" />
+								</div>
+								<div>
+									<div class="ta-name">Luka Stanković</div>
+									<div class="ta-role">Test AI Models</div>
+								</div>
+							</div>
+						</article>
 
-          <article class="tcard tcard-kpi tcard-kpi-secondary tcard-top-right">
-            <p class="tbody">
-              We needed a website that looked like a serious agency, not a generic template. The concept stayed consistent from the first frame to final motion details.
-            </p>
-            <div class="tauthor">
-              <div class="ta-av" style="background: linear-gradient(135deg, #00c98c, #2563eb)">
-                <img class="ta-av-img" src="https://i.pravatar.cc/80?img=32" alt="Dice Media avatar" loading="lazy" decoding="async" />
-              </div>
-              <div>
-                <div class="ta-name">Mina Jovanović</div>
-                <div class="ta-role">Dice Media</div>
-              </div>
-            </div>
-          </article>
+						<article class="tcard tcard-kpi tcard-kpi-secondary tcard-top-right">
+							<p class="tbody">
+								We needed a website that looked like a serious agency, not a generic template. The
+								concept stayed consistent from the first frame to final motion details.
+							</p>
+							<div class="tauthor">
+								<div class="ta-av" style="background: linear-gradient(135deg, #00c98c, #2563eb)">
+									<img class="ta-av-img" src="https://i.pravatar.cc/80?img=32" alt="Dice Media avatar"
+										 loading="lazy" decoding="async" />
+								</div>
+								<div>
+									<div class="ta-name">Mina Jovanović</div>
+									<div class="ta-role">Dice Media</div>
+								</div>
+							</div>
+						</article>
 
-          <article class="tcard tcard-mini tcard-bottom-left">
-            <p class="tbody">
-              In fashion, photography and typography are everything. We got an online store that feels distinctly ours.
-            </p>
-            <div class="tauthor">
-              <div class="ta-av" style="background: rgba(12, 12, 14, 0.15)">
-                <img class="ta-av-img" src="https://i.pravatar.cc/80?img=47" alt="RE Official avatar" loading="lazy" decoding="async" />
-              </div>
-              <div>
-                <div class="ta-name">Nikola Pavlović</div>
-                <div class="ta-role">RE Official</div>
-              </div>
-            </div>
-          </article>
+						<article class="tcard tcard-mini tcard-bottom-left">
+							<p class="tbody">
+								In fashion, photography and typography are everything. We got an online store that feels
+								distinctly ours.
+							</p>
+							<div class="tauthor">
+								<div class="ta-av" style="background: rgba(12, 12, 14, 0.15)">
+									<img class="ta-av-img" src="https://i.pravatar.cc/80?img=47"
+										 alt="RE Official avatar" loading="lazy" decoding="async" />
+								</div>
+								<div>
+									<div class="ta-name">Nikola Pavlović</div>
+									<div class="ta-role">RE Official</div>
+								</div>
+							</div>
+						</article>
 
-          <article class="tcard tcard-mini tcard-bottom-right tcard-dark">
-            <p class="tbody">
-              Guests immediately understand what we offer and what the accommodation looks like. Fewer repetitive calls, more clear bookings.
-            </p>
-            <div class="tauthor">
-              <div class="ta-av" style="background: rgba(12, 12, 14, 0.15)">
-                <img class="ta-av-img" src="https://i.pravatar.cc/80?img=15" alt="Brvnare Janković avatar" loading="lazy" decoding="async" />
-              </div>
-              <div>
-                <div class="ta-name">Jelena Marković</div>
-                <div class="ta-role">Brvnare Janković</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
+						<article class="tcard tcard-mini tcard-bottom-right tcard-dark">
+							<p class="tbody">
+								Guests immediately understand what we offer and what the accommodation looks like. Fewer
+								repetitive calls, more clear bookings.
+							</p>
+							<div class="tauthor">
+								<div class="ta-av" style="background: rgba(12, 12, 14, 0.15)">
+									<img class="ta-av-img" src="https://i.pravatar.cc/80?img=15"
+										 alt="Brvnare Janković avatar" loading="lazy" decoding="async" />
+								</div>
+								<div>
+									<div class="ta-name">Jelena Marković</div>
+									<div class="ta-role">Brvnare Janković</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- PRICING -->
-  <section id="pricing" class="sec" style="background: var(--off)">
-    <div class="mwrap">
-      <div class="reveal" style="text-align: center; max-width: 560px; margin: 0 auto 0">
-        <div class="kicker" style="justify-content: center">Our offer</div>
-        <h2 class="hl2" style="text-align: center">
-          Our <em class="g">offer</em>
-        </h2>
-        <p style="
+		<!-- PRICING -->
+		<section id="pricing" class="sec" style="background: var(--off)">
+			<div class="mwrap">
+				<div class="reveal" style="text-align: center; max-width: 560px; margin: 0 auto 0">
+					<div class="kicker" style="justify-content: center">Our offer</div>
+					<h2 class="hl2" style="text-align: center">
+						Our <em class="g">offer</em>
+					</h2>
+					<p style="
               font-size: 16px;
               color: var(--muted);
               margin-top: 16px;
               line-height: 1.75;
               font-weight: 300;
             ">
-          Every project is different - these packages are guiding benchmarks. Final pricing follows after a quick scope review.
-        </p>
-      </div>
-      <div class="price-grid reveal">
-        <div class="price-card">
-          <div class="pc-badge">Starter</div>
-          <div class="pc-name">Landing Page</div>
-          <div class="pc-desc">
-            One high-converting page for campaigns, launches, or market testing, with your core value proposition clear above the fold.
-          </div>
-          <div class="pc-price"><span class="pc-from">from</span> €600</div>
-          <div class="pc-per">one-time · delivery up to 2 weeks</div>
-          <ul class="pc-feats">
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Up to 8 sections
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Responsive design
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              SEO
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              1 revision round
-            </li>
-          </ul>
-          <a href="contact.html" class="pc-btn">Send inquiry</a>
-        </div>
-        <div class="price-card feat">
-          <div class="pc-badge">Most popular</div>
-          <div class="pc-name">Business Website</div>
-          <div class="pc-desc">
-            A complete website with CMS, motion, and SEO foundations for companies building long-term online presence.
-          </div>
-          <div class="pc-price" style="color: var(--green)"><span class="pc-from">from</span> €1000</div>
-          <div class="pc-per">one-time · delivery in 2-4 weeks</div>
-          <ul class="pc-feats">
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Up to 10 pages
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              CMS (blog, team, portfolio)
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Animations
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              2 revision rounds
-            </li>
-          </ul>
-          <a href="contact.html" class="pc-btn">Send inquiry</a>
-        </div>
-        <div class="price-card">
-          <div class="pc-badge">Custom</div>
-          <div class="pc-name">Advanced & AI Solutions</div>
-          <div class="pc-desc">
-            Complex scopes including AI agents, advanced motion, custom integrations, and optional monthly support.
-          </div>
-          <div class="pc-price pc-price-text">On request</div>
-          <div class="pc-per">tailored to your needs</div>
-          <ul class="pc-feats">
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Unlimited pages
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              AI chatbot / agent
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Custom animations
-            </li>
-            <li class="pc-feat">
-              <div class="pf-check">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </div>
-              Monthly support option
-            </li>
-          </ul>
-          <a href="contact.html" class="pc-btn">Let's talk</a>
-        </div>
-      </div>
-    </div>
-  </section>
+						Every project is different - these packages are guiding benchmarks. Final pricing follows after
+						a quick scope review.
+					</p>
+				</div>
+				<div class="price-grid reveal">
+					<div class="price-card">
+						<div class="pc-badge">Starter</div>
+						<div class="pc-name">Landing Page</div>
+						<div class="pc-desc">
+							One high-converting page for campaigns, launches, or market testing, with your core value
+							proposition clear above the fold.
+						</div>
+						<div class="pc-price"><span class="pc-from">from</span> €600</div>
+						<div class="pc-per">one-time · delivery up to 2 weeks</div>
+						<ul class="pc-feats">
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Up to 8 sections
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Responsive design
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								SEO
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								1 revision round
+							</li>
+						</ul>
+						<a href="contact.html" class="pc-btn">Send inquiry</a>
+					</div>
+					<div class="price-card feat">
+						<div class="pc-badge">Most popular</div>
+						<div class="pc-name">Business Website</div>
+						<div class="pc-desc">
+							A complete website with CMS, motion, and SEO foundations for companies building long-term
+							online presence.
+						</div>
+						<div class="pc-price" style="color: var(--green)"><span class="pc-from">from</span> €1000</div>
+						<div class="pc-per">one-time · delivery in 2-4 weeks</div>
+						<ul class="pc-feats">
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Up to 10 pages
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								CMS (blog, team, portfolio)
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Animations
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								2 revision rounds
+							</li>
+						</ul>
+						<a href="contact.html" class="pc-btn">Send inquiry</a>
+					</div>
+					<div class="price-card">
+						<div class="pc-badge">Custom</div>
+						<div class="pc-name">Advanced & AI Solutions</div>
+						<div class="pc-desc">
+							Complex scopes including AI agents, advanced motion, custom integrations, and optional
+							monthly support.
+						</div>
+						<div class="pc-price pc-price-text">On request</div>
+						<div class="pc-per">tailored to your needs</div>
+						<ul class="pc-feats">
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Unlimited pages
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								AI chatbot / agent
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Custom animations
+							</li>
+							<li class="pc-feat">
+								<div class="pf-check">
+									<svg viewBox="0 0 24 24">
+										<path d="M20 6L9 17l-5-5" />
+									</svg>
+								</div>
+								Monthly support option
+							</li>
+						</ul>
+						<a href="contact.html" class="pc-btn">Let's talk</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- WHY -->
-  <section id="why" class="sec">
-    <div class="mwrap">
-      <div class="why-qa-grid">
-        <div class="why-qa-head reveal">
-          <div class="kicker">Questions and answers</div>
-          <h2 class="hl2 why-qa-hl">
-            <span class="why-qa-line">Frequently asked <em class="g">questions</em></span>
-          </h2>
-        </div>
+		<!-- WHY -->
+		<section id="why" class="sec">
+			<div class="mwrap">
+				<div class="why-qa-grid">
+					<div class="why-qa-head reveal">
+						<div class="kicker">Questions and answers</div>
+						<h2 class="hl2 why-qa-hl">
+							<span class="why-qa-line">Frequently asked <em class="g">questions</em></span>
+						</h2>
+					</div>
 
-        <div class="why-qa-acc">
-          <div class="talk-accordion reveal">
-            <div class="talk-item open" onclick="toggleTalk(this)">
-              <div class="talk-head">
-                <div class="talk-title">Can I know the price in advance?</div>
-                <div class="talk-icon">
-                  <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
-                    <path
-                      d="M6 9l6 6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                  <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
-                    <path
-                      d="M18 15l-6-6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div class="talk-body">
-                <p>
-                  Yes. Before kickoff, we define scope and price clearly: fixed quote, written timelines, and no hidden add-ons at the end.
-                </p>
-              </div>
-            </div>
+					<div class="why-qa-acc">
+						<div class="talk-accordion reveal">
+							<div class="talk-item open" onclick="toggleTalk(this)">
+								<div class="talk-head">
+									<div class="talk-title">Can I know the price in advance?</div>
+									<div class="talk-icon">
+										<svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+											<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+											<path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor"
+												  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</div>
+								</div>
+								<div class="talk-body">
+									<p>
+										Yes. Before kickoff, we define scope and price clearly: fixed quote, written
+										timelines, and no hidden add-ons at the end.
+									</p>
+								</div>
+							</div>
 
-            <div class="talk-item" onclick="toggleTalk(this)">
-          <div class="talk-head">
-            <div class="talk-title">How long does a website project usually take?</div>
-            <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
-                <path
-                      d="M6 9l6 6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
-                <path
-                      d="M18 15l-6-6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-            </div>
-          </div>
-          <div class="talk-body">
-            <p>
-              Most standard scopes are delivered in around two weeks, with clear checkpoints and concise revision rounds.
-            </p>
-          </div>
-          </div>
+							<div class="talk-item" onclick="toggleTalk(this)">
+								<div class="talk-head">
+									<div class="talk-title">How long does a website project usually take?</div>
+									<div class="talk-icon">
+										<svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+											<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+											<path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor"
+												  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</div>
+								</div>
+								<div class="talk-body">
+									<p>
+										Most standard scopes are delivered in around two weeks, with clear checkpoints
+										and concise revision rounds.
+									</p>
+								</div>
+							</div>
 
-          <div class="talk-item" onclick="toggleTalk(this)">
-          <div class="talk-head">
-            <div class="talk-title">Can I edit website content myself?</div>
-            <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
-                <path
-                      d="M6 9l6 6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
-                <path
-                      d="M18 15l-6-6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-            </div>
-          </div>
-          <div class="talk-body">
-            <p>
-              Yes. We set up CMS so you can update blog posts, team members, portfolio items, and most sections without developer support.
-            </p>
-          </div>
-          </div>
+							<div class="talk-item" onclick="toggleTalk(this)">
+								<div class="talk-head">
+									<div class="talk-title">Can I edit website content myself?</div>
+									<div class="talk-icon">
+										<svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+											<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+											<path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor"
+												  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</div>
+								</div>
+								<div class="talk-body">
+									<p>
+										Yes. We set up CMS so you can update blog posts, team members, portfolio items,
+										and most sections without developer support.
+									</p>
+								</div>
+							</div>
 
-          <div class="talk-item" onclick="toggleTalk(this)">
-          <div class="talk-head">
-            <div class="talk-title">Is SEO included from the start?</div>
-            <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
-                <path
-                      d="M6 9l6 6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
-                <path
-                      d="M18 15l-6-6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-            </div>
-          </div>
-          <div class="talk-body">
-            <p>
-              Yes. Semantic HTML, structured data where relevant, and fast loading are part of our technical baseline from day one.
-            </p>
-          </div>
-          </div>
+							<div class="talk-item" onclick="toggleTalk(this)">
+								<div class="talk-head">
+									<div class="talk-title">Is SEO included from the start?</div>
+									<div class="talk-icon">
+										<svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+											<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+											<path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor"
+												  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</div>
+								</div>
+								<div class="talk-body">
+									<p>
+										Yes. Semantic HTML, structured data where relevant, and fast loading are part of
+										our technical baseline from day one.
+									</p>
+								</div>
+							</div>
 
-          <div class="talk-item" onclick="toggleTalk(this)">
-          <div class="talk-head">
-            <div class="talk-title">Can AI agents and automation be integrated?</div>
-            <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
-                <path
-                      d="M6 9l6 6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
-                <path
-                      d="M18 15l-6-6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-            </div>
-          </div>
-          <div class="talk-body">
-            <p>
-              Absolutely. Where it makes sense, we integrate AI tools, AI agents, and automation (e.g. Make or n8n) to reduce manual tasks and connect your site with internal workflows.
-            </p>
-          </div>
-          </div>
+							<div class="talk-item" onclick="toggleTalk(this)">
+								<div class="talk-head">
+									<div class="talk-title">Can AI agents and automation be integrated?</div>
+									<div class="talk-icon">
+										<svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+											<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+											<path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor"
+												  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</div>
+								</div>
+								<div class="talk-body">
+									<p>
+										Absolutely. Where it makes sense, we integrate AI tools, AI agents, and
+										automation (e.g. Make or n8n) to reduce manual tasks and connect your site with
+										internal workflows.
+									</p>
+								</div>
+							</div>
 
-          <div class="talk-item" onclick="toggleTalk(this)">
-          <div class="talk-head">
-            <div class="talk-title">What happens after launch - do you offer support?</div>
-            <div class="talk-icon">
-              <svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
-                <path
-                      d="M6 9l6 6 6-6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-              <svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
-                <path
-                      d="M18 15l-6-6-6 6"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-              </svg>
-            </div>
-          </div>
-          <div class="talk-body">
-            <p>
-              We stay available for 30 days after launch. Ongoing maintenance and larger updates can be arranged through a separate support plan.
-            </p>
-          </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+							<div class="talk-item" onclick="toggleTalk(this)">
+								<div class="talk-head">
+									<div class="talk-title">What happens after launch - do you offer support?</div>
+									<div class="talk-icon">
+										<svg viewBox="0 0 24 24" class="t-plus" aria-hidden="true">
+											<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5"
+												  stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<svg viewBox="0 0 24 24" class="t-minus" aria-hidden="true">
+											<path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor"
+												  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</div>
+								</div>
+								<div class="talk-body">
+									<p>
+										We stay available for 30 days after launch. Ongoing maintenance and larger
+										updates can be arranged through a separate support plan.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="foot-top">
-      <div>
-        <a href="#" class="fl-logo">gowithflow<span>.</span></a>
-        <p class="fl-mail">
-          <a href="mailto:hello@gowithflow.rs">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="5" width="18" height="14" rx="2" />
-              <path d="M3 7l9 6 9-6" />
-            </svg>
-            hello@gowithflow.rs
-          </a>
-        </p>
-        <p class="fl-mail">
-          <a href="tel:+381621604136">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8 9.89a16 16 0 0 0 6.11 6.11l1.44-1.28a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.92z" />
-            </svg>
-            +381621604136
-          </a>
-        </p>
-      </div>
-      <div>
-        <div class="fcol-t">Navigation</div>
-        <ul class="flinks">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#pricing">Our offer</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fcol-t">Services</div>
-        <ul class="flinks">
-          <li><a href="#services">Website Development</a></li>
-          <li><a href="#services">UX/UI Design</a></li>
-          <li><a href="#services">SEO Optimization</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fcol-t">Contact</div>
-        <ul class="flinks">
-          <li>
-            <a href="https://www.instagram.com/gowithflow.rs/" target="_blank">Instagram</a>
-          </li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="contact.html">Send inquiry</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-big">gowithflow.</div>
-    <div class="foot-bot">
-      <div class="fcopy">© 2026 gowithflow. All rights reserved.</div>
-      <div class="fsocs">
-        <a href="https://www.instagram.com/gowithflow.rs/" class="fsoc" target="_blank" aria-label="Instagram"><svg
-            viewBox="0 0 24 24">
-            <rect x="2" y="2" width="20" height="20" rx="5" />
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-          </svg></a>
-        <a href="#" class="fsoc" aria-label="LinkedIn"><svg viewBox="0 0 24 24">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect x="2" y="9" width="4" height="12" />
-            <circle cx="4" cy="4" r="2" />
-          </svg></a>
-      </div>
-    </div>
-  </footer>
+		<!-- FOOTER -->
+		<footer class="site-footer">
+			<div class="foot-top">
+				<div>
+					<a href="#" class="fl-logo">gowithflow<span>.</span></a>
+					<p class="fl-mail">
+						<a href="mailto:hello@gowithflow.rs">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<rect x="3" y="5" width="18" height="14" rx="2" />
+								<path d="M3 7l9 6 9-6" />
+							</svg>
+							hello@gowithflow.rs
+						</a>
+					</p>
+					<p class="fl-mail">
+						<a href="tel:+381621604136">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path
+									  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8 9.89a16 16 0 0 0 6.11 6.11l1.44-1.28a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.92z" />
+							</svg>
+							+381621604136
+						</a>
+					</p>
+				</div>
+				<div>
+					<div class="fcol-t">Navigation</div>
+					<ul class="flinks">
+						<li><a href="#hero">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#services">Services</a></li>
+						<li><a href="#projects">Projects</a></li>
+						<li><a href="#pricing">Our offer</a></li>
+					</ul>
+				</div>
+				<div>
+					<div class="fcol-t">Services</div>
+					<ul class="flinks">
+						<li><a href="#services">Website Development</a></li>
+						<li><a href="#services">UX/UI Design</a></li>
+						<li><a href="#services">SEO Optimization</a></li>
+					</ul>
+				</div>
+				<div>
+					<div class="fcol-t">Contact</div>
+					<ul class="flinks">
+						<li>
+							<a href="https://www.instagram.com/gowithflow.rs/" target="_blank">Instagram</a>
+						</li>
+						<li><a href="#">LinkedIn</a></li>
+						<li><a href="contact.html">Send inquiry</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="foot-big">gowithflow.</div>
+			<div class="foot-bot">
+				<div class="fcopy">© 2026 gowithflow. All rights reserved.</div>
+				<div class="fsocs">
+					<a href="https://www.instagram.com/gowithflow.rs/" class="fsoc" target="_blank"
+					   aria-label="Instagram"><svg viewBox="0 0 24 24">
+							<rect x="2" y="2" width="20" height="20" rx="5" />
+							<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+							<line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+						</svg></a>
+					<a href="#" class="fsoc" aria-label="LinkedIn"><svg viewBox="0 0 24 24">
+							<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+							<rect x="2" y="9" width="4" height="12" />
+							<circle cx="4" cy="4" r="2" />
+						</svg></a>
+				</div>
+			</div>
+		</footer>
 
-  <script src="assets/js/main.js" defer></script>
-  <script>document.fonts&&document.fonts.ready.then(function(){document.documentElement.classList.add('fonts-loaded')});</script>
-</body>
+		<script>
+			(function () {
+				if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						document.documentElement.classList.add("hero-animate");
+					});
+				});
+			})();
+		</script>
+		<script src="assets/js/main.js" defer></script>
+	</body>
 
 </html>

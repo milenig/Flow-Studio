@@ -5,12 +5,17 @@
   const fill = document.getElementById("ldfill"),
     num = document.getElementById("ldnum");
   const loaderEl = document.getElementById("loader");
+  if (!fill || !num || !loaderEl) return;
+
+  // Prevent scroll while overlay is visible.
+  document.body.style.overflow = "hidden";
   let progress = 0;
   let target = 0;
   let raf = 0;
   let done = false;
   const startedAt = performance.now();
   const minVisibleMs = 400;
+  const hardTimeoutMs = 1600;
 
   function finishLoader() {
     if (done) return;
@@ -18,6 +23,14 @@
     loaderEl.classList.add("out");
     document.body.style.overflow = "";
     setTimeout(() => document.getElementById("nav").classList.add("ready"), 100);
+  }
+
+  function forceFinish() {
+    target = 100;
+    progress = 100;
+    fill.style.width = "100%";
+    num.textContent = "100%";
+    finishLoader();
   }
 
   function tick(now) {
@@ -45,21 +58,26 @@
     raf = requestAnimationFrame(tick);
   }
 
-  if (document.readyState === "complete") {
+  const markReady = () => {
     target = 100;
+  };
+  if (document.readyState !== "loading") {
+    markReady();
   } else {
-    window.addEventListener(
-      "load",
-      () => {
-        target = 100;
-      },
-      { once: true }
-    );
+    document.addEventListener("DOMContentLoaded", markReady, { once: true });
   }
+  // Backup: if something blocks DOMContentLoaded for any reason.
+  window.addEventListener("load", markReady, { once: true });
+
+  // Hard stop: never let the loader delay LCP.
+  window.setTimeout(() => {
+    const waitedEnough = performance.now() - startedAt >= minVisibleMs;
+    if (!done && waitedEnough) forceFinish();
+    else markReady();
+  }, hardTimeoutMs);
 
   raf = requestAnimationFrame(tick);
 })();
-document.body.style.overflow = "hidden";
 
 // ════════════════════════════════════
 // FLOATING PILL NAV - animated active indicator (Monofactor-style)
@@ -194,6 +212,15 @@ document.body.style.overflow = "hidden";
 // ════════════════════════════════════
 // CURSOR FX - only on interactive elements (deferred)
 // ════════════════════════════════════
+function runWhenIdle(fn, timeout = 2000) {
+  if (typeof fn !== "function") return;
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(() => fn(), { timeout });
+  } else {
+    setTimeout(fn, 1);
+  }
+}
+
 function initCursorFx() {
   if (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
@@ -242,11 +269,7 @@ function initCursorFx() {
   });
 }
 // Defer cursor FX to idle time to reduce main-thread work during load
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(initCursorFx, { timeout: 2000 });
-} else {
-  setTimeout(initCursorFx, 300);
-}
+runWhenIdle(initCursorFx, 2000);
 
 // ════════════════════════════════════
 // HERO WebGL SHADER
@@ -394,7 +417,7 @@ if ('requestIdleCallback' in window) {
 // ════════════════════════════════════
 // AI Terminal typewriter animation
 // ════════════════════════════════════
-(function () {
+function initAiTerminalTypewriter() {
   const sequences = [
     {
       cmd: 'analyzeProject("dice-media")',
@@ -448,7 +471,8 @@ if ('requestIdleCallback' in window) {
     type(c2, s.cmd, 26, () => type(o2, s.out, 16, () => setTimeout(run, 2400)));
   }
   setTimeout(run, 1000);
-})();
+}
+runWhenIdle(initAiTerminalTypewriter, 2500);
 
 // ════════════════════════════════════
 // SERVICE CARD MOUSE GLOW
@@ -474,7 +498,7 @@ function scGlow(el, e) {
 // ════════════════════════════════════
 // PROJECTS - carousel (bounded), drag + arrows
 // ════════════════════════════════════
-(function initProjectsCarousel() {
+function initProjectsCarousel() {
   const track = document.getElementById("pt");
   if (!track) return;
 
@@ -519,6 +543,7 @@ function scGlow(el, e) {
       let scrollSyncRaf = 0;
       let dragStartX = null;
       let dragScrollStart = 0;
+      let slideCenters = [];
 
       function syncSlideVideos() {
         slides.forEach((slide, i) => {
@@ -529,14 +554,16 @@ function scGlow(el, e) {
         });
       }
 
+      function measureSlides() {
+        // Measure once per resize/init; avoids getBoundingClientRect() during scroll.
+        slideCenters = slides.map((s) => s.offsetLeft + s.offsetWidth / 2);
+      }
+
       function activeIndexFromScroll() {
-        const vr = viewport.getBoundingClientRect();
-        const mid = vr.left + vr.width / 2;
+        const mid = viewport.scrollLeft + viewport.clientWidth / 2;
         let best = 0;
         let bestDist = Infinity;
-        slides.forEach((s, i) => {
-          const r = s.getBoundingClientRect();
-          const c = (r.left + r.right) / 2;
+        slideCenters.forEach((c, i) => {
           const d = Math.abs(c - mid);
           if (d < bestDist) {
             bestDist = d;
@@ -547,13 +574,9 @@ function scGlow(el, e) {
       }
 
       function scrollToSlide(i, smooth) {
-        const slide = slides[i];
-        if (!slide) return;
-        const vr = viewport.getBoundingClientRect();
-        const sr = slide.getBoundingClientRect();
-        const delta =
-          sr.left + sr.width / 2 - (vr.left + vr.width / 2);
-        const target = viewport.scrollLeft + delta;
+        const c = slideCenters[i];
+        if (typeof c !== "number") return;
+        const target = c - viewport.clientWidth / 2;
         const max = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
         const left = Math.max(0, Math.min(max, target));
         viewport.scrollTo({
@@ -581,6 +604,7 @@ function scGlow(el, e) {
       );
       ioCard.observe(card);
 
+      measureSlides();
       viewport.addEventListener("scroll", onScroll, { passive: true });
       viewport.addEventListener(
         "scrollend",
@@ -647,6 +671,7 @@ function scGlow(el, e) {
       function onResize() {
         cancelAnimationFrame(resizeRaf);
         resizeRaf = requestAnimationFrame(() => {
+          measureSlides();
           scrollToSlide(idx, false);
         });
       }
@@ -827,19 +852,23 @@ function scGlow(el, e) {
     );
     io.observe(card);
   });
-})();
+}
+runWhenIdle(initProjectsCarousel, 2500);
 
-const ro = new IntersectionObserver(
-  (en) =>
-    en.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("in");
-        ro.unobserve(e.target);
-      }
-    }),
-  { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-);
-document.querySelectorAll(".reveal,.reveal-l").forEach((el) => ro.observe(el));
+function initRevealObserver() {
+  const ro = new IntersectionObserver(
+    (en) =>
+      en.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          ro.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+  );
+  document.querySelectorAll(".reveal,.reveal-l").forEach((el) => ro.observe(el));
+}
+runWhenIdle(initRevealObserver, 2500);
 
 // Stagger children removed to avoid hover transition-delay bugs
 
