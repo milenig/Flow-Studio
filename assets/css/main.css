@@ -350,7 +350,7 @@ nav.ready {
   width: fit-content;
   backdrop-filter: blur(8px);
   opacity: 0;
-  animation: fadeUp 0.7s 0.2s forwards;
+  animation: fadeUp 0.5s 0.05s forwards;
 }
 
 .hero-badge em {
@@ -367,7 +367,8 @@ nav.ready {
   color: var(--white);
   margin-bottom: 44px;
   opacity: 0;
-  animation: fadeUp 0.9s 0.4s forwards;
+  animation: fadeUp 0.6s 0.1s forwards;
+  will-change: transform, opacity;
 }
 
 .hero-hl em {
@@ -385,15 +386,16 @@ nav.ready {
 .hero-hl .tword {
   display: inline-block;
   transform: translateY(108%);
-  animation: wipeUp 0.9s var(--ease) forwards;
+  animation: wipeUp 0.6s var(--ease) forwards;
+  will-change: transform;
 }
 
 .tline:nth-child(2) .tword {
-  animation-delay: 0.55s;
+  animation-delay: 0.15s;
 }
 
 .tline:nth-child(3) .tword {
-  animation-delay: 0.68s;
+  animation-delay: 0.25s;
 }
 
 @keyframes wipeUp {
@@ -408,7 +410,7 @@ nav.ready {
   justify-content: space-between;
   gap: 40px;
   opacity: 0;
-  animation: fadeUp 0.9s 0.9s forwards;
+  animation: fadeUp 0.7s 0.35s forwards;
 }
 
 .hero-sub {
@@ -634,6 +636,14 @@ nav.ready {
 .sec {
   padding: 140px 64px;
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Hero should always be visible - no content-visibility */
+#hero {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
 }
 
 .kicker {

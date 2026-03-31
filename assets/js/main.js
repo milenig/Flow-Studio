@@ -10,26 +10,26 @@
   let raf = 0;
   let done = false;
   const startedAt = performance.now();
-  const minVisibleMs = 700;
+  const minVisibleMs = 400;
 
   function finishLoader() {
     if (done) return;
     done = true;
     loaderEl.classList.add("out");
     document.body.style.overflow = "";
-    setTimeout(() => document.getElementById("nav").classList.add("ready"), 200);
+    setTimeout(() => document.getElementById("nav").classList.add("ready"), 100);
   }
 
   function tick(now) {
     // Before full page load, approach 92% smoothly.
     if (target < 92) {
       const elapsed = now - startedAt;
-      const t = Math.min(elapsed / 1200, 1);
+      const t = Math.min(elapsed / 800, 1);
       target = 92 * (1 - Math.pow(1 - t, 3));
     }
 
     // Smoothly approach the current target.
-    progress += (target - progress) * 0.12;
+    progress += (target - progress) * 0.18;
     if (target >= 100 && progress > 99.6) progress = 100;
 
     fill.style.width = progress.toFixed(2) + "%";
@@ -86,13 +86,15 @@ document.body.style.overflow = "hidden";
       return;
     }
     const parent = el.closest("ul");
+    // Batch reads first to avoid forced reflow
     const pRect = parent.getBoundingClientRect();
     const eRect = el.getBoundingClientRect();
-    npi.style.width = eRect.width + "px";
-    npi.style.height = eRect.height + "px";
-    npi.style.left = eRect.left - pRect.left + "px";
-    npi.style.top = eRect.top - pRect.top + "px";
-    npi.style.opacity = "1";
+    const w = eRect.width;
+    const h = eRect.height;
+    const l = eRect.left - pRect.left;
+    const t = eRect.top - pRect.top;
+    // Single write to avoid interleaved read/write reflows
+    npi.style.cssText = `width:${w}px;height:${h}px;left:${l}px;top:${t}px;opacity:1;position:absolute;background:var(--ink);border-radius:100px;transition:all 0.4s var(--ease);pointer-events:none`;
   }
 
   function applyVisualState() {
@@ -190,9 +192,9 @@ document.body.style.overflow = "hidden";
 })();
 
 // ════════════════════════════════════
-// CURSOR FX - only on interactive elements
+// CURSOR FX - only on interactive elements (deferred)
 // ════════════════════════════════════
-(function () {
+function initCursorFx() {
   if (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
     window.matchMedia("(max-width: 768px)").matches ||
@@ -211,7 +213,7 @@ document.body.style.overflow = "hidden";
   document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
     my = e.clientY;
-  });
+  }, { passive: true });
   function tick() {
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
@@ -233,12 +235,18 @@ document.body.style.overflow = "hidden";
   // Only show on links/buttons
   const SELECTORS = "a,button,.pc,.sc,.tcard,.wcard";
   document.querySelectorAll(SELECTORS).forEach((el) => {
-    el.addEventListener("mouseenter", () => fx.classList.add("active"));
-    el.addEventListener("mouseleave", () => fx.classList.remove("active"));
-    el.addEventListener("mousedown", () => fx.classList.add("clicking"));
-    el.addEventListener("mouseup", () => fx.classList.remove("clicking"));
+    el.addEventListener("mouseenter", () => fx.classList.add("active"), { passive: true });
+    el.addEventListener("mouseleave", () => fx.classList.remove("active"), { passive: true });
+    el.addEventListener("mousedown", () => fx.classList.add("clicking"), { passive: true });
+    el.addEventListener("mouseup", () => fx.classList.remove("clicking"), { passive: true });
   });
-})();
+}
+// Defer cursor FX to idle time to reduce main-thread work during load
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initCursorFx, { timeout: 2000 });
+} else {
+  setTimeout(initCursorFx, 300);
+}
 
 // ════════════════════════════════════
 // HERO WebGL SHADER
@@ -267,7 +275,7 @@ document.body.style.overflow = "hidden";
     vec3 ink=vec3(.06,.07,.08);
     float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}
     float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1)),f.x),f.y);}
-    float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<7;i++){v+=a*noise(p);p=p*2.1+vec2(.3,.7);a*=.5;}return v;}
+    float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.1+vec2(.3,.7);a*=.5;}return v;}
     void main(){
       vec2 uv=(gl_FragCoord.xy-.5*res)/min(res.x,res.y);
       vec2 m=(mo/res-.5)*2.;m.y*=-1.;
