@@ -2,271 +2,272 @@
 // LOADER
 // ════════════════════════════════════
 (function () {
-  const fill = document.getElementById("ldfill"),
-    num = document.getElementById("ldnum");
-  const loaderEl = document.getElementById("loader");
-  if (!fill || !num || !loaderEl) return;
+	const fill = document.getElementById('ldfill'),
+		num = document.getElementById('ldnum');
+	const loaderEl = document.getElementById('loader');
+	if (!fill || !num || !loaderEl) return;
 
-  // Prevent scroll while overlay is visible.
-  document.body.style.overflow = "hidden";
-  let progress = 0;
-  let target = 0;
-  let raf = 0;
-  let done = false;
-  const startedAt = performance.now();
-  const minVisibleMs = 400;
-  const hardTimeoutMs = 1600;
+	// Prevent scroll while overlay is visible.
+	document.body.style.overflow = 'hidden';
+	let progress = 0;
+	let target = 0;
+	let raf = 0;
+	let done = false;
+	const startedAt = performance.now();
+	const minVisibleMs = 400;
+	const hardTimeoutMs = 1600;
 
-  function finishLoader() {
-    if (done) return;
-    done = true;
-    loaderEl.classList.add("out");
-    document.body.style.overflow = "";
-    setTimeout(() => document.getElementById("nav").classList.add("ready"), 100);
-  }
+	function finishLoader() {
+		if (done) return;
+		done = true;
+		loaderEl.classList.add('out');
+		document.body.style.overflow = '';
+		setTimeout(() => document.getElementById('nav').classList.add('ready'), 100);
+	}
 
-  function forceFinish() {
-    target = 100;
-    progress = 100;
-    fill.style.width = "100%";
-    num.textContent = "100%";
-    finishLoader();
-  }
+	function forceFinish() {
+		target = 100;
+		progress = 100;
+		fill.style.width = '100%';
+		num.textContent = '100%';
+		finishLoader();
+	}
 
-  function tick(now) {
-    // Before full page load, approach 92% smoothly.
-    if (target < 92) {
-      const elapsed = now - startedAt;
-      const t = Math.min(elapsed / 800, 1);
-      target = 92 * (1 - Math.pow(1 - t, 3));
-    }
+	function tick(now) {
+		// Before full page load, approach 92% smoothly.
+		if (target < 92) {
+			const elapsed = now - startedAt;
+			const t = Math.min(elapsed / 800, 1);
+			target = 92 * (1 - Math.pow(1 - t, 3));
+		}
 
-    // Smoothly approach the current target.
-    progress += (target - progress) * 0.18;
-    if (target >= 100 && progress > 99.6) progress = 100;
+		// Smoothly approach the current target.
+		progress += (target - progress) * 0.18;
+		if (target >= 100 && progress > 99.6) progress = 100;
 
-    fill.style.width = progress.toFixed(2) + "%";
-    num.textContent = Math.floor(progress) + "%";
+		fill.style.width = progress.toFixed(2) + '%';
+		num.textContent = Math.floor(progress) + '%';
 
-    if (progress >= 100) {
-      const waitedEnough = now - startedAt >= minVisibleMs;
-      if (waitedEnough) {
-        finishLoader();
-        return;
-      }
-    }
-    raf = requestAnimationFrame(tick);
-  }
+		if (progress >= 100) {
+			const waitedEnough = now - startedAt >= minVisibleMs;
+			if (waitedEnough) {
+				finishLoader();
+				return;
+			}
+		}
+		raf = requestAnimationFrame(tick);
+	}
 
-  const markReady = () => {
-    target = 100;
-  };
-  if (document.readyState !== "loading") {
-    markReady();
-  } else {
-    document.addEventListener("DOMContentLoaded", markReady, { once: true });
-  }
-  // Backup: if something blocks DOMContentLoaded for any reason.
-  window.addEventListener("load", markReady, { once: true });
+	const markReady = () => {
+		target = 100;
+	};
+	if (document.readyState !== 'loading') {
+		markReady();
+	} else {
+		document.addEventListener('DOMContentLoaded', markReady, {once: true});
+	}
+	// Backup: if something blocks DOMContentLoaded for any reason.
+	window.addEventListener('load', markReady, {once: true});
 
-  // Hard stop: never let the loader delay LCP.
-  window.setTimeout(() => {
-    const waitedEnough = performance.now() - startedAt >= minVisibleMs;
-    if (!done && waitedEnough) forceFinish();
-    else markReady();
-  }, hardTimeoutMs);
+	// Hard stop: never let the loader delay LCP.
+	window.setTimeout(() => {
+		const waitedEnough = performance.now() - startedAt >= minVisibleMs;
+		if (!done && waitedEnough) forceFinish();
+		else markReady();
+	}, hardTimeoutMs);
 
-  raf = requestAnimationFrame(tick);
+	raf = requestAnimationFrame(tick);
 })();
 
 // ════════════════════════════════════
 // FLOATING PILL NAV - animated active indicator (Monofactor-style)
 // ════════════════════════════════════
 (function () {
-  const npi = document.getElementById("npi");
-  const navEl = document.getElementById("nav");
-  const navToggle = document.getElementById("nav-toggle");
-  const navLinksEl = document.getElementById("nav-links");
-  const links = [...document.querySelectorAll(".nav-links a[data-section]")];
-  if (!navEl || !navLinksEl || !npi || !links.length) return;
+	const npi = document.getElementById('npi');
+	const navEl = document.getElementById('nav');
+	const navToggle = document.getElementById('nav-toggle');
+	const navLinksEl = document.getElementById('nav-links');
+	const links = [...document.querySelectorAll('.nav-links a[data-section]')];
+	if (!navEl || !navLinksEl || !npi || !links.length) return;
 
-  const sectionIds = links
-    .map((a) => a.dataset.section?.trim())
-    .filter(Boolean);
-  const navSectionIdSet = new Set(sectionIds);
-  let allSectionTops = [];
-  let currentSectionId = null;
-  let scrollRaf = 0;
+	const sectionIds = links.map((a) => a.dataset.section?.trim()).filter(Boolean);
+	const navSectionIdSet = new Set(sectionIds);
+	let allSectionTops = [];
+	let currentSectionId = null;
+	let scrollRaf = 0;
 
-  function moveIndicator(el) {
-    if (!el) {
-      npi.style.opacity = "0";
-      return;
-    }
-    const parent = el.closest("ul");
-    // Batch reads first to avoid forced reflow
-    const pRect = parent.getBoundingClientRect();
-    const eRect = el.getBoundingClientRect();
-    const w = eRect.width;
-    const h = eRect.height;
-    const l = eRect.left - pRect.left;
-    const t = eRect.top - pRect.top;
-    // Single write to avoid interleaved read/write reflows
-    npi.style.cssText = `width:${w}px;height:${h}px;left:${l}px;top:${t}px;opacity:1;position:absolute;background:var(--ink);border-radius:100px;transition:all 0.4s var(--ease);pointer-events:none`;
-  }
+	function moveIndicator(el) {
+		if (!el) {
+			npi.style.opacity = '0';
+			return;
+		}
+		const parent = el.closest('ul');
+		// Batch reads first to avoid forced reflow
+		const pRect = parent.getBoundingClientRect();
+		const eRect = el.getBoundingClientRect();
+		const w = eRect.width;
+		const h = eRect.height;
+		const l = eRect.left - pRect.left;
+		const t = eRect.top - pRect.top;
+		// Single write to avoid interleaved read/write reflows
+		npi.style.cssText = `width:${w}px;height:${h}px;left:${l}px;top:${t}px;opacity:1;position:absolute;background:var(--ink);border-radius:100px;transition:all 0.4s var(--ease);pointer-events:none`;
+	}
 
-  function applyVisualState() {
-    const sectionLink =
-      links.find((a) => a.dataset.section === currentSectionId) || null;
-    links.forEach((a) => a.classList.toggle("active", a === sectionLink));
-    moveIndicator(sectionLink);
-  }
+	function applyVisualState() {
+		const sectionLink = links.find((a) => a.dataset.section === currentSectionId) || null;
+		links.forEach((a) => a.classList.toggle('active', a === sectionLink));
+		moveIndicator(sectionLink);
+	}
 
-  function closeMenu() {
-    navEl.classList.remove("menu-open");
-    if (navToggle) {
-      navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Open menu");
-    }
-  }
+	function closeMenu() {
+		navEl.classList.remove('menu-open');
+		if (navToggle) {
+			navToggle.setAttribute('aria-expanded', 'false');
+			navToggle.setAttribute('aria-label', 'Open menu');
+		}
+	}
 
-  if (navToggle && navLinksEl) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = navEl.classList.toggle("menu-open");
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-    });
-    navLinksEl.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => {
-        if (window.matchMedia("(max-width: 768px)").matches) closeMenu();
-      }),
-    );
-    window.addEventListener("resize", () => {
-      if (!window.matchMedia("(max-width: 768px)").matches) closeMenu();
-    });
-  }
+	if (navToggle && navLinksEl) {
+		navToggle.addEventListener('click', () => {
+			const isOpen = navEl.classList.toggle('menu-open');
+			navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+		});
+		navLinksEl.querySelectorAll('a').forEach((a) =>
+			a.addEventListener('click', () => {
+				if (window.matchMedia('(max-width: 768px)').matches) closeMenu();
+			}),
+		);
+		window.addEventListener('resize', () => {
+			if (!window.matchMedia('(max-width: 768px)').matches) closeMenu();
+		});
+	}
 
-  function refreshSectionTops() {
-    allSectionTops = [...document.querySelectorAll("section[id]")]
-      .map((el) => {
-        const id = el.id?.trim();
-        if (!id) return null;
-        return { id, top: el.getBoundingClientRect().top + window.scrollY };
-      })
-      .filter(Boolean)
-      .sort((a, b) => a.top - b.top);
-  }
+	function refreshSectionTops() {
+		allSectionTops = [...document.querySelectorAll('section[id]')]
+			.map((el) => {
+				const id = el.id?.trim();
+				if (!id) return null;
+				return {id, top: el.getBoundingClientRect().top + window.scrollY};
+			})
+			.filter(Boolean)
+			.sort((a, b) => a.top - b.top);
+	}
 
-  function resolveNavbarSection(sectionId) {
-    // UX rule: never auto-activate "Home" (hero).
-    if (!sectionId || sectionId === "hero") return null;
-    // If the current section is not represented in navbar, show no active state.
-    if (!navSectionIdSet.has(sectionId)) return null;
-    return sectionId;
-  }
+	function resolveNavbarSection(sectionId) {
+		// UX rule: never auto-activate "Home" (hero).
+		if (!sectionId || sectionId === 'hero') return null;
+		// If the current section is not represented in navbar, show no active state.
+		if (!navSectionIdSet.has(sectionId)) return null;
+		return sectionId;
+	}
 
-  function computeCurrentSection() {
-    const y = window.scrollY + 120;
-    let cur = null;
-    for (let i = 0; i < allSectionTops.length; i++) {
-      if (allSectionTops[i].top <= y) cur = allSectionTops[i].id;
-      else break;
-    }
-    return resolveNavbarSection(cur);
-  }
+	function computeCurrentSection() {
+		const y = window.scrollY + 120;
+		let cur = null;
+		for (let i = 0; i < allSectionTops.length; i++) {
+			if (allSectionTops[i].top <= y) cur = allSectionTops[i].id;
+			else break;
+		}
+		return resolveNavbarSection(cur);
+	}
 
-  // Scroll-based active section.
-  // Intentionally avoids active state when user is in non-nav sections.
-  function updateScrollActive() {
-    const nextSectionId = computeCurrentSection();
-    if (nextSectionId === currentSectionId) return;
-    currentSectionId = nextSectionId;
-    applyVisualState();
-  }
+	// Scroll-based active section.
+	// Intentionally avoids active state when user is in non-nav sections.
+	function updateScrollActive() {
+		const nextSectionId = computeCurrentSection();
+		if (nextSectionId === currentSectionId) return;
+		currentSectionId = nextSectionId;
+		applyVisualState();
+	}
 
-  function refreshAndUpdateActiveState() {
-    refreshSectionTops();
-    updateScrollActive();
-  }
+	function refreshAndUpdateActiveState() {
+		refreshSectionTops();
+		updateScrollActive();
+	}
 
-  window.addEventListener("load", refreshAndUpdateActiveState);
-  window.addEventListener("resize", () => {
-    refreshAndUpdateActiveState();
-    applyVisualState();
-  });
+	window.addEventListener('load', refreshAndUpdateActiveState);
+	window.addEventListener('resize', () => {
+		refreshAndUpdateActiveState();
+		applyVisualState();
+	});
 
-  refreshAndUpdateActiveState();
+	refreshAndUpdateActiveState();
 
-  const navWrap = document.getElementById("nav").parentElement;
-  function onScroll() {
-    if (scrollRaf) return;
-    scrollRaf = requestAnimationFrame(() => {
-      scrollRaf = 0;
-      updateScrollActive();
-      navWrap.style.setProperty("--sh", scrollY > 60 ? "1" : "0");
-    });
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
+	const navWrap = document.getElementById('nav').parentElement;
+	function onScroll() {
+		if (scrollRaf) return;
+		scrollRaf = requestAnimationFrame(() => {
+			scrollRaf = 0;
+			updateScrollActive();
+			navWrap.style.setProperty('--sh', scrollY > 60 ? '1' : '0');
+		});
+	}
+	window.addEventListener('scroll', onScroll, {passive: true});
 })();
 
 // ════════════════════════════════════
 // CURSOR FX - only on interactive elements (deferred)
 // ════════════════════════════════════
 function runWhenIdle(fn, timeout = 2000) {
-  if (typeof fn !== "function") return;
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(() => fn(), { timeout });
-  } else {
-    setTimeout(fn, 1);
-  }
+	if (typeof fn !== 'function') return;
+	if ('requestIdleCallback' in window) {
+		requestIdleCallback(() => fn(), {timeout});
+	} else {
+		setTimeout(fn, 1);
+	}
 }
 
 function initCursorFx() {
-  if (
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-    window.matchMedia("(max-width: 768px)").matches ||
-    window.matchMedia("(hover: none), (pointer: coarse)").matches
-  ) {
-    const fx = document.getElementById("curFx");
-    if (fx) fx.style.display = "none";
-    return;
-  }
-  const fx = document.getElementById("curFx");
-  let mx = 0,
-    my = 0,
-    rx = 0,
-    ry = 0;
-  let rafId = 0;
-  document.addEventListener("mousemove", (e) => {
-    mx = e.clientX;
-    my = e.clientY;
-  }, { passive: true });
-  function tick() {
-    rx += (mx - rx) * 0.14;
-    ry += (my - ry) * 0.14;
-    fx.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
-    rafId = requestAnimationFrame(tick);
-  }
-  function start() {
-    if (!rafId) rafId = requestAnimationFrame(tick);
-  }
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      cancelAnimationFrame(rafId);
-      rafId = 0;
-    } else {
-      start();
-    }
-  });
-  start();
-  // Only show on links/buttons
-  const SELECTORS = "a,button,.pc,.sc,.tcard,.wcard";
-  document.querySelectorAll(SELECTORS).forEach((el) => {
-    el.addEventListener("mouseenter", () => fx.classList.add("active"), { passive: true });
-    el.addEventListener("mouseleave", () => fx.classList.remove("active"), { passive: true });
-    el.addEventListener("mousedown", () => fx.classList.add("clicking"), { passive: true });
-    el.addEventListener("mouseup", () => fx.classList.remove("clicking"), { passive: true });
-  });
+	if (
+		window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+		window.matchMedia('(max-width: 768px)').matches ||
+		window.matchMedia('(hover: none), (pointer: coarse)').matches
+	) {
+		const fx = document.getElementById('curFx');
+		if (fx) fx.style.display = 'none';
+		return;
+	}
+	const fx = document.getElementById('curFx');
+	let mx = 0,
+		my = 0,
+		rx = 0,
+		ry = 0;
+	let rafId = 0;
+	document.addEventListener(
+		'mousemove',
+		(e) => {
+			mx = e.clientX;
+			my = e.clientY;
+		},
+		{passive: true},
+	);
+	function tick() {
+		rx += (mx - rx) * 0.14;
+		ry += (my - ry) * 0.14;
+		fx.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+		rafId = requestAnimationFrame(tick);
+	}
+	function start() {
+		if (!rafId) rafId = requestAnimationFrame(tick);
+	}
+	document.addEventListener('visibilitychange', () => {
+		if (document.hidden) {
+			cancelAnimationFrame(rafId);
+			rafId = 0;
+		} else {
+			start();
+		}
+	});
+	start();
+	// Only show on links/buttons
+	const SELECTORS = 'a,button,.pc,.sc,.tcard,.wcard';
+	document.querySelectorAll(SELECTORS).forEach((el) => {
+		el.addEventListener('mouseenter', () => fx.classList.add('active'), {passive: true});
+		el.addEventListener('mouseleave', () => fx.classList.remove('active'), {passive: true});
+		el.addEventListener('mousedown', () => fx.classList.add('clicking'), {passive: true});
+		el.addEventListener('mouseup', () => fx.classList.remove('clicking'), {passive: true});
+	});
 }
 // Defer cursor FX to idle time to reduce main-thread work during load
 runWhenIdle(initCursorFx, 2000);
@@ -275,23 +276,20 @@ runWhenIdle(initCursorFx, 2000);
 // HERO WebGL SHADER
 // ════════════════════════════════════
 (function () {
-  if (
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  )
-    return;
-  const c = document.getElementById("hero-canvas");
-  const gl = c.getContext("webgl");
-  if (!gl) return;
-  function r() {
-    c.width = innerWidth;
-    c.height = innerHeight;
-    gl.viewport(0, 0, c.width, c.height);
-  }
-  r();
-  window.addEventListener("resize", r);
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+	const c = document.getElementById('hero-canvas');
+	const gl = c.getContext('webgl');
+	if (!gl) return;
+	function r() {
+		c.width = innerWidth;
+		c.height = innerHeight;
+		gl.viewport(0, 0, c.width, c.height);
+	}
+	r();
+	window.addEventListener('resize', r);
 
-  const VS = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
-  const FS = `precision highp float;
+	const VS = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
+	const FS = `precision highp float;
     uniform float t;uniform vec2 res;uniform vec2 mo;
     /* Darker emerald (same hue family as brand green) */
     vec3 g=vec3(0.,.42,.30);
@@ -316,161 +314,157 @@ runWhenIdle(initCursorFx, 2000);
       col+=g*.09*(1.-smoothstep(.5,.9,length(uv)))*smoothstep(.45,.8,f);
       gl_FragColor=vec4(col,1.);
     }`;
-  function sh(tp, src) {
-    const s = gl.createShader(tp);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
-  }
-  const pr = gl.createProgram();
-  gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS));
-  gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS));
-  gl.linkProgram(pr);
-  gl.useProgram(pr);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(
-    gl.ARRAY_BUFFER,
-    new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-    gl.STATIC_DRAW,
-  );
-  const loc = gl.getAttribLocation(pr, "p");
-  gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const uT = gl.getUniformLocation(pr, "t"),
-    uR = gl.getUniformLocation(pr, "res"),
-    uM = gl.getUniformLocation(pr, "mo");
-  let mx = 0,
-    my = 0;
-  document.addEventListener("mousemove", (e) => {
-    mx = e.clientX;
-    my = e.clientY;
-  });
-  const t0 = performance.now();
-  const heroEl = document.getElementById("hero");
-  let heroInView = false;
-  let raf = 0;
-  function shouldRun() {
-    return !document.hidden && heroInView;
-  }
-  function frame(now) {
-    if (!shouldRun()) {
-      raf = 0;
-      return;
-    }
-    gl.uniform1f(uT, (now - t0) * 0.001);
-    gl.uniform2f(uR, c.width, c.height);
-    gl.uniform2f(uM, mx, my);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    raf = requestAnimationFrame(frame);
-  }
-  const io = new IntersectionObserver(
-    (entries) => {
-      heroInView = !!entries[0]?.isIntersecting;
-      if (shouldRun() && !raf) raf = requestAnimationFrame(frame);
-      else if (!shouldRun()) {
-        cancelAnimationFrame(raf);
-        raf = 0;
-      }
-    },
-    { threshold: 0, rootMargin: "0px 0px 48px 0px" },
-  );
-  io.observe(heroEl);
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      cancelAnimationFrame(raf);
-      raf = 0;
-    } else if (shouldRun() && !raf) {
-      raf = requestAnimationFrame(frame);
-    }
-  });
+	function sh(tp, src) {
+		const s = gl.createShader(tp);
+		gl.shaderSource(s, src);
+		gl.compileShader(s);
+		return s;
+	}
+	const pr = gl.createProgram();
+	gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS));
+	gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS));
+	gl.linkProgram(pr);
+	gl.useProgram(pr);
+	const buf = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+	const loc = gl.getAttribLocation(pr, 'p');
+	gl.enableVertexAttribArray(loc);
+	gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+	const uT = gl.getUniformLocation(pr, 't'),
+		uR = gl.getUniformLocation(pr, 'res'),
+		uM = gl.getUniformLocation(pr, 'mo');
+	let mx = 0,
+		my = 0;
+	document.addEventListener('mousemove', (e) => {
+		mx = e.clientX;
+		my = e.clientY;
+	});
+	const t0 = performance.now();
+	const heroEl = document.getElementById('hero');
+	let heroInView = false;
+	let raf = 0;
+	function shouldRun() {
+		return !document.hidden && heroInView;
+	}
+	function frame(now) {
+		if (!shouldRun()) {
+			raf = 0;
+			return;
+		}
+		gl.uniform1f(uT, (now - t0) * 0.001);
+		gl.uniform2f(uR, c.width, c.height);
+		gl.uniform2f(uM, mx, my);
+		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+		raf = requestAnimationFrame(frame);
+	}
+	const io = new IntersectionObserver(
+		(entries) => {
+			heroInView = !!entries[0]?.isIntersecting;
+			if (shouldRun() && !raf) raf = requestAnimationFrame(frame);
+			else if (!shouldRun()) {
+				cancelAnimationFrame(raf);
+				raf = 0;
+			}
+		},
+		{threshold: 0, rootMargin: '0px 0px 48px 0px'},
+	);
+	io.observe(heroEl);
+	document.addEventListener('visibilitychange', () => {
+		if (document.hidden) {
+			cancelAnimationFrame(raf);
+			raf = 0;
+		} else if (shouldRun() && !raf) {
+			raf = requestAnimationFrame(frame);
+		}
+	});
 })();
 
 // ════════════════════════════════════
 // ABOUT - load background video when near viewport (saves bandwidth)
 // ════════════════════════════════════
 (function () {
-  const v = document.getElementById("about-visual-vid");
-  if (!v) return;
-  const wrap = v.closest(".about-visual");
-  if (!wrap) return;
-  const io = new IntersectionObserver(
-    (entries) => {
-      if (!entries[0]?.isIntersecting) return;
-      io.disconnect();
-      v.load();
-      // Some mobile browsers reject play() if the media isn't ready yet.
-      const tryPlay = () => v.play().catch(() => {});
-      if (v.readyState >= 2) {
-        tryPlay();
-      } else {
-        v.addEventListener("loadeddata", tryPlay, { once: true });
-        // Fallback: if loadeddata doesn't fire quickly, still try after a moment.
-        setTimeout(tryPlay, 900);
-      }
-    },
-    { rootMargin: "160px 0px", threshold: 0.01 },
-  );
-  io.observe(wrap);
+	const v = document.getElementById('about-visual-vid');
+	if (!v) return;
+	const wrap = v.closest('.about-visual');
+	if (!wrap) return;
+	const io = new IntersectionObserver(
+		(entries) => {
+			if (!entries[0]?.isIntersecting) return;
+			io.disconnect();
+			v.load();
+			// Some mobile browsers reject play() if the media isn't ready yet.
+			const tryPlay = () => v.play().catch(() => {});
+			if (v.readyState >= 2) {
+				tryPlay();
+			} else {
+				v.addEventListener('loadeddata', tryPlay, {once: true});
+				// Fallback: if loadeddata doesn't fire quickly, still try after a moment.
+				setTimeout(tryPlay, 900);
+			}
+		},
+		{rootMargin: '160px 0px', threshold: 0.01},
+	);
+	io.observe(wrap);
 })();
 
 // ════════════════════════════════════
 // AI Terminal typewriter animation
 // ════════════════════════════════════
 function initAiTerminalTypewriter() {
-  const sequences = [
-    {
-      cmd: 'analyzeProject("dice-media")',
-      out: "✓ Brand audit · UX proposal · three actionable recommendations",
-    },
-    {
-      cmd: 'generateHero({style:"editorial",ai:true})',
-      out: "✓ Visual direction · Aligned with the full website · Ready for review",
-    },
-    {
-      cmd: 'optimizeSEO({target:"beograd",schema:true})',
-      out: "✓ Content structure · Schema where it adds value · Technical check complete",
-    },
-    {
-      cmd: 'deployAgent({crm:"pipedrive",mode:"24/7"})',
-      out: "✓ Lead flow activated · Less manual CRM input",
-    },
-    {
-      cmd: 'connectTools(["make","cms","slack"])',
-      out: "✓ Workflows connected · Shared data across tools",
-    },
-    {
-      cmd: "buildLanding({convert:true,cms:true})",
-      out: "✓ Agreed sections delivered · CMS configured · Deadline met",
-    },
-  ];
-  let si = 0;
-  function type(el, text, speed, cb) {
-    el.textContent = "";
-    let i = 0;
-    const iv = setInterval(() => {
-      el.textContent += text[i++];
-      if (i >= text.length) {
-        clearInterval(iv);
-        cb && setTimeout(cb, 700);
-      }
-    }, speed);
-  }
-  function run() {
-    const s = sequences[si % sequences.length];
-    si++;
-    const c1 = document.getElementById("at-cmd1"),
-      o1 = document.getElementById("at-out1");
-    const c2 = document.getElementById("at-cmd2"),
-      o2 = document.getElementById("at-out2");
-    if (!c1) return;
-    c1.textContent = c2.textContent;
-    o1.textContent = o2.textContent;
-    c2.textContent = "";
-    o2.textContent = "";
-    type(c2, s.cmd, 26, () => type(o2, s.out, 16, () => setTimeout(run, 2400)));
-  }
-  setTimeout(run, 1000);
+	const sequences = [
+		{
+			cmd: 'analyzeProject("dice-media")',
+			out: '✓ Brand audit · UX proposal · three actionable recommendations',
+		},
+		{
+			cmd: 'generateHero({style:"editorial",ai:true})',
+			out: '✓ Visual direction · Aligned with the full website · Ready for review',
+		},
+		{
+			cmd: 'optimizeSEO({target:"beograd",schema:true})',
+			out: '✓ Content structure · Schema where it adds value · Technical check complete',
+		},
+		{
+			cmd: 'deployAgent({crm:"pipedrive",mode:"24/7"})',
+			out: '✓ Lead flow activated · Less manual CRM input',
+		},
+		{
+			cmd: 'connectTools(["make","cms","slack"])',
+			out: '✓ Workflows connected · Shared data across tools',
+		},
+		{
+			cmd: 'buildLanding({convert:true,cms:true})',
+			out: '✓ Agreed sections delivered · CMS configured · Deadline met',
+		},
+	];
+	let si = 0;
+	function type(el, text, speed, cb) {
+		el.textContent = '';
+		let i = 0;
+		const iv = setInterval(() => {
+			el.textContent += text[i++];
+			if (i >= text.length) {
+				clearInterval(iv);
+				cb && setTimeout(cb, 700);
+			}
+		}, speed);
+	}
+	function run() {
+		const s = sequences[si % sequences.length];
+		si++;
+		const c1 = document.getElementById('at-cmd1'),
+			o1 = document.getElementById('at-out1');
+		const c2 = document.getElementById('at-cmd2'),
+			o2 = document.getElementById('at-out2');
+		if (!c1) return;
+		c1.textContent = c2.textContent;
+		o1.textContent = o2.textContent;
+		c2.textContent = '';
+		o2.textContent = '';
+		type(c2, s.cmd, 26, () => type(o2, s.out, 16, () => setTimeout(run, 2400)));
+	}
+	setTimeout(run, 1000);
 }
 runWhenIdle(initAiTerminalTypewriter, 2500);
 
@@ -479,394 +473,385 @@ runWhenIdle(initAiTerminalTypewriter, 2500);
 // ════════════════════════════════════
 const scGlowState = new WeakMap();
 function scGlow(el, e) {
-  let st = scGlowState.get(el);
-  if (!st) {
-    st = { raf: 0, x: 0, y: 0 };
-    scGlowState.set(el, st);
-  }
-  st.x = e.clientX;
-  st.y = e.clientY;
-  if (st.raf) return;
-  st.raf = requestAnimationFrame(() => {
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", ((st.x - r.left) / r.width) * 100 + "%");
-    el.style.setProperty("--my", ((st.y - r.top) / r.height) * 100 + "%");
-    st.raf = 0;
-  });
+	let st = scGlowState.get(el);
+	if (!st) {
+		st = {raf: 0, x: 0, y: 0};
+		scGlowState.set(el, st);
+	}
+	st.x = e.clientX;
+	st.y = e.clientY;
+	if (st.raf) return;
+	st.raf = requestAnimationFrame(() => {
+		const r = el.getBoundingClientRect();
+		el.style.setProperty('--mx', ((st.x - r.left) / r.width) * 100 + '%');
+		el.style.setProperty('--my', ((st.y - r.top) / r.height) * 100 + '%');
+		st.raf = 0;
+	});
 }
 
 // ════════════════════════════════════
 // PROJECTS - carousel (bounded), drag + arrows
 // ════════════════════════════════════
 function initProjectsCarousel() {
-  const track = document.getElementById("pt");
-  if (!track) return;
+	const track = document.getElementById('pt');
+	if (!track) return;
 
-  function observeVideoInCard(card, video) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((en) => {
-          if (en.isIntersecting && en.intersectionRatio > 0.22) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: [0, 0.22, 0.5, 1] },
-    );
-    io.observe(card);
-  }
+	function observeVideoInCard(card, video) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((en) => {
+					if (en.isIntersecting && en.intersectionRatio > 0.22) {
+						video.play().catch(() => {});
+					} else {
+						video.pause();
+					}
+				});
+			},
+			{threshold: [0, 0.22, 0.5, 1]},
+		);
+		io.observe(card);
+	}
 
-  function initPortfolioGrid(grid) {
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+	function initPortfolioGrid(grid) {
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    grid.querySelectorAll(".pc--portfolio").forEach((card) => {
-      const viewport = card.querySelector(".pc-port-viewport[data-carousel]");
-      if (!viewport) {
-        card.querySelectorAll("video").forEach((v) =>
-          observeVideoInCard(card, v),
-        );
-        return;
-      }
+		grid.querySelectorAll('.pc--portfolio').forEach((card) => {
+			const viewport = card.querySelector('.pc-port-viewport[data-carousel]');
+			if (!viewport) {
+				card.querySelectorAll('video').forEach((v) => observeVideoInCard(card, v));
+				return;
+			}
 
-      const slides = [...viewport.querySelectorAll(".pc-port-slide")];
-      const trackEl = viewport.querySelector(".pc-port-track");
-      const prev = card.querySelector(".pc-port-prev");
-      const next = card.querySelector(".pc-port-next");
-      if (!trackEl || slides.length < 2) return;
+			const slides = [...viewport.querySelectorAll('.pc-port-slide')];
+			const trackEl = viewport.querySelector('.pc-port-track');
+			const prev = card.querySelector('.pc-port-prev');
+			const next = card.querySelector('.pc-port-next');
+			if (!trackEl || slides.length < 2) return;
 
-      let idx = 0;
-      let isCardVisible = false;
-      let scrollSyncRaf = 0;
-      let dragStartX = null;
-      let dragScrollStart = 0;
-      let slideCenters = [];
+			let idx = 0;
+			let isCardVisible = false;
+			let scrollSyncRaf = 0;
+			let dragStartX = null;
+			let dragScrollStart = 0;
+			let slideCenters = [];
 
-      function syncSlideVideos() {
-        slides.forEach((slide, i) => {
-          const v = slide.querySelector("video");
-          if (!v) return;
-          if (i === idx && isCardVisible) v.play().catch(() => {});
-          else v.pause();
-        });
-      }
+			function syncSlideVideos() {
+				slides.forEach((slide, i) => {
+					const v = slide.querySelector('video');
+					if (!v) return;
+					if (i === idx && isCardVisible) v.play().catch(() => {});
+					else v.pause();
+				});
+			}
 
-      function measureSlides() {
-        // Measure once per resize/init; avoids getBoundingClientRect() during scroll.
-        slideCenters = slides.map((s) => s.offsetLeft + s.offsetWidth / 2);
-      }
+			function measureSlides() {
+				// Measure once per resize/init; avoids getBoundingClientRect() during scroll.
+				slideCenters = slides.map((s) => s.offsetLeft + s.offsetWidth / 2);
+			}
 
-      function activeIndexFromScroll() {
-        const mid = viewport.scrollLeft + viewport.clientWidth / 2;
-        let best = 0;
-        let bestDist = Infinity;
-        slideCenters.forEach((c, i) => {
-          const d = Math.abs(c - mid);
-          if (d < bestDist) {
-            bestDist = d;
-            best = i;
-          }
-        });
-        return best;
-      }
+			function activeIndexFromScroll() {
+				const mid = viewport.scrollLeft + viewport.clientWidth / 2;
+				let best = 0;
+				let bestDist = Infinity;
+				slideCenters.forEach((c, i) => {
+					const d = Math.abs(c - mid);
+					if (d < bestDist) {
+						bestDist = d;
+						best = i;
+					}
+				});
+				return best;
+			}
 
-      function scrollToSlide(i, smooth) {
-        const c = slideCenters[i];
-        if (typeof c !== "number") return;
-        const target = c - viewport.clientWidth / 2;
-        const max = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-        const left = Math.max(0, Math.min(max, target));
-        viewport.scrollTo({
-          left,
-          behavior: smooth && !reducedMotion ? "smooth" : "auto",
-        });
-      }
+			function scrollToSlide(i, smooth) {
+				const c = slideCenters[i];
+				if (typeof c !== 'number') return;
+				const target = c - viewport.clientWidth / 2;
+				const max = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+				const left = Math.max(0, Math.min(max, target));
+				viewport.scrollTo({
+					left,
+					behavior: smooth && !reducedMotion ? 'smooth' : 'auto',
+				});
+			}
 
-      function onScroll() {
-        cancelAnimationFrame(scrollSyncRaf);
-        scrollSyncRaf = requestAnimationFrame(() => {
-          idx = activeIndexFromScroll();
-          syncSlideVideos();
-        });
-      }
+			function onScroll() {
+				cancelAnimationFrame(scrollSyncRaf);
+				scrollSyncRaf = requestAnimationFrame(() => {
+					idx = activeIndexFromScroll();
+					syncSlideVideos();
+				});
+			}
 
-      const ioCard = new IntersectionObserver(
-        (entries) => {
-          const e = entries[0];
-          if (!e) return;
-          isCardVisible = e.isIntersecting && e.intersectionRatio > 0.12;
-          syncSlideVideos();
-        },
-        { threshold: [0, 0.12, 0.25, 0.5] },
-      );
-      ioCard.observe(card);
+			const ioCard = new IntersectionObserver(
+				(entries) => {
+					const e = entries[0];
+					if (!e) return;
+					isCardVisible = e.isIntersecting && e.intersectionRatio > 0.12;
+					syncSlideVideos();
+				},
+				{threshold: [0, 0.12, 0.25, 0.5]},
+			);
+			ioCard.observe(card);
 
-      measureSlides();
-      viewport.addEventListener("scroll", onScroll, { passive: true });
-      viewport.addEventListener(
-        "scrollend",
-        () => {
-          idx = activeIndexFromScroll();
-          syncSlideVideos();
-        },
-        { passive: true },
-      );
+			measureSlides();
+			viewport.addEventListener('scroll', onScroll, {passive: true});
+			viewport.addEventListener(
+				'scrollend',
+				() => {
+					idx = activeIndexFromScroll();
+					syncSlideVideos();
+				},
+				{passive: true},
+			);
 
-      function goPrev() {
-        idx = (idx - 1 + slides.length) % slides.length;
-        scrollToSlide(idx, true);
-      }
+			function goPrev() {
+				idx = (idx - 1 + slides.length) % slides.length;
+				scrollToSlide(idx, true);
+			}
 
-      function goNext() {
-        idx = (idx + 1) % slides.length;
-        scrollToSlide(idx, true);
-      }
+			function goNext() {
+				idx = (idx + 1) % slides.length;
+				scrollToSlide(idx, true);
+			}
 
-      if (prev) prev.addEventListener("click", goPrev);
-      if (next) next.addEventListener("click", goNext);
+			if (prev) prev.addEventListener('click', goPrev);
+			if (next) next.addEventListener('click', goNext);
 
-      viewport.addEventListener(
-        "pointerdown",
-        (e) => {
-          if (e.pointerType !== "mouse" || e.button !== 0) return;
-          if (e.target.closest("a, button")) return;
-          dragStartX = e.clientX;
-          dragScrollStart = viewport.scrollLeft;
-          viewport.classList.add("is-dragging");
-          try {
-            viewport.setPointerCapture(e.pointerId);
-          } catch (_) {}
-        },
-        { passive: true },
-      );
+			viewport.addEventListener(
+				'pointerdown',
+				(e) => {
+					if (e.pointerType !== 'mouse' || e.button !== 0) return;
+					if (e.target.closest('a, button')) return;
+					dragStartX = e.clientX;
+					dragScrollStart = viewport.scrollLeft;
+					viewport.classList.add('is-dragging');
+					try {
+						viewport.setPointerCapture(e.pointerId);
+					} catch (_) {}
+				},
+				{passive: true},
+			);
 
-      function endPointerDrag(e) {
-        if (dragStartX === null) return;
-        dragStartX = null;
-        viewport.classList.remove("is-dragging");
-        try {
-          viewport.releasePointerCapture(e.pointerId);
-        } catch (_) {}
-        idx = activeIndexFromScroll();
-        syncSlideVideos();
-      }
+			function endPointerDrag(e) {
+				if (dragStartX === null) return;
+				dragStartX = null;
+				viewport.classList.remove('is-dragging');
+				try {
+					viewport.releasePointerCapture(e.pointerId);
+				} catch (_) {}
+				idx = activeIndexFromScroll();
+				syncSlideVideos();
+			}
 
-      viewport.addEventListener(
-        "pointermove",
-        (e) => {
-          if (dragStartX === null || e.pointerType !== "mouse") return;
-          const dx = e.clientX - dragStartX;
-          viewport.scrollLeft = dragScrollStart - dx;
-        },
-        { passive: true },
-      );
+			viewport.addEventListener(
+				'pointermove',
+				(e) => {
+					if (dragStartX === null || e.pointerType !== 'mouse') return;
+					const dx = e.clientX - dragStartX;
+					viewport.scrollLeft = dragScrollStart - dx;
+				},
+				{passive: true},
+			);
 
-      viewport.addEventListener("pointerup", endPointerDrag);
-      viewport.addEventListener("pointercancel", endPointerDrag);
+			viewport.addEventListener('pointerup', endPointerDrag);
+			viewport.addEventListener('pointercancel', endPointerDrag);
 
-      let resizeRaf = 0;
-      function onResize() {
-        cancelAnimationFrame(resizeRaf);
-        resizeRaf = requestAnimationFrame(() => {
-          measureSlides();
-          scrollToSlide(idx, false);
-        });
-      }
-      window.addEventListener("resize", onResize);
+			let resizeRaf = 0;
+			function onResize() {
+				cancelAnimationFrame(resizeRaf);
+				resizeRaf = requestAnimationFrame(() => {
+					measureSlides();
+					scrollToSlide(idx, false);
+				});
+			}
+			window.addEventListener('resize', onResize);
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          idx = activeIndexFromScroll();
-          scrollToSlide(idx, false);
-          syncSlideVideos();
-        });
-      });
-    });
-  }
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					idx = activeIndexFromScroll();
+					scrollToSlide(idx, false);
+					syncSlideVideos();
+				});
+			});
+		});
+	}
 
-  const navPrev = document.querySelector(".proj-nav .pnb:first-of-type");
-  const navNext = document.querySelector(".proj-nav .pnb:last-of-type");
+	const navPrev = document.querySelector('.proj-nav .pnb:first-of-type');
+	const navNext = document.querySelector('.proj-nav .pnb:last-of-type');
 
-  if (track.classList.contains("proj-featured-grid")) {
-    if (navPrev) navPrev.style.display = "none";
-    if (navNext) navNext.style.display = "none";
-    initPortfolioGrid(track);
-    return;
-  }
+	if (track.classList.contains('proj-featured-grid')) {
+		if (navPrev) navPrev.style.display = 'none';
+		if (navNext) navNext.style.display = 'none';
+		initPortfolioGrid(track);
+		return;
+	}
 
-  const scroll = document.getElementById("proj-scroll");
-  if (!scroll) return;
+	const scroll = document.getElementById('proj-scroll');
+	if (!scroll) return;
 
-  const slides = [...track.querySelectorAll(".pc[data-slide]")];
-  const n = slides.length;
-  if (!n) return;
+	const slides = [...track.querySelectorAll('.pc[data-slide]')];
+	const n = slides.length;
+	if (!n) return;
 
-  let idx = 0;
-  let step = 0;
-  let dragging = false;
-  let dragStartX = 0;
-  let dragBase = 0;
-  let trans = 0;
-  let animating = false;
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-  const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
-  const durationMs = 720;
+	let idx = 0;
+	let step = 0;
+	let dragging = false;
+	let dragStartX = 0;
+	let dragBase = 0;
+	let trans = 0;
+	let animating = false;
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const ease = 'cubic-bezier(0.22, 1, 0.36, 1)';
+	const durationMs = 720;
 
-  function getGap() {
-    const g = getComputedStyle(track).gap;
-    return parseFloat(g) || 28;
-  }
+	function getGap() {
+		const g = getComputedStyle(track).gap;
+		return parseFloat(g) || 28;
+	}
 
-  function measure() {
-    const card = track.querySelector(".pc[data-slide]");
-    if (!card) return;
-    step = card.offsetWidth + getGap();
-    if (!step) step = 1;
-  }
+	function measure() {
+		const card = track.querySelector('.pc[data-slide]');
+		if (!card) return;
+		step = card.offsetWidth + getGap();
+		if (!step) step = 1;
+	}
 
-  function minTrans() {
-    return n <= 1 ? 0 : -(n - 1) * step;
-  }
+	function minTrans() {
+		return n <= 1 ? 0 : -(n - 1) * step;
+	}
 
-  function clampTrans(px) {
-    const lo = minTrans();
-    return Math.max(lo, Math.min(0, px));
-  }
+	function clampTrans(px) {
+		const lo = minTrans();
+		return Math.max(lo, Math.min(0, px));
+	}
 
-  function setTranslate(px, instant) {
-    trans = clampTrans(px);
-    const noAnim = instant || reducedMotion;
-    track.style.transition = noAnim
-      ? "none"
-      : `transform ${durationMs}ms ${ease}`;
-    track.style.transform = `translate3d(${trans}px,0,0)`;
-    animating = !noAnim;
-  }
+	function setTranslate(px, instant) {
+		trans = clampTrans(px);
+		const noAnim = instant || reducedMotion;
+		track.style.transition = noAnim ? 'none' : `transform ${durationMs}ms ${ease}`;
+		track.style.transform = `translate3d(${trans}px,0,0)`;
+		animating = !noAnim;
+	}
 
-  function updateNav() {
-    if (!navPrev || !navNext) return;
-    const atStart = idx <= 0;
-    const atEnd = idx >= n - 1;
-    navPrev.disabled = atStart;
-    navNext.disabled = atEnd;
-    navPrev.setAttribute("aria-disabled", atStart ? "true" : "false");
-    navNext.setAttribute("aria-disabled", atEnd ? "true" : "false");
-  }
+	function updateNav() {
+		if (!navPrev || !navNext) return;
+		const atStart = idx <= 0;
+		const atEnd = idx >= n - 1;
+		navPrev.disabled = atStart;
+		navNext.disabled = atEnd;
+		navPrev.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+		navNext.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
+	}
 
-  function onTransitionEnd(e) {
-    if (e.target !== track || e.propertyName !== "transform" || dragging)
-      return;
-    animating = false;
-  }
+	function onTransitionEnd(e) {
+		if (e.target !== track || e.propertyName !== 'transform' || dragging) return;
+		animating = false;
+	}
 
-  track.addEventListener("transitionend", onTransitionEnd);
+	track.addEventListener('transitionend', onTransitionEnd);
 
-  window.ps = function (dir) {
-    if (animating || dragging || n < 2) return;
-    const next = idx + dir;
-    if (next < 0 || next > n - 1) return;
-    measure();
-    idx = next;
-    setTranslate(-idx * step, false);
-    updateNav();
-  };
+	window.ps = function (dir) {
+		if (animating || dragging || n < 2) return;
+		const next = idx + dir;
+		if (next < 0 || next > n - 1) return;
+		measure();
+		idx = next;
+		setTranslate(-idx * step, false);
+		updateNav();
+	};
 
-  function snapAfterDrag() {
-    measure();
-    let nearest = Math.round(-trans / step);
-    nearest = Math.max(0, Math.min(n - 1, nearest));
-    idx = nearest;
-    setTranslate(-idx * step, false);
-    updateNav();
-  }
+	function snapAfterDrag() {
+		measure();
+		let nearest = Math.round(-trans / step);
+		nearest = Math.max(0, Math.min(n - 1, nearest));
+		idx = nearest;
+		setTranslate(-idx * step, false);
+		updateNav();
+	}
 
-  scroll.addEventListener(
-    "pointerdown",
-    (e) => {
-      if (e.button !== 0) return;
-      if (e.target.closest("a, button")) return;
-      dragging = true;
-      scroll.classList.add("is-dragging");
-      measure();
-      dragStartX = e.clientX;
-      dragBase = trans;
-      track.style.transition = "none";
-      animating = false;
-      scroll.setPointerCapture(e.pointerId);
-    },
-    { passive: true },
-  );
+	scroll.addEventListener(
+		'pointerdown',
+		(e) => {
+			if (e.button !== 0) return;
+			if (e.target.closest('a, button')) return;
+			dragging = true;
+			scroll.classList.add('is-dragging');
+			measure();
+			dragStartX = e.clientX;
+			dragBase = trans;
+			track.style.transition = 'none';
+			animating = false;
+			scroll.setPointerCapture(e.pointerId);
+		},
+		{passive: true},
+	);
 
-  scroll.addEventListener(
-    "pointermove",
-    (e) => {
-      if (!dragging) return;
-      const dx = e.clientX - dragStartX;
-      setTranslate(dragBase + dx, true);
-    },
-    { passive: true },
-  );
+	scroll.addEventListener(
+		'pointermove',
+		(e) => {
+			if (!dragging) return;
+			const dx = e.clientX - dragStartX;
+			setTranslate(dragBase + dx, true);
+		},
+		{passive: true},
+	);
 
-  function endDrag(e) {
-    if (!dragging) return;
-    dragging = false;
-    scroll.classList.remove("is-dragging");
-    try {
-      scroll.releasePointerCapture(e.pointerId);
-    } catch (_) {}
-    snapAfterDrag();
-  }
+	function endDrag(e) {
+		if (!dragging) return;
+		dragging = false;
+		scroll.classList.remove('is-dragging');
+		try {
+			scroll.releasePointerCapture(e.pointerId);
+		} catch (_) {}
+		snapAfterDrag();
+	}
 
-  scroll.addEventListener("pointerup", endDrag);
-  scroll.addEventListener("pointercancel", endDrag);
+	scroll.addEventListener('pointerup', endDrag);
+	scroll.addEventListener('pointercancel', endDrag);
 
-  function layout() {
-    measure();
-    idx = Math.max(0, Math.min(n - 1, idx));
-    setTranslate(-idx * step, true);
-    updateNav();
-  }
+	function layout() {
+		measure();
+		idx = Math.max(0, Math.min(n - 1, idx));
+		setTranslate(-idx * step, true);
+		updateNav();
+	}
 
-  requestAnimationFrame(() => requestAnimationFrame(layout));
-  window.addEventListener("resize", layout);
+	requestAnimationFrame(() => requestAnimationFrame(layout));
+	window.addEventListener('resize', layout);
 
-  track.querySelectorAll(".pc[data-slide] video").forEach((v) => {
-    const card = v.closest(".pc");
-    if (!card) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((en) => {
-          if (en.isIntersecting && en.intersectionRatio > 0.25) {
-            v.play().catch(() => {});
-          } else {
-            v.pause();
-          }
-        });
-      },
-      { threshold: [0, 0.25, 0.5, 1] },
-    );
-    io.observe(card);
-  });
+	track.querySelectorAll('.pc[data-slide] video').forEach((v) => {
+		const card = v.closest('.pc');
+		if (!card) return;
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((en) => {
+					if (en.isIntersecting && en.intersectionRatio > 0.25) {
+						v.play().catch(() => {});
+					} else {
+						v.pause();
+					}
+				});
+			},
+			{threshold: [0, 0.25, 0.5, 1]},
+		);
+		io.observe(card);
+	});
 }
 runWhenIdle(initProjectsCarousel, 2500);
 
 function initRevealObserver() {
-  const ro = new IntersectionObserver(
-    (en) =>
-      en.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("in");
-          ro.unobserve(e.target);
-        }
-      }),
-    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-  );
-  document.querySelectorAll(".reveal,.reveal-l").forEach((el) => ro.observe(el));
+	const ro = new IntersectionObserver(
+		(en) =>
+			en.forEach((e) => {
+				if (e.isIntersecting) {
+					e.target.classList.add('in');
+					ro.unobserve(e.target);
+				}
+			}),
+		{threshold: 0.1, rootMargin: '0px 0px -40px 0px'},
+	);
+	document.querySelectorAll('.reveal,.reveal-l').forEach((el) => ro.observe(el));
 }
 runWhenIdle(initRevealObserver, 2500);
 
@@ -876,25 +861,104 @@ runWhenIdle(initRevealObserver, 2500);
 // SMOOTH LINKS
 // ════════════════════════════════════
 document.querySelectorAll('a[href^="#"]').forEach((a) =>
-  a.addEventListener("click", (e) => {
-    const h = a.getAttribute("href");
-    if (h === "#") return;
-    e.preventDefault();
-    document.querySelector(h)?.scrollIntoView({ behavior: "smooth" });
-  }),
+	a.addEventListener('click', (e) => {
+		const h = a.getAttribute('href');
+		if (h === '#') return;
+		e.preventDefault();
+		document.querySelector(h)?.scrollIntoView({behavior: 'smooth'});
+	}),
 );
 
 // ════════════════════════════════════
 // ACCORDION TOGGLE
 // ════════════════════════════════════
 function toggleTalk(el) {
-  const isOpen = el.classList.contains("open");
-  const accordion = el.closest(".talk-accordion");
-  const items = accordion
-    ? accordion.querySelectorAll(".talk-item")
-    : document.querySelectorAll(".talk-item");
-  items.forEach((item) => item.classList.remove("open"));
-  if (!isOpen) {
-    el.classList.add("open");
-  }
+	const isOpen = el.classList.contains('open');
+	const accordion = el.closest('.talk-accordion');
+	const items = accordion ? accordion.querySelectorAll('.talk-item') : document.querySelectorAll('.talk-item');
+	items.forEach((item) => item.classList.remove('open'));
+	if (!isOpen) {
+		el.classList.add('open');
+	}
 }
+
+// ════════════════════════════════════
+// LANGUAGE SWITCHER (custom dropdown)
+// ════════════════════════════════════
+(function () {
+	const switchers = [...document.querySelectorAll('[data-lang-switcher]')];
+	if (!switchers.length) return;
+
+	const isEn = () => (location.pathname || '').toLowerCase().includes('/en/');
+
+	function targetsFor(lang) {
+		if (lang === 'en') {
+			// From SR root -> /en/
+			// From EN -> stay in /en/
+			return isEn() ? new URL('./', location.href) : new URL('en/', location.href);
+		}
+		// SR
+		return isEn() ? new URL('../', location.href) : new URL('./', location.href);
+	}
+
+	function closeAll(except) {
+		switchers.forEach((sw) => {
+			if (except && sw === except) return;
+			sw.classList.remove('is-open');
+			const btn = sw.querySelector('.lang-dd__btn');
+			const menu = sw.querySelector('.lang-dd__menu');
+			if (btn) btn.setAttribute('aria-expanded', 'false');
+			if (menu) menu.hidden = true;
+		});
+	}
+
+	function applyActive(sw) {
+		const cur = isEn() ? 'en' : 'sr';
+		const label = sw.querySelector('.lang-dd__label');
+		if (label) label.textContent = cur.toUpperCase();
+		sw.querySelectorAll('.lang-dd__item[data-lang]').forEach((it) => {
+			const lang = it.getAttribute('data-lang');
+			it.setAttribute('aria-checked', lang === cur ? 'true' : 'false');
+		});
+	}
+
+	switchers.forEach((sw) => {
+		const btn = sw.querySelector('.lang-dd__btn');
+		const menu = sw.querySelector('.lang-dd__menu');
+		if (!btn || !menu) return;
+
+		applyActive(sw);
+		menu.hidden = true;
+		btn.setAttribute('aria-expanded', 'false');
+
+		btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			const open = !sw.classList.contains('is-open');
+			closeAll(sw);
+			sw.classList.toggle('is-open', open);
+			btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+			menu.hidden = !open;
+		});
+
+		sw.querySelectorAll('.lang-dd__item[data-lang]').forEach((it) => {
+			it.addEventListener('click', () => {
+				const lang = it.getAttribute('data-lang');
+				if (!lang) return;
+				location.href = targetsFor(lang).toString();
+			});
+		});
+	});
+
+	document.addEventListener('click', (e) => {
+		const t = e.target;
+		if (!(t instanceof Element)) return;
+		const inside = t.closest('[data-lang-switcher]');
+		if (!inside) closeAll();
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeAll();
+	});
+
+	window.addEventListener('resize', () => closeAll());
+})();
