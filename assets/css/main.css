@@ -1894,7 +1894,7 @@ nav.ready {
 	}
 
 	.contact-calendly iframe {
-		height: 640px;
+		height: 775px !important;
 	}
 
 	/* Keep AI terminal area stable to avoid content jump. */
@@ -3152,7 +3152,7 @@ nav.ready {
 
 .contact-calendly iframe {
 	width: 100%;
-	height: 760px;
+	height: 920px;
 	border: 0;
 	display: block;
 	background: transparent;
