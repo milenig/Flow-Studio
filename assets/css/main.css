@@ -1365,6 +1365,7 @@ nav.ready {
 /* AI canvas visual */
 .ai-visual {
 	position: relative;
+	min-width: 0;
 }
 
 .ai-float-card {
@@ -1904,6 +1905,22 @@ nav.ready {
 
 	.at-body {
 		min-height: 96px;
+	}
+
+	/* Long typed lines must wrap instead of overflowing the viewport */
+	.at-cmd,
+	.at-out {
+		flex: 1 1 0;
+		min-width: 0;
+		white-space: normal;
+		overflow: visible;
+		text-overflow: unset;
+		overflow-wrap: anywhere;
+		word-break: break-word;
+	}
+
+	.at-line.at-res .at-out {
+		flex-basis: 100%;
 	}
 }
 
@@ -3323,6 +3340,8 @@ nav.ready {
 	aspect-ratio: auto;
 	background: transparent;
 	flex-shrink: 0;
+	min-width: 0;
+	max-width: 100%;
 }
 
 .ai-terminal {
@@ -3333,6 +3352,9 @@ nav.ready {
 	border-radius: 12px;
 	overflow: hidden;
 	font-family: monospace;
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 .at-bar {
@@ -3374,6 +3396,7 @@ nav.ready {
 	flex-direction: column;
 	gap: 3px;
 	min-height: 108px;
+	min-width: 0;
 }
 
 .at-line {
@@ -3382,6 +3405,7 @@ nav.ready {
 	gap: 7px;
 	font-size: 11px;
 	line-height: 1.5;
+	min-width: 0;
 }
 
 .at-prompt {
