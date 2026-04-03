@@ -193,6 +193,12 @@ nav.ready {
 	white-space: nowrap;
 }
 
+.nav-logo-img {
+	display: block;
+	height: 20px;
+	width: auto;
+}
+
 .nav-logo span {
 	color: var(--green);
 	font-style: normal;
@@ -3202,6 +3208,12 @@ nav.ready {
 	margin-bottom: 14px;
 }
 
+.fl-logo-img {
+	display: block;
+	height: 24px;
+	width: auto;
+}
+
 .fl-logo span {
 	color: var(--green);
 	font-style: normal;
@@ -4633,6 +4645,10 @@ nav.ready {
 	.nav-logo {
 		font-size: 14px;
 		font-weight: 800;
+	}
+
+	.nav-logo-img {
+		height: 18px;
 	}
 
 	.nav-toggle {
